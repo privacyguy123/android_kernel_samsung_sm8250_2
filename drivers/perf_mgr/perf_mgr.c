@@ -18,6 +18,11 @@
 
 #define MAX_INSERT_DIGIT 4
 
+#if !defined(DEBUG)
+#undef trace_printk
+#define trace_printk(fmt, args...) (0)
+#endif
+
 extern int ss_panel_notifier_register(struct notifier_block *nb);
 extern int ss_panel_notifier_unregister(struct notifier_block *nb);
 extern unsigned long get_task_util(struct task_struct *p);

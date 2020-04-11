@@ -29,6 +29,11 @@
 #include <linux/slab.h>
 #include <linux/swap.h>
 
+#if !defined(DEBUG)
+#undef trace_printk
+#define trace_printk(fmt, args...) (0)
+#endif
+
 /*
  * rbincache: a cleancache API implementation
  *
