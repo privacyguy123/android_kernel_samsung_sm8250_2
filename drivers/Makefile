@@ -217,9 +217,6 @@ obj-$(CONFIG_REDRIVER)	        += redriver/
 # Motor
 obj-y				+= motor/
 
-# OLOG
-obj-y				+= kperfmon/
-
 # streamline
 ifeq ($(CONFIG_GATOR), y)
 	obj-$(CONFIG_GATOR)				+= gator/
