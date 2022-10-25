@@ -2229,37 +2229,12 @@ static int sde_kms_set_crtc_for_conn(struct drm_device *dev,
 	return 0;
 }
 
-static void _sde_kms_plane_force_remove(struct drm_plane *plane,
-			struct drm_atomic_state *state)
-{
-	struct drm_plane_state *plane_state;
-	int ret = 0;
-
-	plane_state = drm_atomic_get_plane_state(state, plane);
-	if (IS_ERR(plane_state)) {
-		ret = PTR_ERR(plane_state);
-		SDE_ERROR("error %d getting plane %d state\n",
-				ret, plane->base.id);
-		return;
-	}
-
-	plane->old_fb = plane->fb;
-
-	SDE_DEBUG("disabling plane %d\n", plane->base.id);
-
-	ret = __drm_atomic_helper_disable_plane(plane, plane_state);
-	if (ret != 0)
-		SDE_ERROR("error %d disabling plane %d\n", ret,
-				plane->base.id);
-}
-
 static int _sde_kms_remove_fbs(struct sde_kms *sde_kms, struct drm_file *file,
 		struct drm_atomic_state *state)
 {
 	struct drm_device *dev = sde_kms->dev;
 	struct drm_framebuffer *fb, *tfb;
 	struct list_head fbs;
-	struct drm_plane *plane;
 	struct drm_crtc *crtc = NULL;
 	unsigned int crtc_mask = 0;
 	int ret = 0;
@@ -2267,20 +2242,9 @@ static int _sde_kms_remove_fbs(struct sde_kms *sde_kms, struct drm_file *file,
 	INIT_LIST_HEAD(&fbs);
 
 	list_for_each_entry_safe(fb, tfb, &file->fbs, filp_head) {
-		if (drm_framebuffer_read_refcount(fb) > 1) {
+		if (drm_framebuffer_read_refcount(fb) > 1)
 			list_move_tail(&fb->filp_head, &fbs);
-
-			drm_for_each_plane(plane, dev) {
-				if (plane->state &&
-					plane->state->fb == fb) {
-					if (plane->state->crtc)
-						crtc_mask |= drm_crtc_mask(
-							plane->state->crtc);
-					 _sde_kms_plane_force_remove(
-								plane, state);
-				}
-			}
-		} else {
+		else {
 			list_del_init(&fb->filp_head);
 			drm_framebuffer_put(fb);
 		}
@@ -4021,15 +3985,12 @@ end:
 
 struct msm_kms *sde_kms_init(struct drm_device *dev)
 {
-	struct msm_drm_private *priv;
 	struct sde_kms *sde_kms;
 
 	if (!dev || !dev->dev_private) {
 		SDE_ERROR("drm device node invalid\n");
 		return ERR_PTR(-EINVAL);
 	}
-
-	priv = dev->dev_private;
 
 	sde_kms = kzalloc(sizeof(*sde_kms), GFP_KERNEL);
 	if (!sde_kms) {
