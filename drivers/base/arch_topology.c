@@ -118,20 +118,6 @@ static ssize_t cpu_capacity_show(struct device *dev,
 {
 	struct cpu *cpu = container_of(dev, struct cpu, dev);
 
-#if IS_ENABLED(CONFIG_CPU_CAPACITY_FIXUP)
-	if (strncmp(current->comm, cpu_cap_fixup_target,
-			strnlen(current->comm, TASK_COMM_LEN)) == 0) {
-		unsigned long curr, left, right;
-
-		curr = topology_get_cpu_scale(NULL, cpu->dev.id);
-		left = topology_get_cpu_scale(NULL, 0);
-		right = topology_get_cpu_scale(NULL, num_possible_cpus() - 1);
-
-		if (curr != left && curr != right)
-			return sprintf(buf, "%lu\n", left > right ? left : right);
-	}
-#endif
-
 	return sprintf(buf, "%lu\n", topology_get_cpu_scale(NULL, cpu->dev.id));
 }
 
