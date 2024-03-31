@@ -195,8 +195,6 @@ static void qmi_rmnet_update_flow_map(struct rmnet_flow_map *itm,
 int qmi_rmnet_flow_control(struct net_device *dev, u32 mq_idx, int enable)
 {
 	struct netdev_queue *q;
-	struct timespec ts;
-	struct rtc_time tm;
 	
 	if (unlikely(mq_idx >= dev->num_tx_queues))
 		return 0;
