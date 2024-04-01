@@ -27,7 +27,6 @@
 #include <linux/fs.h>
 #include <linux/debugfs.h>
 #include <linux/uaccess.h>
-#include <linux/uh.h>
 #include <linux/sec_class.h>
 #if defined(CONFIG_ARCH_QCOM)
 #include <linux/sched/signal.h>
@@ -392,7 +391,6 @@ static ssize_t store_hdm_test(struct device *dev, struct device_attribute *attr,
 {
 	unsigned long mode = 0xFFFFF;
 	size_t len = count;
-
 	if (count == 0) {
 		hdm_err("%s count = 0\n", __func__);
 		goto error;
