@@ -34,12 +34,7 @@
 #include "binder_alloc.h"
 #include "binder_trace.h"
 
-#define MAX_ALLOCATION_SIZE (1024 * 1024)
-#define MAX_ASYNC_ALLOCATION_SIZE (512 * 1024)
-
 struct list_lru binder_alloc_lru;
-
-extern int system_server_pid;
 
 static DEFINE_MUTEX(binder_alloc_mmap_lock);
 
@@ -430,31 +425,6 @@ static struct binder_buffer *binder_alloc_new_buf_locked(
 		return ERR_PTR(-EINVAL);
 	}
 
-	if (is_async &&
-	    alloc->free_async_space < size + sizeof(struct binder_buffer)) {
-		//binder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC,
-		//		"%d: binder_alloc_buf size %zd failed, no async space left\n",
-		//		alloc->pid, size);
-		pr_info("%d: binder_alloc_buf size %zd(%zd) failed, no async space left\n",
-		         alloc->pid, size, alloc->free_async_space);
-		return ERR_PTR(-ENOSPC);
-	}
-
-	// If allocation size is more than 1M, throw it away and return ENOSPC err
-	if (MAX_ALLOCATION_SIZE <= size + sizeof(struct binder_buffer)) { //1M
-		pr_info("%d: binder_alloc_buf size %zd failed, too large size\n",
-		         alloc->pid, size);
-		return ERR_PTR(-ENOSPC);
-	}
-
-	// If allocation size for async is more than 512K, throw it away and return ENOPC
-	if (is_async &&
-	    MAX_ASYNC_ALLOCATION_SIZE <= size + sizeof(struct binder_buffer)) { //512K
-		pr_info("%d: binder_alloc_buf size %zd(%zd) failed, too large async size\n",
-		         alloc->pid, size, alloc->free_async_space);
-		return ERR_PTR(-ENOSPC);
-	}
-
 	/* Pad 0-size buffers so they get assigned unique addresses */
 	size = max(size, sizeof(void *));
 
@@ -566,14 +536,6 @@ static struct binder_buffer *binder_alloc_new_buf_locked(
 	buffer->pid = pid;
 	if (is_async) {
 		alloc->free_async_space -= size;
-		if ((system_server_pid == alloc->pid) && (alloc->free_async_space <= 153600)) { // 150K
-			pr_info("%d: [free_size<150K] binder_alloc_buf size %zd async free %zd\n",
-					alloc->pid, size, alloc->free_async_space);
-		}
-		if ((system_server_pid == alloc->pid) && (size >= 122880)) { // 120K
-			pr_info("%d: [alloc_size>120K] binder_alloc_buf size %zd async free %zd\n",
-				alloc->pid, size, alloc->free_async_space);
-		}
 		binder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC_ASYNC,
 			     "%d: binder_alloc_buf size %zd async free %zd\n",
 			      alloc->pid, size, alloc->free_async_space);
