@@ -62,7 +62,6 @@
 #include <linux/nsproxy.h>
 #include <linux/poll.h>
 #include <linux/debugfs.h>
-#include <linux/delay.h>
 #include <linux/rbtree.h>
 #include <linux/sched/signal.h>
 #include <linux/sched/mm.h>
@@ -83,8 +82,6 @@
 #include "binder_alloc.h"
 #include "binder_internal.h"
 #include "binder_trace.h"
-
-int system_server_pid = 0;
 
 static HLIST_HEAD(binder_deferred_list);
 static DEFINE_MUTEX(binder_deferred_lock);
@@ -1223,13 +1220,7 @@ static void binder_transaction_priority(struct task_struct *task,
 					bool inherit_rt)
 {
 	struct binder_priority desired_prio = t->priority;
-	desired_prio.prio = t->priority.prio;
-	desired_prio.sched_policy = t->priority.sched_policy;
 
-	/*
-	 * To resolve all possible priority inversions.
-	 */
-	inherit_rt = true;
 	if (t->set_priority_called)
 		return;
 
@@ -2792,46 +2783,6 @@ err_translate_fd_failed:
 	return target_fd;
 }
 
-//[SAnP
-static void print_binder_proc_inner(struct binder_proc *proc) 
-{
-	struct rb_node *pn;
-	struct binder_thread *p_thread;
-	struct binder_transaction *t;
-	struct binder_buffer *buffer;
-	uint32_t cnt = 1; 
-
-	binder_inner_proc_lock(proc);
-	for (pn = rb_first(&proc->threads); pn != NULL; pn = rb_next(pn)) {
-		p_thread = rb_entry(pn, struct binder_thread, rb_node);
-		t = p_thread->transaction_stack;
-		if (t) {
-			spin_lock(&t->lock);  
-			if (t->from != p_thread && t->to_thread == p_thread) { //incoming transaction
-				buffer = t->buffer;
-				if (buffer != NULL) {
-					pr_info("[%d] from %d:%d to %d:%d size %zd:%zd\n",
-						cnt, t->from ? t->from->proc->pid : 0,
-						t->from ? t->from->pid : 0,
-						t->to_proc ? t->to_proc->pid : 0,
-						t->to_thread ? t->to_thread->pid : 0,
-						buffer->data_size, buffer->offsets_size);
-				} else {
-					pr_info("[%d] from %d:%d to %d:%d\n",
-						cnt, t->from ? t->from->proc->pid : 0,
-						t->from ? t->from->pid : 0,
-						t->to_proc ? t->to_proc->pid : 0,
-						t->to_thread ? t->to_thread->pid : 0);
-				}
-				cnt++;
-			}
-			spin_unlock(&t->lock);
-		}
-	}
-	binder_inner_proc_unlock(proc);
-}
-//SAnP]
-
 static int binder_fixup_parent(struct binder_transaction *t,
 			       struct binder_thread *thread,
 			       struct binder_buffer_object *bp,
@@ -3139,7 +3090,6 @@ static void binder_transaction(struct binder_proc *proc,
 			goto err_dead_binder;
 		}
 		e->to_node = target_node->debug_id;
-
 		if (security_binder_transaction(proc->cred,
 						target_proc->cred) < 0) {
 			return_error = BR_FAILED_REPLY;
@@ -3273,26 +3223,9 @@ static void binder_transaction(struct binder_proc *proc,
 	if (target_node && target_node->txn_security_ctx) {
 		u32 secid;
 		size_t added_size;
-		int retries = 0;
-		int max_retries = 100;
 
 		security_cred_getsecid(proc->cred, &secid);
-retry_lowmem:
 		ret = security_secid_to_secctx(secid, &secctx, &secctx_sz);
-		if (ret == -ENOMEM && retries++ < max_retries) {
-			/*
-			 * security_secid_to_secctx() can fail
-			 * because of a GFP_ATOMIC allocation in
-			 * which case -ENOMEM is returned. This needs
-			 * to be retried, but there is currently no
-			 * way to tell userspace to retry so we do
-			 * it here. Sleep briefly to allow the low
-			 * memory condition to resolve.
-			 */
-			udelay(100);
-			goto retry_lowmem;
-		}
-
 		if (ret) {
 			return_error = BR_FAILED_REPLY;
 			return_error_param = ret;
@@ -3324,13 +3257,6 @@ retry_lowmem:
 			BR_DEAD_REPLY : BR_FAILED_REPLY;
 		return_error_line = __LINE__;
 		t->buffer = NULL;
-		//[SAnP
-		if (return_error_param == -ENOSPC) {
-			mutex_lock(&binder_procs_lock);
-			print_binder_proc_inner(target_proc);  
-			mutex_unlock(&binder_procs_lock);   
-		}
-		//SAnP]
 		goto err_binder_alloc_buf_failed;
 	}
 	if (secctx) {
@@ -3395,7 +3321,6 @@ retry_lowmem:
 		return_error_line = __LINE__;
 		goto err_bad_offset;
 	}
-
 	off_start_offset = ALIGN(tr->data_size, sizeof(void *));
 	buffer_offset = off_start_offset;
 	off_end_offset = off_start_offset + tr->offsets_size;
@@ -3487,7 +3412,7 @@ retry_lowmem:
 			binder_size_t parent_offset;
 			struct binder_fd_array_object *fda =
 				to_binder_fd_array_object(hdr);
-			size_t num_valid = (buffer_offset - off_start_offset) / 
+			size_t num_valid = (buffer_offset - off_start_offset) /
 						sizeof(binder_size_t);
 			struct binder_buffer_object *parent =
 				binder_validate_ptr(target_proc, t->buffer,
@@ -3605,7 +3530,6 @@ retry_lowmem:
 		binder_inner_proc_unlock(target_proc);
 
 		wake_up_interruptible_sync(&target_thread->wait);
-
 		binder_restore_priority(current, in_reply_to->saved_priority);
 		binder_free_transaction(in_reply_to);
 	} else if (!(t->flags & TF_ONE_WAY)) {
@@ -5186,14 +5110,6 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		}
 		break;
 	}
-	case BINDER_SET_SYSTEM_SERVER_PID: {
-		if (copy_from_user(&system_server_pid, ubuf,
-					sizeof(system_server_pid))) {
-			ret = -EINVAL;
-			goto err;
-		}
-		break;
-	}
 	default:
 		ret = -EINVAL;
 		goto err;
@@ -5207,8 +5123,6 @@ err:
 		pr_info("%d:%d ioctl %x %lx returned %d\n", proc->pid, current->pid, cmd, arg, ret);
 err_unlocked:
 	trace_binder_ioctl_done(ret);
-	if (ret == -ERESTARTSYS)
-		ret = -EINTR;
 	return ret;
 }
 
@@ -5310,7 +5224,6 @@ static int binder_open(struct inode *nodp, struct file *filp)
 	mutex_init(&proc->files_lock);
 	proc->cred = get_cred(filp->f_cred);
 	INIT_LIST_HEAD(&proc->todo);
-
 	if (binder_supported_policy(current->policy)) {
 		proc->default_priority.sched_policy = current->policy;
 		proc->default_priority.prio = current->normal_prio;
