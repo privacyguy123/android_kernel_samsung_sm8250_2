@@ -397,8 +397,6 @@ static int __init fscrypt_init(void)
 	 * Also use a high-priority workqueue to prioritize decryption work,
 	 * which blocks reads from completing, over regular application tasks.
 	 */
-	int res = -ENOMEM;
-
 	fscrypt_read_workqueue = alloc_workqueue("fscrypt_read_queue",
 						 WQ_UNBOUND | WQ_HIGHPRI,
 						 num_online_cpus());
