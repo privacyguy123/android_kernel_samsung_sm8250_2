@@ -1886,9 +1886,10 @@ static size_t order_to_size(unsigned int order)
 static void blk_mq_clear_rq_mapping(struct blk_mq_tag_set *set,
 		struct blk_mq_tags *tags, unsigned int hctx_idx)
 {
-	struct blk_mq_tags *drv_tags = set->tags[hctx_idx];
-	struct page *page;
-	unsigned long flags;
+		struct blk_mq_tags *drv_tags = set->tags[hctx_idx];
+		struct ext_blk_mq_tags *drv_etags;
+		struct page *page;
+		unsigned long flags;
 
 	list_for_each_entry(page, &tags->page_list, lru) {
 		unsigned long start = (unsigned long)page_address(page);
@@ -1912,8 +1913,9 @@ static void blk_mq_clear_rq_mapping(struct blk_mq_tag_set *set,
 	 * Request reference is cleared and it is guaranteed to be observed
 	 * after the ->lock is released.
 	 */
-	spin_lock_irqsave(&drv_tags->lock, flags);
-	spin_unlock_irqrestore(&drv_tags->lock, flags);
+	drv_etags = container_of(drv_tags, struct ext_blk_mq_tags, tags);
+	spin_lock_irqsave(&drv_etags->lock, flags);
+	spin_unlock_irqrestore(&drv_etags->lock, flags);
 }
 
 static blk_qc_t blk_mq_make_request(struct request_queue *q, struct bio *bio)
