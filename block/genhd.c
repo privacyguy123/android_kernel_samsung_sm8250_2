@@ -1144,11 +1144,7 @@ static ssize_t disk_ios_show(struct device *dev,
 	unsigned long discard_ios;
 	unsigned long discard_sectors;
 	long hours;
-	int cpu;
 	int ret;
-
-	cpu = part_stat_lock();
-	part_stat_unlock();
 
 	new.ios[STAT_READ] = part_stat_read(hd, ios[STAT_READ]);
 	new.ios[STAT_WRITE] = part_stat_read(hd, ios[STAT_WRITE]);
@@ -1612,7 +1608,6 @@ static int iostats_show(struct seq_file *seqf, void *v)
 	struct disk_part_iter piter;
 	struct hd_struct *hd;
 	char buf[BDEVNAME_SIZE];
-	int cpu;
 	u64 uptime;
 	unsigned long thresh = 0;
 	unsigned long bg_thresh = 0;
@@ -1623,9 +1618,7 @@ static int iostats_show(struct seq_file *seqf, void *v)
 
 	disk_part_iter_init(&piter, gp, DISK_PITER_INCL_EMPTY_PART0);
 	while ((hd = disk_part_iter_next(&piter))) {
-		cpu = part_stat_lock();
 		part_in_flight_rw(gp->queue, hd, inflight);
-		part_stat_unlock();
 		uptime = ktime_to_ns(ktime_get());
 		uptime /= 1000000; /* in ms */
 		bdi = gp->queue->backing_dev_info;
