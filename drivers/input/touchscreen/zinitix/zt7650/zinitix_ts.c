@@ -2035,11 +2035,12 @@ static bool ts_read_coord(struct zt_ts_info *info)
 					| ((info->touch_info[0].byte04.value_u8bit & 0xF0) >> 4);
 				info->scrub_y = ((info->touch_info[0].byte03.value_u8bit << 4) & 0xFF0)
 					| ((info->touch_info[0].byte04.value_u8bit & 0x0F));
-
-				input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 1);
-				input_sync(info->input_dev);
-				input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 0);
-				input_sync(info->input_dev);
+                if (info->lpm_mode == 1){
+				    input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 1);
+				    input_sync(info->input_dev);
+				    input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 0);
+				    input_sync(info->input_dev);
+                }
 #ifdef CONFIG_SAMSUNG_PRODUCT_SHIP
 				input_info(true, &client->dev, "%s: SINGLE TAP: %d\n", __func__, info->scrub_id);
 #else
