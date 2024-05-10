@@ -2104,9 +2104,11 @@ static u8 fts_event_handler_type_b(struct fts_ts_info *info)
 					info->scrub_y = (p_gesture_status->gesture_data_2 << 4) | (p_gesture_status->gesture_data_3 & 0x0F);
 
 					input_info(true, &info->client->dev, "%s: SINGLE TAP\n", __func__);
+				if (info->fts_power_state == FTS_POWER_STATE_LOWPOWER){
 					input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 1);
 					input_sync(info->input_dev);
 					input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 0);
+				}
 					break;
 #ifdef CONFIG_TOUCHSCREEN_DUMP_MODE
 				case FTS_SPONGE_EVENT_DUMPFLUSH:
