@@ -100,8 +100,7 @@
 #include "audit.h"
 #include "avc_ss.h"
 
-
-struct selinux_state selinux_state __rticdata;
+struct selinux_state selinux_state;
 
 /* SECMARK reference count */
 static atomic_t selinux_secmark_refcount = ATOMIC_INIT(0);
@@ -213,9 +212,11 @@ static void cred_init_security(void)
 {
 	struct cred *cred = (struct cred *) current->real_cred;
 	struct task_security_struct *tsec;
+
 	tsec = kzalloc(sizeof(struct task_security_struct), GFP_KERNEL);
 	if (!tsec)
 		panic("SELinux:  Failed to initialize initial task.\n");
+
 	tsec->osid = tsec->sid = SECINITSID_KERNEL;
 	cred->security = tsec;
 }
@@ -870,7 +871,6 @@ static int selinux_set_mnt_opts(struct super_block *sb,
 	    !strcmp(sb->s_type->name, "tracefs") ||
 	    !strcmp(sb->s_type->name, "sysfs") ||
 	    !strcmp(sb->s_type->name, "pstore") ||
-	    !strcmp(sb->s_type->name, "bpf") ||
 	    !strcmp(sb->s_type->name, "binder") ||
 	    !strcmp(sb->s_type->name, "bpf") ||
 	    !strcmp(sb->s_type->name, "cgroup") ||
@@ -1044,7 +1044,6 @@ static int selinux_sb_clone_mnt_opts(const struct super_block *oldsb,
 	 * if the parent was able to be mounted it clearly had no special lsm
 	 * mount options.  thus we can safely deal with this superblock later
 	 */
- 
 	if (!selinux_state.initialized)
 		return 0;
 
@@ -2971,7 +2970,6 @@ static int selinux_sb_kern_mount(struct super_block *sb, int flags, void *data)
 	ad.u.dentry = sb->s_root;
 	return superblock_has_perm(cred, sb, FILESYSTEM__MOUNT, &ad);
 }
-
 
 static int selinux_sb_statfs(struct dentry *dentry)
 {
@@ -7431,6 +7429,7 @@ static struct pernet_operations selinux_net_ops = {
 static int __init selinux_nf_ip_init(void)
 {
 	int err;
+
 	if (!selinux_enabled)
 		return 0;
 
@@ -7494,4 +7493,3 @@ int selinux_disable(struct selinux_state *state)
 	return 0;
 }
 #endif
-

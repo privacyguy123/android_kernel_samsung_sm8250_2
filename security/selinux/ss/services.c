@@ -1643,7 +1643,6 @@ out:
 	kfree(s);
 	kfree(t);
 	kfree(n);
-
 	if (!enforcing_enabled(state))
 		return 0;
 	return -EACCES;
@@ -3765,4 +3764,3 @@ int security_read_policy(struct selinux_state *state,
 	return 0;
 
 }
-
