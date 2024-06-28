@@ -17,7 +17,7 @@ obj-$(CONFIG_CRYPTO_FIPS) += fips140_test_tv.o
 obj-$(CONFIG_CRYPTO_FIPS) += fips.o
 
 obj-$(CONFIG_CRYPTO) += crypto.o
-crypto-y := api.o cipher.o compress.o memneq.o
+crypto-y := api.o cipher.o compress.o
 
 crypto_algapi-$(CONFIG_PROC_FS) += proc.o
 crypto_algapi-y := algapi.o scatterwalk.o $(crypto_algapi-y)
