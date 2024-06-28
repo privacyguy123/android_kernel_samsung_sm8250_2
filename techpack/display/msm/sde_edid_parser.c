@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include <drm/drm_edid.h>
@@ -87,6 +88,21 @@ sde_cea_db_offsets(const u8 *cea, int *start, int *end)
 for ((i) = (start); \
 (i) < (end) && (i) + sde_cea_db_payload_len(&(cea)[(i)]) < (end); \
 (i) += sde_cea_db_payload_len(&(cea)[(i)]) + 1)
+
+static bool sde_cea_db_is_hdmi_vsdb(const u8 *db)
+{
+	int hdmi_id;
+
+	if (sde_cea_db_tag(db) != VENDOR_SPECIFIC_DATA_BLOCK)
+		return false;
+
+	if (sde_cea_db_payload_len(db) < 6)
+		return false;
+
+	hdmi_id = db[1] | (db[2] << 8) | (db[3] << 16);
+
+	return hdmi_id == HDMI_IEEE_OUI;
+}
 
 static bool sde_cea_db_is_hdmi_hf_vsdb(const u8 *db)
 {
@@ -455,7 +471,7 @@ static void _sde_edid_extract_audio_data_blocks(
 #if defined(CONFIG_SEC_DISPLAYPORT)
 	in_buf = (u8 *)edid_ctrl->edid;
 	if (in_buf[3] & (1<<6)) {
-		pr_info("%s: default audio format\n", __func__);
+		pr_info("default audio\n");
 		edid_ctrl->audio_channel_info |= 2;
 	}
 #endif
@@ -517,8 +533,7 @@ static void _sde_edid_extract_audio_data_blocks(
 #if defined(CONFIG_SEC_DISPLAYPORT)
 	edid_ctrl->audio_channel_info |= (bit_rate << 16);
 	edid_ctrl->audio_channel_info |= audio_ch;
-	pr_info("%s: Displayport Audio info : 0x%x\n", __func__,
-			edid_ctrl->audio_channel_info);
+	pr_info("DP Audio info: 0x%x\n", edid_ctrl->audio_channel_info);
 #endif
 	SDE_EDID_DEBUG("%s -", __func__);
 }
@@ -587,6 +602,46 @@ struct sde_edid_ctrl *sde_edid_init(void)
 	SDE_EDID_DEBUG("%s -\n", __func__);
 	return edid_ctrl;
 }
+
+static void _sde_edid_extract_hdmi_vsdb_block(
+		struct sde_edid_ctrl *edid_ctrl)
+{
+	int i, start, end;
+	u8 *cea, *hdmi;
+
+	memset(&edid_ctrl->hdmi_vsdb, 0, sizeof(edid_ctrl->hdmi_vsdb));
+
+	SDE_EDID_DEBUG("%s +\n", __func__);
+
+	if (!edid_ctrl) {
+		SDE_ERROR("invalid input\n");
+		goto out;
+	}
+
+	cea = sde_find_cea_extension(edid_ctrl->edid);
+
+	if (!cea) {
+		SDE_DEBUG("no cea extension\n");
+		goto out;
+	}
+
+	if (sde_cea_db_offsets(cea, &start, &end))
+		goto out;
+
+	sde_for_each_cea_db(cea, i, start, end) {
+		if (sde_cea_db_is_hdmi_vsdb(&cea[i])) {
+			hdmi = &cea[i];
+			edid_ctrl->hdmi_vsdb.supports_ai = hdmi[6] & BIT(7);
+			SDE_DEBUG("HDMI VSDB block present");
+			break;
+		}
+	}
+
+	return;
+out:
+	SDE_DEBUG("HDMI VSDB block NOT present.");
+}
+
 
 void sde_free_edid(void **input)
 {
@@ -1295,6 +1350,7 @@ void sde_parse_edid(void *input)
 		sde_edid_extract_vendor_id(edid_ctrl);
 		_sde_edid_extract_audio_data_blocks(edid_ctrl);
 		_sde_edid_extract_speaker_allocation_data(edid_ctrl);
+		_sde_edid_extract_hdmi_vsdb_block(edid_ctrl);
 	} else {
 		SDE_ERROR("edid not present\n");
 	}

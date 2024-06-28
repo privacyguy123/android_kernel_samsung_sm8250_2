@@ -7,6 +7,7 @@
 #include <linux/unistd.h>
 #include <drm/drm_fixed.h>
 #include "dp_debug.h"
+#include <drm/drm_edid.h>
 
 #ifdef CONFIG_SEC_DISPLAYPORT
 #ifdef CONFIG_SEC_DISPLAYPORT_BIGDATA
@@ -1399,8 +1400,11 @@ static void _dp_panel_dsc_bw_overhead_calc(struct dp_panel *dp_panel,
 	int tot_num_hor_bytes, tot_num_dummy_bytes;
 	int dwidth_dsc_bytes, eoc_bytes;
 	u32 num_lanes;
+	struct dp_panel_private *panel;
 
-	num_lanes = dp_panel->link_info.num_lanes;
+	panel = container_of(dp_panel, struct dp_panel_private, dp_panel);
+
+	num_lanes = panel->link->link_params.lane_count;
 	num_slices = dsc->slice_per_pkt;
 
 	eoc_bytes = dsc_byte_cnt % num_lanes;
@@ -2019,7 +2023,25 @@ static int dp_panel_set_default_link_params(struct dp_panel *dp_panel)
 	return 0;
 }
 
-static int dp_panel_set_edid(struct dp_panel *dp_panel, u8 *edid)
+static bool dp_panel_validate_edid(struct edid *edid, size_t edid_size)
+{
+	if (!edid || (edid_size < EDID_LENGTH))
+		return false;
+
+	if (EDID_LENGTH * (edid->extensions + 1) > edid_size) {
+		DP_ERR("edid size does not match allocated.\n");
+		return false;
+	}
+
+	if (!drm_edid_is_valid(edid)) {
+		DP_ERR("invalid edid.\n");
+		return false;
+	}
+	return true;
+}
+
+static int dp_panel_set_edid(struct dp_panel *dp_panel, u8 *edid,
+		size_t edid_size)
 {
 	struct dp_panel_private *panel;
 
@@ -2030,7 +2052,7 @@ static int dp_panel_set_edid(struct dp_panel *dp_panel, u8 *edid)
 
 	panel = container_of(dp_panel, struct dp_panel_private, dp_panel);
 
-	if (edid) {
+	if (edid && dp_panel_validate_edid((struct edid *)edid, edid_size)) {
 		dp_panel->edid_ctrl->edid = (struct edid *)edid;
 		panel->custom_edid = true;
 	} else {
@@ -2355,10 +2377,11 @@ static int dp_panel_read_sink_caps(struct dp_panel *dp_panel,
 			dp_panel->dsc_en, dp_panel->widebus_en);
 
 #ifdef CONFIG_SEC_DISPLAYPORT
-	DP_INFO("dpcd_rev: 0x%02x\n", dp_panel->dpcd[DP_DPCD_REV]);
-	DP_INFO("vendor_id: <%s>\n", dp_panel->edid_ctrl->vendor_id);
 	drm_edid_get_monitor_name(dp_panel->edid_ctrl->edid, dp_panel->monitor_name, 14);
-	DP_INFO("monitor_name: <%s>\n", dp_panel->monitor_name);
+	DP_INFO("dpcd_rev:0x%02x, vendor:%s, monitor:%s\n",
+		dp_panel->dpcd[DP_DPCD_REV],
+		dp_panel->edid_ctrl->vendor_id,
+		dp_panel->monitor_name);
 #ifdef CONFIG_SEC_DISPLAYPORT_BIGDATA
 	secdp_bigdata_save_item(BD_SINK_NAME, dp_panel->monitor_name);
 	secdp_bigdata_save_item(BD_EDID, (char *)(dp_panel->edid_ctrl->edid));
@@ -2371,10 +2394,13 @@ end:
 static u32 dp_panel_get_supported_bpp(struct dp_panel *dp_panel,
 		u32 mode_edid_bpp, u32 mode_pclk_khz)
 {
-	struct drm_dp_link *link_info;
+	struct dp_link_params *link_params;
+	struct dp_panel_private *panel;
 	const u32 max_supported_bpp = 30;
 	u32 min_supported_bpp = 18;
 	u32 bpp = 0, data_rate_khz = 0, tmds_max_clock = 0;
+
+	panel = container_of(dp_panel, struct dp_panel_private, dp_panel);
 
 	if (dp_panel->dsc_en)
 		min_supported_bpp = 24;
@@ -2389,8 +2415,10 @@ static u32 dp_panel_get_supported_bpp(struct dp_panel *dp_panel,
 		((dp_panel->dsp_type == DSP_TYPE_DP) ? max_supported_bpp : max_supported_bpp - 6));
 #endif
 
-	link_info = &dp_panel->link_info;
-	data_rate_khz = link_info->num_lanes * link_info->rate * 8;
+	link_params = &panel->link->link_params;
+
+	data_rate_khz = link_params->lane_count *
+		drm_dp_bw_code_to_link_rate(link_params->bw_code) * 8;
 	tmds_max_clock = dp_panel->connector->display_info.max_tmds_clock;
 
 	for (; bpp > min_supported_bpp; bpp -= 6) {
@@ -2504,11 +2532,11 @@ static int dp_panel_get_modes(struct dp_panel *dp_panel,
 	}
 
 	panel = container_of(dp_panel, struct dp_panel_private, dp_panel);
-#ifdef CONFIG_SEC_DISPLAYPORT
-	DP_INFO("video_test:%d\n", dp_panel->video_test);
-#endif
 
 	if (dp_panel->video_test) {
+#ifdef CONFIG_SEC_DISPLAYPORT
+		DP_INFO("video_test!");
+#endif
 		dp_panel_set_test_mode(panel, mode);
 		return 1;
 	} else if (dp_panel->edid_ctrl->edid) {
@@ -2957,7 +2985,7 @@ bool secdp_panel_hdr_supported(void)
 
 	hdr = dp_panel_hdr_supported(dp_panel);
 
-	DP_DEBUG("dsp_type:%s, hdr_support: %d\n",
+	DP_INFO("dsp_type:%s, hdr:%d\n",
 		mdss_dp_dsp_type_to_string(dp_panel->dsp_type), hdr);
 
 	return ((dp_panel->dsp_type == DSP_TYPE_DP) && hdr);
@@ -3209,8 +3237,9 @@ cached:
 		dp_panel_setup_dhdr_vsif(panel);
 
 		input.mdp_clk = core_clk_rate;
-		input.lclk = dp_panel->link_info.rate;
-		input.nlanes = dp_panel->link_info.num_lanes;
+		input.lclk = drm_dp_bw_code_to_link_rate(
+				panel->link->link_params.bw_code);
+		input.nlanes = panel->link->link_params.lane_count;
 		input.pclk = dp_panel->pinfo.pixel_clk_khz;
 		input.h_active = dp_panel->pinfo.h_active;
 		input.mst_target_sc = dp_panel->mst_target_sc;
