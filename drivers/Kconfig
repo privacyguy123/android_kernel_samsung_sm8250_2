@@ -253,7 +253,17 @@ source "drivers/ccic/Kconfig"
 
 source "drivers/redriver/Kconfig"
 
-source "drivers/motor/Kconfig"
+source "drivers/vibrator/cs40l2x/Kconfig"
+
+source "drivers/vibrator/maxim/Kconfig"
+
+source "drivers/vibrator/msm_vibrator/Kconfig"
+
+source "drivers/vibrator/ss_vibrator/Kconfig"
+
+source "drivers/vibrator/notifier/Kconfig"
+
+source "drivers/vibrator/timed_output/Kconfig"
 
 source "drivers/fingerprint/Kconfig"
 

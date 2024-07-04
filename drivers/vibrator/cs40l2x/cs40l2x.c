@@ -42,10 +42,10 @@
 #include <linux/vib_notifier.h>
 #endif
 
-#include "cs40l2x-private.h"
+#include <linux/vibrator/cs40l2x-private.h>
 
 #ifdef CONFIG_ANDROID_TIMED_OUTPUT
-#include "timed_output.h"
+#include <linux/vibrator/timed_output.h>
 #else
 #include <linux/leds.h>
 #endif /* CONFIG_ANDROID_TIMED_OUTPUT */

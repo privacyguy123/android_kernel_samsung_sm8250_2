@@ -24,14 +24,14 @@
 #include <linux/pm_qos.h>
 #include <linux/wakelock.h>
 
-#include "ss_vibrator.h"
+#include <linux/vibrator/ss_vibrator.h>
 
 #if defined(CONFIG_VIB_NOTIFIER)
 #include <linux/vib_notifier.h>
 #endif
 
 #if defined(CONFIG_BATTERY_SAMSUNG)
-#include "../battery_v2/include/sec_charging_common.h"
+#include "../../battery_v2/include/sec_charging_common.h"
 #endif
 
 /* default timeout */

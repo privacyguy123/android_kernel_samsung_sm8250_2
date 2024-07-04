@@ -11,7 +11,7 @@
  *
  */
 
-#include "cs40l2x-private.h"
+#include <linux/vibrator/cs40l2x-private.h>
 
 const unsigned char cs40l2x_bst_k1_table[4][5] = {
 	{0x24, 0x32, 0x32, 0x4F, 0x57},

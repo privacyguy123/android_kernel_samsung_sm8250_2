@@ -1,0 +1,2 @@
+config ANDROID_TIMED_OUTPUT
+	bool "Timed output class driver"

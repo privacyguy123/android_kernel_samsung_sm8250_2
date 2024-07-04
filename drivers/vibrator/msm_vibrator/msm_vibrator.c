@@ -23,7 +23,7 @@
 #include <linux/wakelock.h>
 #include <asm/io.h>
 #include <linux/sec_class.h>
-#include "vibrator.h"
+#include <linux/vibrator/msm_vibrator.h>
 
 #define MAX_LEN_VIB_TYPE 32
 

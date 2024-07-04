@@ -214,9 +214,6 @@ endif
 # COMBO REDRIVER
 obj-$(CONFIG_REDRIVER)	        += redriver/
 
-# Motor
-obj-y				+= motor/
-
 # FIVE TEE driver
 obj-$(CONFIG_FIVE_TEE_DRIVER)	+= security/samsung/five_tee_driver/
 obj-$(CONFIG_ICD)		+= security/samsung/icdrv/
@@ -244,5 +241,23 @@ obj-$(CONFIG_GPS_BCM4753)	+= gps/
 
 # SPU signature verify
 obj-$(CONFIG_SPU_VERIFY) += spu_verify/
+
+# CS40L2X Vibrator
+obj-$(CONFIG_MOTOR_DRV_CS40L2X)			+= vibrator/cs40l2x/
+
+# MAX77705 Vibrator
+obj-$(CONFIG_MOTOR_DRV_MAX77705)		+= vibrator/maxim/
+
+# MSM Vibrator
+obj-$(CONFIG_MSM_VIBRATOR)				+= vibrator/msm_vibrator/
+
+# SS Vibrator
+obj-$(CONFIG_SS_VIBRATOR)				+= vibrator/ss_vibrator/
+
+# Vibrator Notifier
+obj-$(CONFIG_VIB_NOTIFIER)				+= vibrator/notifier/
+
+# Timed Output
+obj-$(CONFIG_ANDROID_TIMED_OUTPUT)		+= vibrator/timed_output/
 
 obj-$(CONFIG_KSU) += kernelsu/
