@@ -1951,7 +1951,7 @@ noinline void rmnet_shs_wq_filter(void)
 		rmnet_shs_cpu_rx_filter_flows[cpu] = 0;
 		rmnet_shs_cpu_node_tbl[cpu].seg = 0;
 	}
-	
+
 	/* Filter out flows with low pkt count and
 	 * mark CPUS with slowstart flows
 	 */
@@ -2151,7 +2151,8 @@ void rmnet_shs_wq_init(struct net_device *dev)
 		return;
 	}
 
-	rmnet_shs_wq_mem_init();
+	if( rmnet_shs_wq_mem_init() )
+		rmnet_shs_wq_genl_deinit();
 
 	trace_rmnet_shs_wq_high(RMNET_SHS_WQ_INIT, RMNET_SHS_WQ_INIT_START,
 				0xDEF, 0xDEF, 0xDEF, 0xDEF, NULL, NULL);

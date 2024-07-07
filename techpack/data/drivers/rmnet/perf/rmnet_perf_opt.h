@@ -17,7 +17,7 @@
 #include "rmnet_perf_core.h"
 
 #define RMNET_PERF_FLOW_HASH_TABLE_BITS        4
-#define RMNET_PERF_NUM_FLOW_NODES              50
+#define RMNET_PERF_NUM_FLOW_NODES             50
 
 struct rmnet_perf_opt_pkt_node {
 	unsigned char *header_start;

@@ -83,6 +83,7 @@ unsigned int rmnet_shs_byte_store_limit __read_mostly = 271800 * 80;
 module_param(rmnet_shs_byte_store_limit, uint, 0644);
 MODULE_PARM_DESC(rmnet_shs_byte_store_limit, "Maximum byte module will park");
 
+
 unsigned int rmnet_shs_in_count = 0;
 module_param(rmnet_shs_in_count, uint, 0644);
 MODULE_PARM_DESC(rmnet_shs_in_count, "SKb in count");
@@ -94,6 +95,7 @@ MODULE_PARM_DESC(rmnet_shs_out_count, "SKb out count");
 unsigned int rmnet_shs_wq_fb_limit = 10;
 module_param(rmnet_shs_wq_fb_limit, uint, 0644);
 MODULE_PARM_DESC(rmnet_shs_wq_fb_limit, "Final fb timer");
+
 
 unsigned int rmnet_shs_pkts_store_limit __read_mostly = 2100 * 8;
 module_param(rmnet_shs_pkts_store_limit, uint, 0644);
@@ -195,7 +197,6 @@ static void rmnet_shs_cpu_ooo(u8 cpu, int count)
 		rmnet_shs_cpu_ooo_count[cpu]+=count;
 	}
 }
-
 /* Evaluates the incoming transport protocol of the incoming skb. Determines
  * if the skb transport protocol will be supported by SHS module
  */
@@ -1212,7 +1213,6 @@ void rmnet_shs_flush_lock_table(u8 flsh, u8 ctxt)
 	u32 total_bytes_flush = 0;
 	u32 total_cpu_gro_flushed = 0;
 	u32 total_node_gro_flushed = 0;
-
 	u8 is_flushed = 0;
 
 	/* Record a qtail + pkts flushed or move if reqd
@@ -1265,7 +1265,7 @@ void rmnet_shs_flush_lock_table(u8 flsh, u8 ctxt)
 					}
 				}
 			}
-			
+
 		}
 
 		/* If core is loaded set core flows as priority and
@@ -1279,6 +1279,7 @@ void rmnet_shs_flush_lock_table(u8 flsh, u8 ctxt)
 				total_cpu_gro_flushed);
 
 			rmnet_shs_core_prio_check(cpu_num, BACKLOG_CHECK, 0);
+
 		}
 
 		if (rmnet_shs_cpu_node_tbl[cpu_num].parkedlen < 0)
@@ -1331,11 +1332,11 @@ void rmnet_shs_flush_table(u8 flsh, u8 ctxt)
 			hrtimer_start(&rmnet_shs_cfg.hrtimer_shs,
 				ns_to_ktime(rmnet_shs_timeout * NS_IN_MS),
 				HRTIMER_MODE_REL);
-			if (rmnet_shs_fall_back_timer &&
-				rmnet_shs_cfg.num_bytes_parked &&
-				rmnet_shs_cfg.num_pkts_parked){
-					rmnet_shs_cfg.ff_flag++;
-			}
+		if (rmnet_shs_fall_back_timer &&
+		    rmnet_shs_cfg.num_bytes_parked &&
+		    rmnet_shs_cfg.num_pkts_parked){
+				rmnet_shs_cfg.ff_flag++;
+		}
 
 		}
 		rmnet_shs_flush_reason[RMNET_SHS_FLUSH_WQ_FB_FLUSH]++;
@@ -1427,7 +1428,7 @@ static void rmnet_flush_buffered(struct work_struct *work)
 		}
 		rmnet_shs_flush_table(rmnet_shs_cfg.ff_flag >= rmnet_shs_wq_fb_limit,
 				      RMNET_WQ_CTXT);
-					  
+
 		local_bh_enable();
 	}
 	SHS_TRACE_HIGH(RMNET_SHS_FLUSH,
@@ -1551,7 +1552,6 @@ int rmnet_shs_drop_backlog(struct sk_buff_head *list, int cpu)
 
 	return 0;
 }
-
 /* This will run in process context, avoid disabling bh */
 static int rmnet_shs_oom_notify(struct notifier_block *self,
 			    unsigned long emtpy, void *free)
@@ -1587,7 +1587,6 @@ static int rmnet_shs_oom_notify(struct notifier_block *self,
 static struct notifier_block rmnet_oom_nb = {
 	.notifier_call = rmnet_shs_oom_notify,
 };
-
 
 void rmnet_shs_ps_on_hdlr(void *port)
 {
@@ -1631,7 +1630,6 @@ void rmnet_shs_dl_trl_handler_v2(struct rmnet_map_dl_ind_trl *dltrl,
 
 void rmnet_shs_dl_trl_handler(struct rmnet_map_dl_ind_trl *dltrl)
 {
-
 	SHS_TRACE_HIGH(RMNET_SHS_DL_MRK,
 			     RMNET_SHS_FLUSH_DL_MRK_TRLR_HDLR_START,
 			     rmnet_shs_cfg.num_pkts_parked, 0,
@@ -1865,7 +1863,7 @@ void rmnet_shs_assign(struct sk_buff *skb, struct rmnet_port *port)
 		break;
 
 	} while (0);
-	
+
 	if (!is_shs_reqd) {
 		spin_unlock_irqrestore(&rmnet_shs_ht_splock, ht_flags);
 		rmnet_shs_crit_err[RMNET_SHS_MAIN_SHS_NOT_REQD]++;

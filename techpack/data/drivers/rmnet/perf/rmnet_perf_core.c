@@ -116,7 +116,7 @@ MODULE_PARM_DESC(rmnet_perf_qmap_size_mismatch,
 		 "Number of mismatches b/w QMAP and IP lengths");
 
 /* Handle deag by default for legacy behavior */
-static bool rmnet_perf_ingress_deag = false;
+static bool rmnet_perf_ingress_deag = true;
 module_param(rmnet_perf_ingress_deag, bool, 0444);
 MODULE_PARM_DESC(rmnet_perf_ingress_deag,
 		 "If true, rmnet_perf will handle QMAP deaggregation");
