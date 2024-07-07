@@ -1242,13 +1242,8 @@ static ssize_t iobd_show(struct device *dev,
 	struct hd_struct *hd = dev_to_part(dev);
 	struct accumulated_io_stats *old = &(disk->accios);
 	struct accumulated_io_stats new;
-	int cpu;
 	int ret;
 	int idx, sg;
-
-	cpu = part_stat_lock();
-	part_round_stats(disk->queue, cpu, hd);
-	part_stat_unlock();
 
 	for (idx = 0; idx < FSYNC_TIME_GROUP_MAX; idx++)
 		new.fsync_time_cnt[idx] = read_fsync_time_cnt(idx);
