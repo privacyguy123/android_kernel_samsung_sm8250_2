@@ -416,16 +416,10 @@ int __sock_queue_rcv_skb(struct sock *sk, struct sk_buff *skb)
 	unsigned long flags;
 	struct sk_buff_head *list = &sk->sk_receive_queue;
 
-	if (atomic_read(&sk->sk_rmem_alloc) >= sk->sk_rcvbuf) {
-		if (sk->sk_rcvbuf < sysctl_rmem_max) {
-			/* increase sk_rcvbuf twice */
-			sk->sk_rcvbuf = min(sk->sk_rcvbuf * 2, (int)sysctl_rmem_max);
-		}
-		if (atomic_read(&sk->sk_rmem_alloc) >= sk->sk_rcvbuf) {
-			atomic_inc(&sk->sk_drops);
-			trace_sock_rcvqueue_full(sk, skb);
-			return -ENOMEM;
-		}
+	if (atomic_read(&sk->sk_rmem_alloc) >= READ_ONCE(sk->sk_rcvbuf)) {
+		atomic_inc(&sk->sk_drops);
+		trace_sock_rcvqueue_full(sk, skb);
+		return -ENOMEM;
 	}
 
 	if (!sk_rmem_schedule(sk, skb, skb->truesize)) {
@@ -474,7 +468,7 @@ int __sk_receive_skb(struct sock *sk, struct sk_buff *skb,
 
 	skb->dev = NULL;
 
-	if (sk_rcvqueues_full(sk, sk->sk_rcvbuf)) {
+	if (sk_rcvqueues_full(sk, READ_ONCE(sk->sk_rcvbuf))) {
 		atomic_inc(&sk->sk_drops);
 		goto discard_and_relse;
 	}
@@ -549,7 +543,7 @@ static int sock_setbindtodevice(struct sock *sk, char __user *optval,
 
 	/* Sorry... */
 	ret = -EPERM;
-	if (!ns_capable(net->user_ns, CAP_NET_RAW))
+	if (sk->sk_bound_dev_if && !ns_capable(net->user_ns, CAP_NET_RAW))
 		goto out;
 
 	ret = -EINVAL;
@@ -3007,6 +3001,13 @@ void sk_stop_timer(struct sock *sk, struct timer_list* timer)
 		__sock_put(sk);
 }
 EXPORT_SYMBOL(sk_stop_timer);
+
+void sk_stop_timer_sync(struct sock *sk, struct timer_list *timer)
+{
+	if (del_timer_sync(timer))
+		__sock_put(sk);
+}
+EXPORT_SYMBOL(sk_stop_timer_sync);
 
 void sock_init_data_uid(struct socket *sock, struct sock *sk, kuid_t uid)
 {
