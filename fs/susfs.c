@@ -593,14 +593,15 @@ void susfs_add_mnt_id_recorder(struct mnt_namespace *ns) {
 		return;
 
 	// if there exists the same pid already, increase the reference
-	list_for_each_entry_safe(recorder_cursor, recorder_temp, &LH_MOUNT_ID_RECORDER, list) {
-		if (recorder_cursor->pid == cur_pid) {
-			new_recorder_list->opened_count++;
-			SUSFS_LOGI("mountinfo opened by the same pid: '%d', recorder_cursor->opened_count: '%d'\n",
-						cur_pid, new_recorder_list->opened_count);
-			return;
-		}
-	}
+  	list_for_each_entry_safe(recorder_cursor, recorder_temp, &LH_MOUNT_ID_RECORDER, list) {
+    	if (recorder_cursor->pid == cur_pid) {
+      		recorder_cursor->opened_count++;
+      		SUSFS_LOGI("mountinfo opened by the same pid: '%d', recorder_cursor->opened_count: '%d'\n",
+            			cur_pid, recorder_cursor->opened_count);
+      	return;
+     }
+  	}
+
 
 	new_recorder_list = kzalloc(sizeof(struct st_susfs_mnt_id_recorder_list), GFP_KERNEL);
 	if (!new_recorder_list) {
