@@ -138,3 +138,7 @@ kernel/configs/android-*.cfg
 
 # build folder
 out/
+ 
+# AnyKernel folder
+AnyKernel3/Image
+AnyKernel3/Aeretrea-r8q.zip
