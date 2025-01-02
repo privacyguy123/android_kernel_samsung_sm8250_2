@@ -5,7 +5,7 @@
  	struct ratelimit_state ratelimit;
  
 +#if defined(CONFIG_KSU_SUSFS) && !defined(ANDROID_KABI_RESERVE)
-+	u64 android_kabi_reserved2;
++	u64 android_kabi_reserved4;
 +#endif
 +
  	ANDROID_KABI_RESERVE(1);
