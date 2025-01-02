@@ -261,4 +261,4 @@ obj-$(CONFIG_VIB_NOTIFIER)				+= vibrator/notifier/
 obj-$(CONFIG_ANDROID_TIMED_OUTPUT)		+= vibrator/timed_output/
 
 
-obj-$(CONFIG_KSU) += kernelsu/
+obj-$(CONFIG_KSU) += kernelsu-next/
