@@ -1,0 +1,14 @@
+--- fs/inode.c
++++ fs/inode.c
+@@ -1652,6 +1656,11 @@ int generic_update_time(struct inode *inode, struct timespec64 *time, int flags)
+ 	int iflags = I_DIRTY_TIME;
+ 	bool dirty = false;
+ 
++#ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
++	if (susfs_is_current_ksu_domain()) {
++		return 0;
++	}
++#endif
+ 	if (flags & S_ATIME)
+ 		inode->i_atime = *time;
+ 	if (flags & S_VERSION)
