@@ -37,7 +37,7 @@
 #		 CONFIG_FTRACE=y
 #		 CONFIG_FUNCTION_TRACER=y
 #		 CONFIG_FUNCTION_GRAPH_TRACER=y
-#		 CONFIG_KPROBES=y
+#		 # CONFIG_KPROBES is not set
 #		 CONFIG_KPROBES_ON_FTRACE=y
 #
 #	 For kernel versions older than 3.15:
