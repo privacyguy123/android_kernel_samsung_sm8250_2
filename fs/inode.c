@@ -27,6 +27,10 @@
 extern bool susfs_is_current_ksu_domain(void);
 #endif
 
+#ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
+extern bool susfs_is_current_ksu_domain(void);
+#endif
+
 /*
  * Inode locking rules:
  *
@@ -1684,6 +1688,12 @@ static int update_time(struct inode *inode, struct timespec64 *time, int flags)
 	}
 #endif
 
+#ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
+	if (susfs_is_current_ksu_domain()) {
+		return 0;
+	}
+#endif
+
 	update_time = inode->i_op->update_time ? inode->i_op->update_time :
 		generic_update_time;
 
@@ -1739,6 +1749,12 @@ void touch_atime(const struct path *path)
 	struct vfsmount *mnt = path->mnt;
 	struct inode *inode = d_inode(path->dentry);
 	struct timespec64 now;
+
+#ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
+	if (susfs_is_current_ksu_domain()) {
+		return;
+	}
+#endif
 
 #ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
 	if (susfs_is_current_ksu_domain()) {

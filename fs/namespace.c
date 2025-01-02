@@ -83,6 +83,23 @@ extern void susfs_auto_add_try_umount_for_bind_mount(struct path *path);
 extern void susfs_auto_add_sus_ksu_default_mount(const char __user *to_pathname);
 #endif
 
+#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
+extern bool susfs_is_current_ksu_domain(void);
+extern bool susfs_is_current_zygote_domain(void);
+#define CL_SUSFS_COPY_MNT_NS 0x1000000
+#define DEFAULT_SUS_MNT_GROUP_ID 1000
+#endif
+
+#ifdef CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT
+extern int susfs_auto_add_sus_bind_mount(const char *pathname, struct path *path_target);
+#endif
+#ifdef CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT
+extern void susfs_auto_add_try_umount_for_bind_mount(struct path *path);
+#endif
+#ifdef CONFIG_KSU_SUSFS_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT
+extern void susfs_auto_add_sus_ksu_default_mount(const char __user *to_pathname);
+#endif
+
 /* Maximum number of mounts in a mount namespace */
 unsigned int sysctl_mount_max __read_mostly = 100000;
 
@@ -2467,6 +2484,17 @@ static int invent_group_ids(struct mount *mnt, bool recurse)
 	}
 #endif
 
+#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
+	if (susfs_is_current_ksu_domain()) {
+		for (p = mnt; p; p = recurse ? next_mnt(p, mnt) : NULL) {
+			if (!p->mnt_group_id && !IS_MNT_SHARED(p)) {
+				susfs_mnt_alloc_group_id(p);
+			}
+		}
+		return 0;
+	}
+#endif
+
 	for (p = mnt; p; p = recurse ? next_mnt(p, mnt) : NULL) {
 		if (!p->mnt_group_id && !IS_MNT_SHARED(p)) {
 			int err = mnt_alloc_group_id(p);
@@ -2674,6 +2702,29 @@ retry:
 		}
 		return mp;
 	}
+#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
+	// current->android_kabi_reserved8 -> to record last valid fake mnt_id to zygote pid
+	// q->mnt.android_kabi_reserved4 -> original mnt_id
+	// q->mnt_id -> will be modified to the fake mnt_id
+
+	// Here We are only interested in processes of which original mnt namespace belongs to zygote 
+	// Also we just make use of existing 'q' mount pointer, no need to delcare extra mount pointer
+	if (is_zygote_pid) {
+		last_entry_mnt_id = list_first_entry(&new_ns->list, struct mount, mnt_list)->mnt_id;
+		list_for_each_entry(q, &new_ns->list, mnt_list) {
+			if (unlikely(q->mnt.mnt_root->d_inode->i_state & 33554432)) {
+				continue;
+			}
+			q->mnt.android_kabi_reserved4 = q->mnt_id;
+			q->mnt_id = last_entry_mnt_id++;
+		}
+	}
+	// Assign the 'last_entry_mnt_id' to 'current->android_kabi_reserved8' for later use.
+	// should be fine here assuming zygote is forking/unsharing app in one single thread.
+	// Or should we put a lock here?
+	current->android_kabi_reserved8 = last_entry_mnt_id;
+#endif
+
 	namespace_unlock();
 	inode_unlock(path->dentry->d_inode);
 	path_put(path);

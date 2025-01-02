@@ -27,6 +27,10 @@
 extern bool susfs_is_current_ksu_domain(void);
 #endif
 
+#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
+extern bool susfs_is_current_ksu_domain(void);
+#endif
+
 static __poll_t mounts_poll(struct file *file, poll_table *wait)
 {
 	struct seq_file *m = file->private_data;
@@ -113,6 +117,11 @@ static int show_vfsmnt(struct seq_file *m, struct vfsmount *mnt)
 
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 	if (susfs_sus_mount(mnt, &p->root)) return 0;
+#endif
+
+#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
+	if (unlikely((r->mnt.mnt_root->d_inode->i_state & 33554432) && !susfs_is_current_ksu_domain()))
+		return 0;
 #endif
 
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
@@ -245,6 +254,11 @@ static int show_vfsstat(struct seq_file *m, struct vfsmount *mnt)
 
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 	if (susfs_sus_mount(mnt, &p->root)) return 0;
+#endif
+
+#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
+	if (unlikely((r->mnt.mnt_root->d_inode->i_state & 33554432) && !susfs_is_current_ksu_domain()))
+		return 0;
 #endif
 
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT

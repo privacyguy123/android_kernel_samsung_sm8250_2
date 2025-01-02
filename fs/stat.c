@@ -29,6 +29,10 @@
 extern void susfs_sus_ino_for_generic_fillattr(unsigned long ino, struct kstat *stat);
 #endif
 
+#ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
+extern void susfs_sus_ino_for_generic_fillattr(unsigned long ino, struct kstat *stat);
+#endif
+
 /**
  * generic_fillattr - Fill in the basic attributes from the inode struct
  * @inode: Inode to use as the source
@@ -206,6 +210,12 @@ int vfs_statx(int dfd, const char __user *filename, int flags,
 
 #ifdef CONFIG_KSU
 	ksu_handle_stat(&dfd, &filename, &flags);
+#endif
+
+#ifdef CONFIG_KSU_SUSFS_SUS_SU
+	if (susfs_is_sus_su_hooks_enabled) {
+		ksu_handle_stat(&dfd, &filename, &flags);
+	}
 #endif
 
 #ifdef CONFIG_KSU_SUSFS_SUS_SU

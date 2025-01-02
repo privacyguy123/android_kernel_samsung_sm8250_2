@@ -1019,6 +1019,12 @@ static inline int may_follow_link(struct nameidata *nd)
 	}
 #endif
 
+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
+	if (nd->inode && unlikely(nd->inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
+		return -ENOENT;
+	}
+#endif
+
 	if (!sysctl_protected_symlinks)
 		return 0;
 
@@ -1095,6 +1101,12 @@ static bool safe_hardlink_source(struct inode *inode)
 static int may_linkat(struct path *link)
 {
 	struct inode *inode = link->dentry->d_inode;
+
+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
+	if (link->dentry->d_inode && unlikely(link->dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
+		return -ENOENT;
+	}
+#endif
 
 #ifdef CONFIG_KSU_SUSFS_SUS_PATH
 	if (link->dentry->d_inode && unlikely(link->dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
@@ -1662,6 +1674,19 @@ static struct dentry *lookup_dcache(const struct qstr *name,
 			return ERR_PTR(error);
 		}
 	}
+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
+	if (!IS_ERR(dentry) && dentry->d_inode && unlikely(dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
+		if ((flags & (LOOKUP_CREATE | LOOKUP_EXCL))) {
+			error = inode_permission(dir, MAY_WRITE | MAY_EXEC);
+			if (error) {
+				dput(dentry);
+				return ERR_PTR(error);
+			}
+		}
+		dput(dentry);
+		return ERR_PTR(-ENOENT);
+	}
+#endif
 	return dentry;
 }
 
@@ -1916,6 +1941,12 @@ static int pick_link(struct nameidata *nd, struct path *link,
 			path_put(link);
 			return error;
 		}
+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
+		// we deal with sus sub path here
+		if (nd->inode && unlikely(nd->inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
+			return 0;
+		}
+#endif
 	}
 
 	last = nd->stack + nd->depth++;
@@ -2929,6 +2960,12 @@ filename_mountpoint(int dfd, struct filename *name, struct path *path,
 	if (likely(!error))
 		audit_inode(name, path->dentry, 0);
 	restore_nameidata();
+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
+	if (!retval && path->dentry->d_inode && unlikely(path->dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
+		putname(name);
+		return -ENOENT;
+	}
+#endif
 	putname(name);
 	return error;
 }
@@ -3234,6 +3271,11 @@ static int may_open(const struct path *path, int acc_mode, int flag)
 	/* O_NOATIME can only be set by the owner or superuser */
 	if (flag & O_NOATIME && !inode_owner_or_capable(inode))
 		return -EPERM;
+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
+	if (unlikely(inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
+		return -ENOENT;
+	}
+#endif
 
 	return 0;
 }
