@@ -46,6 +46,16 @@ struct user_struct {
 
 	/* Miscellaneous per-user rate limit */
 	struct ratelimit_state ratelimit;
+
+	/* SUSFS compatibility */
+    u64 android_kabi_reserved1; /* Add this if it doesn't already exist */
+    u64 android_kabi_reserved2; /* Add more if necessary */
+	u64 android_kabi_reserved3;
+	u64 android_kabi_reserved4;
+	u64 android_kabi_reserved5;
+	u64 android_kabi_reserved6;
+	u64 android_kabi_reserved7;
+	u64 android_kabi_reserved8;
 };
 
 extern int uids_sysfs_init(void);
