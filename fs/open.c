@@ -368,7 +368,7 @@ SYSCALL_DEFINE4(fallocate, int, fd, int, mode, loff_t, offset, loff_t, len)
 	return ksys_fallocate(fd, mode, offset, len);
 }
 
-#ifdef CONFIG_KSU
+#ifdef CONFIG_KSU_SUSFS
 extern int ksu_handle_faccessat(int *dfd, const char __user **filename_user, int *mode,
 			 int *flags);
 #endif
@@ -404,18 +404,6 @@ long do_faccessat(int dfd, const char __user *filename, int mode)
 
 	if (status) {
 		return error;
-	}
-#endif
-
-#ifdef CONFIG_KSU_SUSFS_SUS_SU
-	if (susfs_is_sus_su_hooks_enabled) {
-		ksu_handle_faccessat(&dfd, &filename, &mode, NULL);
-	}
-#endif
-
-#ifdef CONFIG_KSU_SUSFS_SUS_SU
-	if (susfs_is_sus_su_hooks_enabled) {
-		ksu_handle_faccessat(&dfd, &filename, &mode, NULL);
 	}
 #endif
 
