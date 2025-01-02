@@ -172,7 +172,7 @@ struct st_sus_su {
 /***********************/
 /* sus_path */
 #ifdef CONFIG_KSU_SUSFS_SUS_PATH
-int susfs_add_sus_path(struct st_susfs_sus_path* __user user_info);
+int susfs_sus_path_by_filename(struct filename* name, int* errno_to_be_changed, int syscall_family);
 int susfs_sus_ino_for_filldir64(unsigned long ino);
 #endif
 /* sus_mount */

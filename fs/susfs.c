@@ -496,6 +496,29 @@ void susfs_sus_ino_for_show_map_vma(unsigned long ino, dev_t *out_dev, unsigned 
 }
 #endif // #ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
 
+int susfs_sus_path_by_filename(struct filename* name, int* errno_to_be_changed, int syscall_family) {
+	int status = 0;
+	int ret = 0;
+	struct path path;
+
+	if (IS_ERR(name)) {
+		return status;
+	}
+
+	if (!uid_matches_suspicious_path() || name == NULL) {
+		return status;
+	}
+
+	ret = kern_path(name->name, LOOKUP_FOLLOW, &path);
+
+	if (!ret) {
+		status = susfs_sus_path_by_path(&path, errno_to_be_changed, syscall_family);
+		path_put(&path);
+	}
+
+	return status;
+}
+
 /* try_umount */
 #ifdef CONFIG_KSU_SUSFS_TRY_UMOUNT
 static LIST_HEAD(LH_TRY_UMOUNT_PATH);
