@@ -5,7 +5,7 @@
  				struct inode * const inode)
  {
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+	if (unlikely(inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved4 & 16777216)) {
++	if (unlikely(inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
 +		return -ENOENT;
 +	}
 +#endif
@@ -28,7 +28,7 @@
  		}
  	}
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+	if (!IS_ERR(dentry) && dentry->d_inode && unlikely(dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved4 & 16777216)) {
++	if (!IS_ERR(dentry) && dentry->d_inode && unlikely(dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
 +		dput(dentry);
 +		return ERR_PTR(-ENOENT);
 +	}
@@ -46,7 +46,7 @@
  	struct user_namespace *s_user_ns;
  	audit_inode_child(dir, child, AUDIT_TYPE_CHILD_CREATE);
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+	if (child->d_inode && unlikely(child->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved4 & 16777216)) {
++	if (child->d_inode && unlikely(child->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
 +		error = inode_permission(dir, MAY_WRITE | MAY_EXEC);
 +		if (error) {
 +			return error;
@@ -62,7 +62,7 @@
  		return -ENOENT;
  
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+	if (unlikely(inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved4 & 16777216)) {
++	if (unlikely(inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
 +		return -ENOENT;
 +	}
 +#endif
@@ -77,7 +77,7 @@
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
 +	int error;
 +
-+	if (dentry->d_inode && unlikely(dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved4 & 16777216)) {
++	if (dentry->d_inode && unlikely(dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
 +		error = inode_permission(dir->dentry->d_inode, MAY_WRITE | MAY_EXEC);
 +		if (error) {
 +			return error;
@@ -96,7 +96,7 @@
  	if (dentry->d_inode) {
  		/* Cached positive dentry: will open in f_op->open */
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+		if (unlikely(dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved4 & 16777216)) {
++		if (unlikely(dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
 +			dput(dentry);
 +			return -ENOENT;
 +		}
@@ -109,7 +109,7 @@
  		if (unlikely(error == -ENOENT) && create_error)
  			error = create_error;
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+		if (!IS_ERR(dentry) && dentry->d_inode && unlikely(dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved4 & 16777216)) {
++		if (!IS_ERR(dentry) && dentry->d_inode && unlikely(dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
 +			if (create_error) {
 +				dput(dentry);
 +				return create_error;
@@ -126,7 +126,7 @@
  			dput(dentry);
  			dentry = res;
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+			if (dentry->d_inode && unlikely(dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved4 & 16777216)) {
++			if (dentry->d_inode && unlikely(dentry->d_inode->i_state & 16777216) && likely(current_cred()->user->android_kabi_reserved2 & 16777216)) {
 +				dput(dentry);
 +				return -ENOENT;
 +			}

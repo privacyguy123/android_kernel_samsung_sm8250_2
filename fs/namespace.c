@@ -350,10 +350,10 @@ static int mnt_alloc_vfsmount(struct mount *mnt)
 static void mnt_free_id(struct mount *mnt)
 {
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
-	// If mnt->mnt.android_kabi_reserved4 is not zero, it means mnt->mnt_id is spoofed,
+	// If mnt->mnt.android_kabi_reserved2 is not zero, it means mnt->mnt_id is spoofed,
 	// so here we return the original mnt_id for being freed.
-	if (unlikely(mnt->mnt.android_kabi_reserved4)) {
-		ida_free(&mnt_id_ida, mnt->mnt.android_kabi_reserved4);
+	if (unlikely(mnt->mnt.android_kabi_reserved2)) {
+		ida_free(&mnt_id_ida, mnt->mnt.android_kabi_reserved2);
 		return;
 	}
 #endif
@@ -1339,7 +1339,7 @@ vfs_kern_mount(struct file_system_type *type, int flags, const char *name, void 
 
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 	if (susfs_is_current_zygote_domain()) {
-		mnt->mnt.android_kabi_reserved4 = mnt->mnt_id;
+		mnt->mnt.android_kabi_reserved2 = mnt->mnt_id;
 		mnt->mnt_id = current->android_kabi_reserved8++;
 	}
 #endif
@@ -1472,7 +1472,7 @@ static struct mount *clone_mnt(struct mount *old, struct dentry *root,
 
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 	if (susfs_is_current_zygote_domain() && !(flag & CL_SUSFS_COPY_MNT_NS)) {
-		mnt->mnt.android_kabi_reserved4 = mnt->mnt_id;
+		mnt->mnt.android_kabi_reserved2 = mnt->mnt_id;
 		mnt->mnt_id = current->android_kabi_reserved8++;
 	}
 #endif
@@ -2704,7 +2704,7 @@ retry:
 	}
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 	// current->android_kabi_reserved8 -> to record last valid fake mnt_id to zygote pid
-	// q->mnt.android_kabi_reserved4 -> original mnt_id
+	// q->mnt.android_kabi_reserved2 -> original mnt_id
 	// q->mnt_id -> will be modified to the fake mnt_id
 
 	// Here We are only interested in processes of which original mnt namespace belongs to zygote 
@@ -2715,7 +2715,7 @@ retry:
 			if (unlikely(q->mnt.mnt_root->d_inode->i_state & 33554432)) {
 				continue;
 			}
-			q->mnt.android_kabi_reserved4 = q->mnt_id;
+			q->mnt.android_kabi_reserved2 = q->mnt_id;
 			q->mnt_id = last_entry_mnt_id++;
 		}
 	}
@@ -3768,7 +3768,7 @@ struct mnt_namespace *copy_mnt_ns(unsigned long flags, struct mnt_namespace *ns,
 	}
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 	// current->android_kabi_reserved8 -> to record last valid fake mnt_id to zygote pid
-	// q->mnt.android_kabi_reserved4 -> original mnt_id
+	// q->mnt.android_kabi_reserved2 -> original mnt_id
 	// q->mnt_id -> will be modified to the fake mnt_id
 
 	// Here We are only interested in processes of which original mnt namespace belongs to zygote 
@@ -3779,7 +3779,7 @@ struct mnt_namespace *copy_mnt_ns(unsigned long flags, struct mnt_namespace *ns,
 			if (unlikely(q->mnt.mnt_root->d_inode->i_state & 33554432)) {
 				continue;
 			}
-			q->mnt.android_kabi_reserved4 = q->mnt_id;
+			q->mnt.android_kabi_reserved2 = q->mnt_id;
 			q->mnt_id = last_entry_mnt_id++;
 		}
 	}

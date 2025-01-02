@@ -312,7 +312,7 @@ static int filldir64(struct dir_context *ctx, const char *name, int namlen,
 		sizeof(u64));
 
 #ifdef CONFIG_KSU_SUSFS_SUS_PATH
-	if (likely(current_cred()->user->android_kabi_reserved4 & 16777216) && susfs_sus_ino_for_filldir64(ino)) {
+	if (likely(current_cred()->user->android_kabi_reserved2 & 16777216) && susfs_sus_ino_for_filldir64(ino)) {
 		return 0;
 	}
 #endif

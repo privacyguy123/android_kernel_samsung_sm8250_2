@@ -5,10 +5,10 @@
  static void mnt_free_id(struct mount *mnt)
  {
 +#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
-+	// If mnt->mnt.android_kabi_reserved4 is not zero, it means mnt->mnt_id is spoofed,
++	// If mnt->mnt.android_kabi_reserved2 is not zero, it means mnt->mnt_id is spoofed,
 +	// so here we return the original mnt_id for being freed.
-+	if (unlikely(mnt->mnt.android_kabi_reserved4)) {
-+		ida_free(&mnt_id_ida, mnt->mnt.android_kabi_reserved4);
++	if (unlikely(mnt->mnt.android_kabi_reserved2)) {
++		ida_free(&mnt_id_ida, mnt->mnt.android_kabi_reserved2);
 +		return;
 +	}
 +#endif
@@ -48,7 +48,7 @@
 +
 +#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 +	if (susfs_is_current_zygote_domain()) {
-+		mnt->mnt.android_kabi_reserved4 = mnt->mnt_id;
++		mnt->mnt.android_kabi_reserved2 = mnt->mnt_id;
 +		mnt->mnt_id = current->android_kabi_reserved8++;
 +	}
 +#endif
@@ -63,7 +63,7 @@
 +
 +#ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 +	if (susfs_is_current_zygote_domain() && !(flag & CL_SUSFS_COPY_MNT_NS)) {
-+		mnt->mnt.android_kabi_reserved4 = mnt->mnt_id;
++		mnt->mnt.android_kabi_reserved2 = mnt->mnt_id;
 +		mnt->mnt_id = current->android_kabi_reserved8++;
 +	}
 +#endif
