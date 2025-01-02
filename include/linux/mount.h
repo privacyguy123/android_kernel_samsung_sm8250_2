@@ -76,6 +76,10 @@ struct vfsmount {
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+	ANDROID_KABI_RESERVE(5);
+	ANDROID_KABI_RESERVE(6);
+	ANDROID_KABI_RESERVE(7);
+	ANDROID_KABI_RESERVE(8);
 	void *data;
 #if defined(CONFIG_KSU_SUSFS) && !defined(ANDROID_KABI_RESERVE)
 	u64 android_kabi_reserved2;
@@ -118,8 +122,8 @@ extern unsigned int sysctl_mount_max;
 
 extern bool path_is_mountpoint(const struct path *path);
 
-// #ifdef CONFIG_KSU_SUSFS
-// extern int path_umount(struct path *path, int flags);
-// #endif
+#ifdef CONFIG_KSU_SUSFS
+extern int path_umount(struct path *path, int flags);
+#endif
 
 #endif /* _LINUX_MOUNT_H */

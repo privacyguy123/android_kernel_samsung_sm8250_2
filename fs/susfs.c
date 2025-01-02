@@ -14,6 +14,7 @@
 #include <linux/fdtable.h>
 #include <linux/statfs.h>
 #include <linux/mount.h>
+#include "internal.h"
 #include <linux/susfs.h>
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5,15,0)
 #include "pnode.h"
