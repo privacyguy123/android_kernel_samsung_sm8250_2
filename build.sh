@@ -1,4 +1,4 @@
-LLVM=~/clangr52/bin/
+LLVM=$(pwd)/toolchain/gcc/bin/
 
 LLVM_ENV="CROSS_COMPILE=$(echo $LLVM)aarch64-linux-gnu- CROSS_COMPILE_COMPAT=$(echo $LLVM)arm-linux-gnueabi- CLANG_DIR=$LLVM LLVM=1 LLVM_IAS=1"
 
