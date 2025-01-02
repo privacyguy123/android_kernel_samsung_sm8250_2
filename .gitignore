@@ -73,6 +73,9 @@ modules.builtin
 #
 /snap/
 
+#Android-Toolcins
+/toolchain/
+
 #
 # tar directory (make tar*-pkg)
 #
