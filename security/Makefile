@@ -38,7 +38,6 @@ obj-$(CONFIG_INTEGRITY)			+= integrity/
 # MST driver
 obj-$(CONFIG_MST_LDO)	  += mstdrv/
 
-<<<<<<< HEAD
 # PROCA module
 subdir-$(CONFIG_PROCA)		+= proca
 obj-$(CONFIG_PROCA)		+= proca/
@@ -53,7 +52,5 @@ obj-$(CONFIG_HDM)			+= hdm/
 # Knox SDP
 obj-$(CONFIG_SDP) += sdp/
 obj-$(CONFIG_SDP) += sdp/built-in.a
-=======
 # HDM driver
 obj-$(CONFIG_HDM)			+= hdm/
->>>>>>> ata-karner-lineage-21
