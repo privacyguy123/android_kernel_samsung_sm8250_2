@@ -1,6 +1,10 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
  * Copyright (c) 2016-2019, The Linux Foundation. All rights reserved.
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #ifndef _CAM_REQ_MGR_UTIL_API_H_
@@ -9,6 +13,12 @@
 #include <media/cam_req_mgr.h>
 #include "cam_req_mgr_util_priv.h"
 
+<<<<<<< HEAD
+=======
+/* Interval for cam_info_rate_limit_custom() */
+#define CAM_RATE_LIMIT_INTERVAL_5SEC 5
+
+>>>>>>> ata-karner-lineage-21
 /**
  * state of a handle(session/device)
  * @HDL_FREE: free handle
@@ -21,12 +31,23 @@ enum hdl_state {
 
 /**
  * handle type
+<<<<<<< HEAD
  * @HDL_TYPE_DEV: for device and link
  * @HDL_TYPE_SESSION: for session
  */
 enum hdl_type {
 	HDL_TYPE_DEV = 1,
 	HDL_TYPE_SESSION
+=======
+ * @HDL_TYPE_DEV: for device
+ * @HDL_TYPE_SESSION: for session
+ * @HDL_TYPE_LINK: for link
+ */
+enum hdl_type {
+	HDL_TYPE_DEV = 1,
+	HDL_TYPE_SESSION,
+	HDL_TYPE_LINK
+>>>>>>> ata-karner-lineage-21
 };
 
 /**
@@ -99,8 +120,24 @@ int32_t cam_create_session_hdl(void *priv);
 int32_t cam_create_device_hdl(struct cam_create_dev_hdl *hdl_data);
 
 /**
+<<<<<<< HEAD
  * cam_get_device_priv() - get private data of a handle
  * @dev_hdl: handle for a session/link/device
+=======
+ * cam_create_link_hdl() - create a link handle
+ * @hdl_data: session hdl, flags, ops and priv dara as input
+ *
+ * cam_req_mgr_core calls this function to get
+ * session and link handles
+ * KMD drivers calls this function to create
+ * a link handle. Returns a unique link handle
+ */
+int32_t cam_create_link_hdl(struct cam_create_dev_hdl *hdl_data);
+
+/**
+ * cam_get_device_priv() - get private data of a device handle
+ * @dev_hdl: handle for a device
+>>>>>>> ata-karner-lineage-21
  *
  * cam_req_mgr_core and KMD drivers use this function to
  * get private data of a handle. Returns a private data
@@ -109,6 +146,29 @@ int32_t cam_create_device_hdl(struct cam_create_dev_hdl *hdl_data);
 void *cam_get_device_priv(int32_t dev_hdl);
 
 /**
+<<<<<<< HEAD
+=======
+ * cam_get_session_priv() - get private data of a session handle
+ * @dev_hdl: handle for a session
+ *
+ * cam_req_mgr_core and KMD drivers use this function to
+ * get private data of a handle. Returns a private data
+ * structure pointer.
+ */
+struct cam_req_mgr_core_session *cam_get_session_priv(int32_t dev_hdl);
+
+/**
+ * cam_get_link_priv() - get private data of a link handle
+ * @dev_hdl: handle for a link
+ *
+ * cam_req_mgr_core and KMD drivers use this function to
+ * get private data of a handle. Returns a private data
+ * structure pointer.
+ */
+struct cam_req_mgr_core_link *cam_get_link_priv(int32_t dev_hdl);
+
+/**
+>>>>>>> ata-karner-lineage-21
  * cam_get_device_ops() - get ops of a handle
  * @dev_hdl: handle for a session/link/device
  *
@@ -119,13 +179,28 @@ void *cam_get_device_ops(int32_t dev_hdl);
 
 /**
  * cam_destroy_device_hdl() - destroy device handle
+<<<<<<< HEAD
  * @dev_hdl: handle for a link/device.
+=======
+ * @dev_hdl: handle for a device.
+>>>>>>> ata-karner-lineage-21
  *
  * Returns success/failure
  */
 int32_t cam_destroy_device_hdl(int32_t dev_hdl);
 
 /**
+<<<<<<< HEAD
+=======
+ * cam_destroy_link_hdl() - destroy link handle
+ * @dev_hdl: handle for a link.
+ *
+ * Returns success/failure
+ */
+int32_t cam_destroy_link_hdl(int32_t dev_hdl);
+
+/**
+>>>>>>> ata-karner-lineage-21
  * cam_destroy_session_hdl() - destroy device handle
  * @dev_hdl: handle for a session
  *
@@ -162,9 +237,12 @@ int32_t cam_req_mgr_util_deinit(void);
  */
 int32_t cam_req_mgr_util_free_hdls(void);
 
+<<<<<<< HEAD
 #if defined(CONFIG_SAMSUNG_SBI)
 bool cam_req_mgr_get_is_crm_in_ssm_mode(void);
 void cam_req_mgr_set_is_crm_in_ssm_mode(bool val);
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 #endif /* _CAM_REQ_MGR_UTIL_API_H_ */

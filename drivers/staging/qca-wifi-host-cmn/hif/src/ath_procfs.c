@@ -218,7 +218,11 @@ int athdiag_procfs_init(void *scn)
 	}
 
 #ifdef CONFIG_SEC
+<<<<<<< HEAD
 	proc_file = proc_create_data(PROCFS_NAME, 0666, proc_dir,
+=======
+       proc_file = proc_create_data(PROCFS_NAME, 0666, proc_dir,
+>>>>>>> ata-karner-lineage-21
 #else
 	proc_file = proc_create_data(PROCFS_NAME, 0600, proc_dir,
 #endif

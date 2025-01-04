@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 	/*
+=======
+/*
+>>>>>>> ata-karner-lineage-21
  * Copyright (c) 2012-2021 The Linux Foundation. All rights reserved.
  * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
  *
@@ -84,6 +88,7 @@
 #include <linux/compat.h>
 #include <linux/ethtool.h>
 
+<<<<<<< HEAD
 #if defined (SEC_READ_MACADDR_SYSFS) || defined (SEC_WRITE_VERSION_IN_SYSFS) || defined (SEC_WRITE_SOFTAP_INFO_IN_SYSFS) || defined (SEC_CONFIG_PSM_SYSFS)
 #ifdef CONFIG_LITHIUM
 #include <net/cnss2.h>
@@ -92,6 +97,8 @@
 #endif
 #endif /* SEC_READ_MACADDR_SYSFS || SEC_WRITE_VERSION_IN_SYSFS || SEC_WRITE_SOFTAP_INFO_IN_SYSFS || SEC_CONFIG_PSM_SYSFS */
 
+=======
+>>>>>>> ata-karner-lineage-21
 #ifdef WLAN_FEATURE_DP_BUS_BANDWIDTH
 #include "qdf_periodic_work.h"
 #endif
@@ -240,6 +247,7 @@ static unsigned int dev_num = 1;
 static struct cdev wlan_hdd_state_cdev;
 static struct class *class;
 static dev_t device;
+<<<<<<< HEAD
 #if defined (SEC_READ_MACADDR_SYSFS) || defined (SEC_WRITE_VERSION_IN_SYSFS) || defined (SEC_WRITE_SOFTAP_INFO_IN_SYSFS) || defined (SEC_CONFIG_PSM_SYSFS)
 void hdd_sysfs_update_driver_status(int32_t status);
 #endif /* SEC_READ_MACADDR_SYSFS || SEC_WRITE_VERSION_IN_SYSFS || SEC_WRITE_SOFTAP_INFO_IN_SYSFS || SEC_CONFIG_PSM_SYSFS */
@@ -254,6 +262,8 @@ static int sec_hw_dbs_capable = 0;
 #endif //SEC_CONFIG_SUPPORT_MIMO
 static uint16_t sec_max_station = 0;
 #endif //SEC_WRITE_SOFTAP_INFO_IN_SYSFS
+=======
+>>>>>>> ata-karner-lineage-21
 static bool hdd_loaded = false;
 
 /* the Android framework expects this param even though we don't use it */
@@ -304,12 +314,15 @@ static const struct wiphy_wowlan_support wowlan_support_reg_init = {
 	.pattern_min_len = WOW_MIN_PATTERN_SIZE,
 	.pattern_max_len = WOW_MAX_PATTERN_SIZE,
 };
+<<<<<<< HEAD
 
 #ifdef CONFIG_SEC
 static struct cfg80211_wowlan wowlan_config = {
 	.magic_pkt = true,
 };
 #endif /* CONFIG_SEC */
+=======
+>>>>>>> ata-karner-lineage-21
 #endif
 
 static const struct category_info cinfo[MAX_SUPPORTED_CATEGORY] = {
@@ -2803,6 +2816,7 @@ wlan_hdd_update_dbs_scan_and_fw_mode_config(void)
 	 * NON-ROME platform.
 	 */
 	if (!policy_mgr_find_if_fw_supports_dbs(hdd_ctx->psoc))
+<<<<<<< HEAD
 	#ifdef SEC_WRITE_SOFTAP_INFO_IN_SYSFS
 	{
 		sec_hw_dbs_capable = 0;
@@ -2811,6 +2825,9 @@ wlan_hdd_update_dbs_scan_and_fw_mode_config(void)
 #else //!SEC_WRITE_SOFTAP_INFO_IN_SYSFS
 		return QDF_STATUS_SUCCESS;
 #endif //SEC_WRITE_SOFTAP_INFO_IN_SYSFS
+=======
+		return QDF_STATUS_SUCCESS;
+>>>>>>> ata-karner-lineage-21
 
 	if (hdd_ctx->is_dual_mac_cfg_updated) {
 		hdd_debug("dual mac config has already been updated, skip");
@@ -2821,9 +2838,12 @@ wlan_hdd_update_dbs_scan_and_fw_mode_config(void)
 	cfg.fw_mode_config = 0;
 	cfg.set_dual_mac_cb = policy_mgr_soc_set_dual_mac_cfg_cb;
 	if (policy_mgr_is_hw_dbs_capable(hdd_ctx->psoc)) {
+<<<<<<< HEAD
 #ifdef SEC_WRITE_SOFTAP_INFO_IN_SYSFS
         sec_hw_dbs_capable = 1;
 #endif //SEC_WRITE_SOFTAP_INFO_IN_SYSFS
+=======
+>>>>>>> ata-karner-lineage-21
 		status =
 		ucfg_policy_mgr_get_chnl_select_plcy(hdd_ctx->psoc,
 						     &chnl_sel_logic_conc);
@@ -3657,6 +3677,7 @@ unregister_ip6_notifier:
 out:
 	return ret;
 }
+<<<<<<< HEAD
 #if defined (SEC_READ_MACADDR_SYSFS) || defined (SEC_WRITE_VERSION_IN_SYSFS) || defined (SEC_WRITE_SOFTAP_INFO_IN_SYSFS) || defined (SEC_CONFIG_PSM_SYSFS)
 void hdd_sysfs_update_driver_status(int32_t status)
 {
@@ -3714,6 +3735,8 @@ void hdd_sysfs_update_driver_status(int32_t status)
 	}
 }
 #endif /* SEC_READ_MACADDR_SYSFS || SEC_WRITE_VERSION_IN_SYSFS || SEC_WRITE_SOFTAP_INFO_IN_SYSFS || SEC_CONFIG_PSM_SYSFS */
+=======
+>>>>>>> ata-karner-lineage-21
 
 #ifdef WLAN_FEATURE_WMI_SEND_RECV_QMI
 static inline
@@ -3951,9 +3974,12 @@ int hdd_wlan_start_modules(struct hdd_context *hdd_ctx, bool reinit)
 	}
 
 	hdd_ctx->driver_status = DRIVER_MODULES_ENABLED;
+<<<<<<< HEAD
 #if defined (SEC_READ_MACADDR_SYSFS) || defined (SEC_WRITE_VERSION_IN_SYSFS) || defined (SEC_WRITE_SOFTAP_INFO_IN_SYSFS) || defined (SEC_CONFIG_PSM_SYSFS)
 	hdd_sysfs_update_driver_status(DRIVER_MODULES_ENABLED);
 #endif /* SEC_READ_MACADDR_SYSFS || SEC_WRITE_VERSION_IN_SYSFS || SEC_WRITE_SOFTAP_INFO_IN_SYSFS || SEC_CONFIG_PSM_SYSFS */
+=======
+>>>>>>> ata-karner-lineage-21
 	hdd_nofl_debug("Wlan transitioned (now ENABLED)");
 
 	ucfg_ipa_reg_rps_enable_cb(hdd_ctx->pdev,
@@ -3991,9 +4017,12 @@ cds_txrx_free:
 
 close:
 	hdd_ctx->driver_status = DRIVER_MODULES_CLOSED;
+<<<<<<< HEAD
 #if defined (SEC_READ_MACADDR_SYSFS) || defined (SEC_WRITE_VERSION_IN_SYSFS) || defined (SEC_WRITE_SOFTAP_INFO_IN_SYSFS) || defined (SEC_CONFIG_PSM_SYSFS)
 	hdd_sysfs_update_driver_status(DRIVER_MODULES_CLOSED);
 #endif /* SEC_READ_MACADDR_SYSFS || SEC_WRITE_VERSION_IN_SYSFS || SEC_WRITE_SOFTAP_INFO_IN_SYSFS || SEC_CONFIG_PSM_SYSFS */
+=======
+>>>>>>> ata-karner-lineage-21
 	hdd_info("Wlan transition aborted (now CLOSED)");
 
 	cds_close(hdd_ctx->psoc);
@@ -9227,9 +9256,12 @@ static int hdd_wiphy_init(struct hdd_context *hdd_ctx)
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 11, 0))
 	wiphy->wowlan = &wowlan_support_reg_init;
+<<<<<<< HEAD
 #ifdef CONFIG_SEC
 	wiphy->wowlan_config = kmemdup(&wowlan_config, sizeof(wowlan_config), GFP_KERNEL);
 #endif /* CONFIG_SEC */
+=======
+>>>>>>> ata-karner-lineage-21
 #else
 	wiphy->wowlan.flags = WIPHY_WOWLAN_ANY |
 			      WIPHY_WOWLAN_MAGIC_PKT |
@@ -11724,12 +11756,15 @@ static void hdd_init_runtime_pm(struct hdd_config *config,
 				struct wlan_objmgr_psoc *psoc)
 {
 	config->runtime_pm = cfg_get(psoc, CFG_ENABLE_RUNTIME_PM);
+<<<<<<< HEAD
 #ifdef SEC_CONFIG_PSM_SYSFS
 	if (wlan_hdd_sec_get_psm()) {
 		config->runtime_pm = 0;
 		printk("[WIFI] CFG_ENABLE_RUNTIME_PM : sec_control_psm = %u", config->runtime_pm = 0);
 	}
 #endif /* SEC_CONFIG_PSM_SYSFS */
+=======
+>>>>>>> ata-karner-lineage-21
 }
 #else
 static void hdd_init_runtime_pm(struct hdd_config *config,
@@ -12290,9 +12325,12 @@ static int hdd_update_cds_config(struct hdd_context *hdd_ctx)
 	cds_cfg->enable_rxthread = hdd_ctx->enable_rxthread;
 	ucfg_mlme_get_sap_max_peers(hdd_ctx->psoc, &value);
 	cds_cfg->max_station = value;
+<<<<<<< HEAD
 #ifdef SEC_WRITE_SOFTAP_INFO_IN_SYSFS
 	sec_max_station = value;
 #endif //SEC_WRITE_SOFTAP_INFO_IN_SYSFS
+=======
+>>>>>>> ata-karner-lineage-21
 	cds_cfg->sub_20_channel_width = WLAN_SUB_20_CH_WIDTH_NONE;
 	cds_cfg->max_msdus_per_rxinorderind =
 		cfg_get(hdd_ctx->psoc, CFG_DP_MAX_MSDUS_PER_RXIND);
@@ -13976,9 +14014,12 @@ int hdd_wlan_stop_modules(struct hdd_context *hdd_ctx, bool ftm_mode)
 	hdd_ctx->imps_enabled = false;
 	hdd_ctx->is_dual_mac_cfg_updated = false;
 	hdd_ctx->driver_status = DRIVER_MODULES_CLOSED;
+<<<<<<< HEAD
 #if defined (SEC_READ_MACADDR_SYSFS) || defined (SEC_WRITE_VERSION_IN_SYSFS) || defined (SEC_WRITE_SOFTAP_INFO_IN_SYSFS) || defined (SEC_CONFIG_PSM_SYSFS)
 	hdd_sysfs_update_driver_status(DRIVER_MODULES_CLOSED);
 #endif /* SEC_READ_MACADDR_SYSFS || SEC_WRITE_VERSION_IN_SYSFS || SEC_WRITE_SOFTAP_INFO_IN_SYSFS || SEC_CONFIG_PSM_SYSFS */
+=======
+>>>>>>> ata-karner-lineage-21
 	hdd_debug("Wlan transitioned (now CLOSED)");
 
 done:
@@ -14285,16 +14326,21 @@ static QDF_STATUS hdd_open_concurrent_interface(struct hdd_context *hdd_ctx)
 {
 	QDF_STATUS status;
 	const char *iface_name;
+<<<<<<< HEAD
 #ifdef CONFIG_SEC
 	struct qdf_mac_addr mac_addr_swlan0;
 #else /* !CONFIG_SEC */
 	uint8_t *mac_addr;
 #endif /* CONFIG_SEC */
+=======
+	uint8_t *mac_addr;
+>>>>>>> ata-karner-lineage-21
 
 	if (qdf_str_eq(hdd_ctx->config->enable_concurrent_sta, ""))
 		return QDF_STATUS_SUCCESS;
 
 	iface_name = hdd_ctx->config->enable_concurrent_sta;
+<<<<<<< HEAD
 #ifdef CONFIG_SEC
 	if (hdd_ctx->num_provisioned_addr &&
 		!(hdd_ctx->provisioned_mac_addr[0].bytes[0] & 0x02)) {
@@ -14313,18 +14359,28 @@ static QDF_STATUS hdd_open_concurrent_interface(struct hdd_context *hdd_ctx)
 		if (QDF_IS_STATUS_ERROR(status))
 		hdd_err("Failed to open concurrent station interface");
 #else /* !CONFIG_SEC */
+=======
+>>>>>>> ata-karner-lineage-21
 	mac_addr = wlan_hdd_get_intf_addr(hdd_ctx, QDF_STA_MODE);
 	if (!mac_addr)
 		return QDF_STATUS_E_INVAL;
 
 	status = hdd_open_adapter_no_trans(hdd_ctx, QDF_STA_MODE,
 					   iface_name, mac_addr);
+<<<<<<< HEAD
 
         if (QDF_IS_STATUS_ERROR(status)) {
                 wlan_hdd_release_intf_addr(hdd_ctx, mac_addr);
                 hdd_err("Failed to open concurrent station interface");
         }
 #endif /* CONFIG_SEC */
+=======
+	if (QDF_IS_STATUS_ERROR(status)) {
+		wlan_hdd_release_intf_addr(hdd_ctx, mac_addr);
+		hdd_err("Failed to open concurrent station interface");
+	}
+
+>>>>>>> ata-karner-lineage-21
 	return status;
 }
 
@@ -16799,6 +16855,7 @@ static void hdd_driver_unload(void)
 	hdd_qdf_deinit();
 }
 
+<<<<<<< HEAD
 #if defined (SEC_CONFIG_PSM_SYSFS)
 int wlan_hdd_sec_get_psm(void)
 {
@@ -16811,6 +16868,8 @@ int wlan_hdd_sec_get_psm(void)
 }
 #endif /* SEC_CONFIG_PSM_SYSFS */
 
+=======
+>>>>>>> ata-karner-lineage-21
 /**
  * hdd_module_init() - Module init helper
  *

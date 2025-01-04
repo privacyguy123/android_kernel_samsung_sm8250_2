@@ -2189,6 +2189,51 @@ static void sde_kms_destroy(struct msm_kms *kms)
 
 static int sde_kms_set_crtc_for_conn(struct drm_device *dev,
 		struct drm_encoder *enc, struct drm_atomic_state *state)
+<<<<<<< HEAD
+=======
+{
+	struct drm_connector *conn = NULL;
+	struct drm_connector *tmp_conn = NULL;
+	struct drm_connector_list_iter conn_iter;
+	struct drm_crtc_state *crtc_state = NULL;
+	struct drm_connector_state *conn_state = NULL;
+	int ret = 0;
+
+	drm_connector_list_iter_begin(dev, &conn_iter);
+	drm_for_each_connector_iter(tmp_conn, &conn_iter) {
+		if (enc == tmp_conn->state->best_encoder) {
+			conn = tmp_conn;
+			break;
+		}
+	}
+	drm_connector_list_iter_end(&conn_iter);
+
+	if (!conn) {
+		SDE_ERROR("error in finding conn for enc:%d\n", DRMID(enc));
+		return -EINVAL;
+	}
+
+	crtc_state = drm_atomic_get_crtc_state(state, enc->crtc);
+	conn_state = drm_atomic_get_connector_state(state, conn);
+	if (IS_ERR(conn_state)) {
+		SDE_ERROR("error %d getting connector %d state\n",
+				ret, DRMID(conn));
+		return -EINVAL;
+	}
+
+	crtc_state->active = true;
+	ret = drm_atomic_set_crtc_for_connector(conn_state, enc->crtc);
+	if (ret)
+		SDE_ERROR("error %d setting the crtc\n", ret);
+
+	_sde_crtc_clear_dim_layers_v1(crtc_state);
+
+	return 0;
+}
+
+static void _sde_kms_plane_force_remove(struct drm_plane *plane,
+			struct drm_atomic_state *state)
+>>>>>>> ata-karner-lineage-21
 {
 	struct drm_connector *conn = NULL;
 	struct drm_connector *tmp_conn = NULL;
@@ -2235,6 +2280,10 @@ static int _sde_kms_remove_fbs(struct sde_kms *sde_kms, struct drm_file *file,
 	struct drm_device *dev = sde_kms->dev;
 	struct drm_framebuffer *fb, *tfb;
 	struct list_head fbs;
+<<<<<<< HEAD
+=======
+	struct drm_plane *plane;
+>>>>>>> ata-karner-lineage-21
 	struct drm_crtc *crtc = NULL;
 	unsigned int crtc_mask = 0;
 	int ret = 0;
@@ -2244,7 +2293,22 @@ static int _sde_kms_remove_fbs(struct sde_kms *sde_kms, struct drm_file *file,
 	list_for_each_entry_safe(fb, tfb, &file->fbs, filp_head) {
 		if (drm_framebuffer_read_refcount(fb) > 1)
 			list_move_tail(&fb->filp_head, &fbs);
+<<<<<<< HEAD
 		else {
+=======
+
+			drm_for_each_plane(plane, dev) {
+				if (plane->state &&
+					plane->state->fb == fb) {
+					if (plane->state->crtc)
+						crtc_mask |= drm_crtc_mask(
+							plane->state->crtc);
+					 _sde_kms_plane_force_remove(
+								plane, state);
+				}
+			}
+		} else {
+>>>>>>> ata-karner-lineage-21
 			list_del_init(&fb->filp_head);
 			drm_framebuffer_put(fb);
 		}
@@ -3973,6 +4037,18 @@ static int sde_kms_hw_init(struct msm_kms *kms)
 		pm_runtime_put_sync(sde_kms->dev->dev);
 	}
 
+<<<<<<< HEAD
+=======
+	sde_kms->affinity_notify.notify = sde_kms_irq_affinity_notify;
+	sde_kms->affinity_notify.release = sde_kms_irq_affinity_release;
+
+	irq_num = platform_get_irq(to_platform_device(sde_kms->dev->dev), 0);
+	SDE_DEBUG("Registering for notification of irq_num: %d\n", irq_num);
+	irq_set_affinity_notifier(irq_num, &sde_kms->affinity_notify);
+
+	reg_log_dump(__func__, __LINE__);
+
+>>>>>>> ata-karner-lineage-21
 	return 0;
 
 hw_init_err:

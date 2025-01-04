@@ -39,6 +39,10 @@
 #include <linux/wakelock.h>
 #include <linux/workqueue.h>
 #include <linux/power_supply.h>
+<<<<<<< HEAD
+=======
+#include <linux/proc_fs.h>
+>>>>>>> ata-karner-lineage-21
 
 #if defined(CONFIG_TRUSTONIC_TRUSTED_UI_QC)
 #include <linux/input/tui_hal_ts.h>

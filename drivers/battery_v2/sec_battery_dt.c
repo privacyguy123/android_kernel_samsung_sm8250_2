@@ -2199,7 +2199,11 @@ void sec_bat_parse_mode_dt(struct sec_battery_info *battery)
 		return;
 	}
 
+<<<<<<< HEAD
 	if (battery->store_mode) {
+=======
+	if (battery->store_mode || !battery->charging_enabled) {
+>>>>>>> ata-karner-lineage-21
 		ret = of_property_read_u32(np, "battery,store_mode_max_input_power",
 			&pdata->store_mode_max_input_power);
 		if (ret) {

@@ -231,11 +231,14 @@ void __put_cred(struct cred *cred)
 	kdebug("__put_cred(%p{%d,%d})", cred,
 	       atomic_read(&cred->usage),
 	       read_cred_subscribers(cred));
+<<<<<<< HEAD
 #ifdef CONFIG_KDP_CRED
 	if (rkp_ro_page((unsigned long)cred))
 		BUG_ON((rocred_uc_read(cred)) != 0);
 	else
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	BUG_ON(atomic_read(&cred->usage) != 0);
 #ifdef CONFIG_DEBUG_CREDENTIALS
 	BUG_ON(read_cred_subscribers(cred) != 0);
@@ -305,9 +308,12 @@ void exit_creds(struct task_struct *tsk)
 const struct cred *get_task_cred(struct task_struct *task)
 {
 	const struct cred *cred;
+<<<<<<< HEAD
 #ifdef CONFIG_KDP_CRED
 	int inc_test;
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	rcu_read_lock();
 
 #ifdef CONFIG_KDP_CRED
@@ -325,7 +331,10 @@ const struct cred *get_task_cred(struct task_struct *task)
 		cred = __task_cred((task));
 		BUG_ON(!cred);
 	} while (!atomic_inc_not_zero(&((struct cred *)cred)->usage));
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	rcu_read_unlock();
 	return cred;
 }
@@ -507,6 +516,7 @@ struct cred *prepare_exec_creds(void)
 
 	return new;
 }
+<<<<<<< HEAD
 #ifdef CONFIG_KDP_CRED
 int rkp_from_tsec_jar(unsigned long addr)
 {
@@ -547,6 +557,8 @@ void rkp_free_security(unsigned long tsec)
 	}
 }
 #endif /*CONFIG_KDP_CRED*/
+=======
+>>>>>>> ata-karner-lineage-21
 /*
  * Copy credentials for the new process created by fork()
  *
@@ -570,9 +582,12 @@ int copy_creds(struct task_struct *p, unsigned long clone_flags)
 	 * create a new one, while all other threads in the same thread group still
 	 * reference the old one, whose reference counter decreases by 2.
 	 */
+<<<<<<< HEAD
 #ifdef CONFIG_KDP_CRED
 	if(!rkp_cred_enable){
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	if (
 #ifdef CONFIG_KEYS
 		!p->cred->thread_keyring &&
@@ -773,12 +788,15 @@ int commit_creds(struct cred *new)
 	    !gid_eq(new->sgid,  old->sgid) ||
 	    !gid_eq(new->fsgid, old->fsgid))
 		proc_id_connector(task, PROC_EVENT_GID);
+<<<<<<< HEAD
 #ifdef CONFIG_KDP_CRED
 	if (rkp_cred_enable) {
 		put_cred(new);
 		put_cred(new);
 	}
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	/* release the old obj and subj refs both */
 	put_cred(old);
 	put_cred(old);

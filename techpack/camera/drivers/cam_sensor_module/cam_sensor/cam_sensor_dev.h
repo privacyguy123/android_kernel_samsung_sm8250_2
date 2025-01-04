@@ -85,6 +85,8 @@ struct intf_params {
  * @bob_pwm_switch: Boolean flag to switch into PWM mode for BoB regulator
  * @last_flush_req: Last request to flush
  * @pipeline_delay: Sensor pipeline delay
+ * @force_low_priority_for_init_setting: Using low priority queue to send
+ *     init setting
  */
 struct cam_sensor_ctrl_t {
 	char device_name[CAM_CTX_DEV_NAME_MAX_LENGTH];
@@ -111,6 +113,7 @@ struct cam_sensor_ctrl_t {
 	bool bob_pwm_switch;
 	uint32_t last_flush_req;
 	uint16_t pipeline_delay;
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_ADAPTIVE_MIPI)
 	u32 mipi_clock_index_new;
 	u32 mipi_clock_index_cur;
@@ -121,6 +124,10 @@ struct cam_sensor_ctrl_t {
 	struct task_struct *sensor_thread;
 	bool is_thread_started;
 #endif
+=======
+	int32_t open_cnt;
+	bool force_low_priority_for_init_setting;
+>>>>>>> ata-karner-lineage-21
 };
 
 #endif /* _CAM_SENSOR_DEV_H_ */

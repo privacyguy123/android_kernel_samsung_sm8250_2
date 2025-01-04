@@ -1233,6 +1233,7 @@ static ssize_t hiotime_store(struct device *dev,
 
 	return count;
 }
+<<<<<<< HEAD
 
 static ssize_t iobd_show(struct device *dev,
 			  struct device_attribute *attr,
@@ -1313,6 +1314,8 @@ static ssize_t iobd_show(struct device *dev,
 
 	return ret;
 }
+=======
+>>>>>>> ata-karner-lineage-21
 
 static struct kobject *base_probe(dev_t devt, int *partno, void *data)
 {
@@ -1424,7 +1427,10 @@ static DEVICE_ATTR(stat, 0444, part_stat_show, NULL);
 static DEVICE_ATTR(inflight, 0444, part_inflight_show, NULL);
 static DEVICE_ATTR(badblocks, 0644, disk_badblocks_show, disk_badblocks_store);
 static DEVICE_ATTR(diskios, 0660, disk_ios_show, NULL);
+<<<<<<< HEAD
 static DEVICE_ATTR(iobd, 0660, iobd_show, NULL);
+=======
+>>>>>>> ata-karner-lineage-21
 static DEVICE_ATTR(hiotime, 0660, hiotime_show, hiotime_store);
 #ifdef CONFIG_FAIL_MAKE_REQUEST
 static struct device_attribute dev_attr_fail =
@@ -1449,7 +1455,10 @@ static struct attribute *disk_attrs[] = {
 	&dev_attr_inflight.attr,
 	&dev_attr_badblocks.attr,
 	&dev_attr_diskios.attr,
+<<<<<<< HEAD
 	&dev_attr_iobd.attr,
+=======
+>>>>>>> ata-karner-lineage-21
 	&dev_attr_hiotime.attr,
 #ifdef CONFIG_FAIL_MAKE_REQUEST
 	&dev_attr_fail.attr,

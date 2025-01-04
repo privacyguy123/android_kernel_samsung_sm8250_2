@@ -1,6 +1,10 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
+<<<<<<< HEAD
  * Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2017-2021, The Linux Foundation. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #ifndef _CAM_SENSOR_CMN_HEADER_
@@ -219,7 +223,13 @@ enum cam_sensor_packet_opcodes {
 	CAM_SENSOR_PACKET_OPCODE_SENSOR_PROBE,
 	CAM_SENSOR_PACKET_OPCODE_SENSOR_CONFIG,
 	CAM_SENSOR_PACKET_OPCODE_SENSOR_STREAMOFF,
+<<<<<<< HEAD
 	CAM_SENSOR_PACKET_OPCODE_SENSOR_MODE,
+=======
+	CAM_SENSOR_PACKET_OPCODE_SENSOR_READ,
+	CAM_SENSOR_PACKET_OPCODE_SENSOR_POWERON_REG,
+	CAM_SENSOR_PACKET_OPCODE_SENSOR_POWEROFF_REG,
+>>>>>>> ata-karner-lineage-21
 	CAM_SENSOR_PACKET_OPCODE_SENSOR_NOP = 127
 };
 
@@ -365,6 +375,12 @@ struct i2c_data_settings {
 	struct i2c_settings_array config_settings;
 	struct i2c_settings_array streamon_settings;
 	struct i2c_settings_array streamoff_settings;
+<<<<<<< HEAD
+=======
+	struct i2c_settings_array read_settings;
+	struct i2c_settings_array poweron_reg_settings;
+	struct i2c_settings_array poweroff_reg_settings;
+>>>>>>> ata-karner-lineage-21
 	struct i2c_settings_array *per_frame;
 };
 

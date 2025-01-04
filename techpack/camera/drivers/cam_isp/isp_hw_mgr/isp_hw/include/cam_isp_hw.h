@@ -1,6 +1,11 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
+<<<<<<< HEAD
  * Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2017-2021, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #ifndef _CAM_ISP_HW_H_
@@ -104,7 +109,20 @@ enum cam_isp_hw_cmd_type {
 	CAM_ISP_HW_CMD_WM_CONFIG_UPDATE,
 	CAM_ISP_HW_CMD_CSID_QCFA_SUPPORTED,
 	CAM_ISP_HW_CMD_QUERY_REGSPACE_DATA,
+<<<<<<< HEAD
 	CAM_ISP_HW_CMD_UNMASK_BUS_WR_IRQ,
+=======
+	CAM_ISP_HW_CMD_QUERY,
+	CAM_ISP_HW_CMD_QUERY_DSP_MODE,
+	CAM_ISP_HW_CMD_DUMP_HW,
+	CAM_ISP_HW_CMD_FE_TRIGGER_CMD,
+	CAM_ISP_HW_CMD_CSID_CHANGE_HALT_MODE,
+	CAM_ISP_HW_CMD_GET_IRQ_REGISTER_DUMP,
+	CAM_ISP_HW_CMD_CSID_CLOCK_DUMP,
+	CAM_ISP_HW_CMD_SET_NUM_OF_ACQUIRED_RESOURCE,
+	CAM_ISP_HW_CMD_GET_NUM_OF_ACQUIRED_RESOURCE,
+	CAM_ISP_HW_CMD_IS_CONSUMED_ADDR_SUPPORT,
+>>>>>>> ata-karner-lineage-21
 	CAM_ISP_HW_CMD_MAX,
 };
 
@@ -168,7 +186,7 @@ struct cam_isp_resource_node {
  * @res_id:         Unique resource ID
  * @hw_idx:         IFE hw index
  * @err_type:       Error type if any
- * @th_reg_val:     Any critical register value captured during th
+ * @reg_val:        Any critical register value captured during irq handling
  *
  */
 struct cam_isp_hw_event_info {
@@ -176,7 +194,7 @@ struct cam_isp_hw_event_info {
 	uint32_t                       res_id;
 	uint32_t                       hw_idx;
 	uint32_t                       err_type;
-	uint32_t                       th_reg_val;
+	uint32_t                       reg_val;
 };
 
 /*
@@ -198,9 +216,10 @@ struct cam_isp_hw_cmd_buf_update {
 /*
  * struct cam_isp_hw_get_wm_update:
  *
- * @Brief:         Get cmd buffer for WM updates.
+ * @Brief:             Get cmd buffer for WM updates.
  *
  * @ image_buf:    image buffer address array
+ * @ image_buf_offset: image buffer address offset array
  * @ num_buf:      Number of buffers in the image_buf array
  * @ frame_header: frame header iova
  * @ local_id:     local id for the wm
@@ -209,6 +228,7 @@ struct cam_isp_hw_cmd_buf_update {
  */
 struct cam_isp_hw_get_wm_update {
 	dma_addr_t                     *image_buf;
+	uint32_t                        image_buf_offset[CAM_PACKET_MAX_PLANES];
 	uint32_t                        num_buf;
 	uint64_t                        frame_header;
 	uint32_t                        local_id;

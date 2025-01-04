@@ -104,6 +104,7 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/initcall.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_UH
 #include <linux/uh.h>
 #ifdef CONFIG_UH_RKP
@@ -114,10 +115,13 @@
 #endif
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 #ifdef CONFIG_KUNIT
 #include <kunit/test.h>
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_CFP
 #include <linux/cfp.h>
 #endif
@@ -130,6 +134,11 @@
 void __init __weak defex_load_rules(void) { }
 #endif
 
+=======
+#include <linux/sec_debug.h>
+#include <linux/sec_bootstat.h>
+
+>>>>>>> ata-karner-lineage-21
 static int kernel_init(void *);
 
 extern void init_IRQ(void);
@@ -160,9 +169,12 @@ static void __ref do_deferred_initcalls(struct work_struct *work)
 	ftrace_free_init_mem();
 	jump_label_invalidate_initmem();
 	free_initmem();
+<<<<<<< HEAD
 #ifdef CONFIG_UH_RKP
 	rkp_deferred_init();
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 }
 
 static DECLARE_WORK(deferred_initcall_work, do_deferred_initcalls);
@@ -1425,11 +1437,14 @@ static int __ref kernel_init(void *unused)
 	free_initmem();
 #endif
 	mark_readonly();
+<<<<<<< HEAD
 #ifndef CONFIG_DEFERRED_INITCALLS
 #ifdef CONFIG_UH_RKP
 	rkp_deferred_init();
 #endif
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	/*
 	 * Kernel mappings are now finalized - update the userspace page-table
 	 * to finalize PTI.

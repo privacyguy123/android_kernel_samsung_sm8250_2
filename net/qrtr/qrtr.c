@@ -589,8 +589,12 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
 	hdr->src_port_id = cpu_to_le32(from->sq_port);
 	if (to->sq_node == QRTR_NODE_BCAST) {
 		hdr->dst_node_id = cpu_to_le32(node->nid);
+<<<<<<< HEAD
 		hdr->dst_port_id = cpu_to_le32(QRTR_PORT_CTRL);
 	} else
+=======
+	else
+>>>>>>> ata-karner-lineage-21
 		hdr->dst_node_id = cpu_to_le32(to->sq_node);
 
 	hdr->dst_port_id = cpu_to_le32(to->sq_port);
@@ -820,6 +824,10 @@ int qrtr_endpoint_post(struct qrtr_endpoint *ep, const void *data, size_t len)
 			return -ENOMEM;
 		}
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> ata-karner-lineage-21
 	skb_reserve(skb, sizeof(*v1));
 	cb = (struct qrtr_cb *)skb->cb;
 

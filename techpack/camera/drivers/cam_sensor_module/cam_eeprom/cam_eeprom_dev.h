@@ -1,6 +1,10 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
+<<<<<<< HEAD
  * Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2017-2020, The Linux Foundation. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 #ifndef _CAM_EEPROM_DEV_H_
 #define _CAM_EEPROM_DEV_H_
@@ -12,7 +16,10 @@
 #include <media/v4l2-event.h>
 #include <media/v4l2-subdev.h>
 #include <media/v4l2-ioctl.h>
+<<<<<<< HEAD
 #include <media/cam_sensor.h>
+=======
+>>>>>>> ata-karner-lineage-21
 #include <cam_sensor_i2c.h>
 #include <cam_sensor_spi.h>
 #include <cam_sensor_io.h>
@@ -28,6 +35,7 @@
 #define DEFINE_MSM_MUTEX(mutexname) \
 	static struct mutex mutexname = __MUTEX_INITIALIZER(mutexname)
 
+<<<<<<< HEAD
 #define OK 1
 #define CRASH 0
 #define PROPERTY_MAXSIZE 32
@@ -517,6 +525,13 @@ extern uint8_t front_tof_cal_result;
 extern uint8_t front_tof_dual_cal[FRONT_TOF_DUAL_CAL_SIZE + 1];
 extern DualTilt_t front_tof_dual;
 #endif
+=======
+#define PROPERTY_MAXSIZE 32
+
+#define MSM_EEPROM_MEMORY_MAP_MAX_SIZE         80
+#define MSM_EEPROM_MAX_MEM_MAP_CNT             100
+#define MSM_EEPROM_MEM_MAP_PROPERTIES_CNT      8
+>>>>>>> ata-karner-lineage-21
 
 enum cam_eeprom_state {
 	CAM_EEPROM_INIT,
@@ -572,7 +587,10 @@ struct cam_eeprom_memory_block_t {
 	uint32_t num_map;
 	uint8_t *mapdata;
 	uint32_t num_data;
+<<<<<<< HEAD
 	uint32_t is_supported;
+=======
+>>>>>>> ata-karner-lineage-21
 };
 
 /**
@@ -676,6 +694,7 @@ struct cam_eeprom_ctrl_t {
 	uint16_t is_multimodule_mode;
 	struct i2c_settings_array wr_settings;
 	struct eebin_info eebin_info;
+<<<<<<< HEAD
 	uint32_t is_supported;
 };
 
@@ -685,6 +704,11 @@ typedef enum{
 	LOAD_FW_VER
 } cam_eeprom_fw_version_idx;
 
+=======
+	uint32_t open_cnt;
+};
+
+>>>>>>> ata-karner-lineage-21
 int32_t cam_eeprom_update_i2c_info(struct cam_eeprom_ctrl_t *e_ctrl,
 	struct cam_eeprom_i2c_info_t *i2c_info);
 

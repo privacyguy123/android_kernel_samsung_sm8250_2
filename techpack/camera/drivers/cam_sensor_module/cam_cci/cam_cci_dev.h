@@ -1,6 +1,10 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
  * Copyright (c) 2017-2020, The Linux Foundation. All rights reserved.
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2022-2023, Qualcomm Innovation Center, Inc. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #ifndef _CAM_CCI_DEV_H_
@@ -37,9 +41,14 @@
 #define CYCLES_PER_MICRO_SEC_DEFAULT 4915
 #define CCI_MAX_DELAY 1000000
 
+<<<<<<< HEAD
 #define CCI_TIMEOUT msecs_to_jiffies(1500)
 
 #define NUM_MASTERS 2
+=======
+#define CCI_TIMEOUT msecs_to_jiffies(100)
+
+>>>>>>> ata-karner-lineage-21
 #define NUM_QUEUES 2
 
 #define CCI_PINCTRL_STATE_DEFAULT "cci_default"
@@ -67,6 +76,11 @@
 #define PRIORITY_QUEUE (QUEUE_0)
 #define SYNC_QUEUE (QUEUE_1)
 
+<<<<<<< HEAD
+=======
+#define REPORT_IDSIZE 16
+
+>>>>>>> ata-karner-lineage-21
 enum cci_i2c_sync {
 	MSM_SYNC_DISABLE,
 	MSM_SYNC_ENABLE,
@@ -122,7 +136,11 @@ struct cam_cci_i2c_queue_info {
 };
 
 struct cam_cci_master_info {
+<<<<<<< HEAD
 	uint32_t status;
+=======
+	int32_t status;
+>>>>>>> ata-karner-lineage-21
 	atomic_t q_free[NUM_QUEUES];
 	uint8_t q_lock[NUM_QUEUES];
 	uint8_t reset_pending;
@@ -134,10 +152,17 @@ struct cam_cci_master_info {
 	struct completion report_q[NUM_QUEUES];
 	atomic_t done_pending[NUM_QUEUES];
 	spinlock_t lock_q[NUM_QUEUES];
+<<<<<<< HEAD
 	spinlock_t freq_cnt;
 	struct semaphore master_sem;
 	bool is_first_req;
 	uint16_t freq_ref_cnt;
+=======
+	struct semaphore master_sem;
+	spinlock_t freq_cnt_lock;
+	uint16_t freq_ref_cnt;
+	bool is_initilized;
+>>>>>>> ata-karner-lineage-21
 };
 
 struct cam_cci_clk_params_t {
@@ -172,6 +197,10 @@ enum cam_cci_state_t {
  * @cci_clk_info:               CCI clock information
  * @cam_cci_i2c_queue_info:     CCI queue information
  * @i2c_freq_mode:              I2C frequency of operations
+<<<<<<< HEAD
+=======
+ * @master_active_slave:        Number of active/connected slaves for master
+>>>>>>> ata-karner-lineage-21
  * @cci_clk_params:             CCI hw clk params
  * @cci_gpio_tbl:               CCI GPIO table
  * @cci_gpio_tbl_size:          GPIO table size
@@ -204,9 +233,16 @@ struct cci_device {
 	uint8_t ref_count;
 	enum cam_cci_state_t cci_state;
 	struct cam_cci_i2c_queue_info
+<<<<<<< HEAD
 		cci_i2c_queue_info[NUM_MASTERS][NUM_QUEUES];
 	struct cam_cci_master_info cci_master_info[NUM_MASTERS];
 	enum i2c_freq_mode i2c_freq_mode[NUM_MASTERS];
+=======
+		cci_i2c_queue_info[MASTER_MAX][NUM_QUEUES];
+	struct cam_cci_master_info cci_master_info[MASTER_MAX];
+	enum i2c_freq_mode i2c_freq_mode[MASTER_MAX];
+	uint8_t master_active_slave[MASTER_MAX];
+>>>>>>> ata-karner-lineage-21
 	struct cam_cci_clk_params_t cci_clk_params[I2C_MAX_MODES];
 	struct msm_pinctrl_info cci_pinctrl;
 	uint8_t cci_pinctrl_status;
@@ -283,6 +319,10 @@ struct cam_cci_ctrl {
 		struct cam_cci_wait_sync_cfg cci_wait_sync_cfg;
 		struct cam_cci_gpio_cfg gpio_cfg;
 	} cfg;
+<<<<<<< HEAD
+=======
+	bool force_low_priority;
+>>>>>>> ata-karner-lineage-21
 };
 
 struct cci_write_async {

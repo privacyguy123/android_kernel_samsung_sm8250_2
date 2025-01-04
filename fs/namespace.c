@@ -27,10 +27,13 @@
 #include <linux/task_work.h>
 #include <linux/sched/task.h>
 #include <linux/fslog.h>
+<<<<<<< HEAD
 #ifdef CONFIG_KDP_NS
 #include <linux/slub_def.h>
 #include <linux/kdp.h>
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 #include "pnode.h"
 #include "internal.h"
 
@@ -171,9 +174,17 @@ enum {
 	UMOUNT_STATUS_MAX
 };
 
+<<<<<<< HEAD
 static const char *umount_exit_str[UMOUNT_STATUS_MAX] = {
 	"ADDED_TASK", "REMAIN_NS", "REMAIN_CNT", "DELAY_TASK"
 };
+=======
+#ifdef CONFIG_PROC_STLOG
+static const char *umount_exit_str[UMOUNT_STATUS_MAX] = {
+	"ADDED_TASK", "REMAIN_NS", "REMAIN_CNT", "DELAY_TASK"
+};
+#endif
+>>>>>>> ata-karner-lineage-21
 
 static const char *exception_process[] = {
 	"main", "ch_zygote", "usap32", "usap64", NULL,
@@ -198,6 +209,7 @@ static inline int is_exception(char *comm)
 
 static inline void sys_umount_trace_print(struct mount *mnt, int flags)
 {
+<<<<<<< HEAD
 #ifdef CONFIG_KDP_NS
 	struct super_block *sb = mnt->mnt->mnt_sb;
 	int mnt_flags = mnt->mnt->mnt_flags;
@@ -205,6 +217,11 @@ static inline void sys_umount_trace_print(struct mount *mnt, int flags)
 	struct super_block *sb = mnt->mnt.mnt_sb;
 	int mnt_flags = mnt->mnt.mnt_flags;
 #endif
+=======
+#ifdef CONFIG_PROC_STLOG
+	struct super_block *sb = mnt->mnt.mnt_sb;
+	int mnt_flags = mnt->mnt.mnt_flags;
+>>>>>>> ata-karner-lineage-21
 	/* We don`t want to see what zygote`s umount */
 	if (((sb->s_magic == SDFAT_SUPER_MAGIC) ||
 		(sb->s_magic == MSDOS_SUPER_MAGIC)) &&
@@ -217,6 +234,7 @@ static inline void sys_umount_trace_print(struct mount *mnt, int flags)
 			sb->s_id, MAJOR(bd_dev), MINOR(bd_dev), mnt_flags,
 			flags, umount_exit_str[sys_umount_trace_status]);
 	}
+<<<<<<< HEAD
 }
 
 #ifdef CONFIG_KDP_NS
@@ -273,6 +291,10 @@ void rkp_set_data(struct vfsmount *mnt,void *data)
 	uh_call(UH_APP_RKP, RKP_KDP_X55, (u64)mnt, (u64)data, 0, 0);
 }
 #endif
+=======
+#endif
+}
+>>>>>>> ata-karner-lineage-21
 
 static inline struct hlist_head *mp_hash(struct dentry *dentry)
 {

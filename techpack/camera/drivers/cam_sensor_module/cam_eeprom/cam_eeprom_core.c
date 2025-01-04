@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
+<<<<<<< HEAD
  * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+=======
+ * Copyright (c) 2017-2020, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #include <linux/module.h>
@@ -12,6 +17,7 @@
 #include "cam_debug_util.h"
 #include "cam_common_util.h"
 #include "cam_packet_util.h"
+<<<<<<< HEAD
 #include <linux/ctype.h>
 
 #define CAM_EEPROM_DBG  1
@@ -2022,6 +2028,11 @@ static uint32_t cam_eeprom_match_crc(struct cam_eeprom_memory_block_t *data, uin
 }
 
 
+=======
+
+#define MAX_READ_SIZE  0x7FFFF
+
+>>>>>>> ata-karner-lineage-21
 /**
  * cam_eeprom_read_memory() - read map data into buffer
  * @e_ctrl:     eeprom control struct
@@ -2040,10 +2051,13 @@ static int cam_eeprom_read_memory(struct cam_eeprom_ctrl_t *e_ctrl,
 	struct cam_eeprom_memory_map_t    *emap = block->map;
 	struct cam_eeprom_soc_private     *eb_info = NULL;
 	uint8_t                           *memptr = block->mapdata;
+<<<<<<< HEAD
 #if 1
 	uint32_t                          addr = 0, size = 0, read_size = 0;
 #endif
 	int                               retry = 3;
+=======
+>>>>>>> ata-karner-lineage-21
 
 	if (!e_ctrl) {
 		CAM_ERR(CAM_EEPROM, "e_ctrl is NULL");
@@ -2075,7 +2089,11 @@ static int cam_eeprom_read_memory(struct cam_eeprom_ctrl_t *e_ctrl,
 			i2c_reg_array.delay = emap[j].page.delay;
 			i2c_reg_settings.reg_setting = &i2c_reg_array;
 			rc = camera_io_dev_write(&e_ctrl->io_master_info,
+<<<<<<< HEAD
 				&i2c_reg_settings);
+=======
+				&i2c_reg_settings, false);
+>>>>>>> ata-karner-lineage-21
 			if (rc) {
 				CAM_ERR(CAM_EEPROM, "page write failed rc %d",
 					rc);
@@ -2092,7 +2110,11 @@ static int cam_eeprom_read_memory(struct cam_eeprom_ctrl_t *e_ctrl,
 			i2c_reg_array.delay = emap[j].pageen.delay;
 			i2c_reg_settings.reg_setting = &i2c_reg_array;
 			rc = camera_io_dev_write(&e_ctrl->io_master_info,
+<<<<<<< HEAD
 				&i2c_reg_settings);
+=======
+				&i2c_reg_settings, false);
+>>>>>>> ata-karner-lineage-21
 			if (rc) {
 				CAM_ERR(CAM_EEPROM, "page enable failed rc %d",
 					rc);
@@ -2114,6 +2136,7 @@ static int cam_eeprom_read_memory(struct cam_eeprom_ctrl_t *e_ctrl,
 		}
 
 		if (emap[j].mem.valid_size) {
+<<<<<<< HEAD
 #if 1
 			size = emap[j].mem.valid_size;
 			addr = emap[j].mem.addr;
@@ -2170,6 +2193,8 @@ static int cam_eeprom_read_memory(struct cam_eeprom_ctrl_t *e_ctrl,
 				memptr += read_size;
 			}
 #else
+=======
+>>>>>>> ata-karner-lineage-21
 			rc = camera_io_dev_read_seq(&e_ctrl->io_master_info,
 				emap[j].mem.addr, memptr,
 				emap[j].mem.addr_type,
@@ -2181,7 +2206,10 @@ static int cam_eeprom_read_memory(struct cam_eeprom_ctrl_t *e_ctrl,
 				return rc;
 			}
 			memptr += emap[j].mem.valid_size;
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 		}
 
 		if (emap[j].pageen.valid_size) {
@@ -2193,8 +2221,13 @@ static int cam_eeprom_read_memory(struct cam_eeprom_ctrl_t *e_ctrl,
 			i2c_reg_array.delay = emap[j].pageen.delay;
 			i2c_reg_settings.reg_setting = &i2c_reg_array;
 			rc = camera_io_dev_write(&e_ctrl->io_master_info,
+<<<<<<< HEAD
 				&i2c_reg_settings);
 			if (rc < 0) {
+=======
+				&i2c_reg_settings, false);
+			if (rc) {
+>>>>>>> ata-karner-lineage-21
 				CAM_ERR(CAM_EEPROM,
 					"page disable failed rc %d",
 					rc);
@@ -2256,7 +2289,10 @@ static int cam_eeprom_power_up(struct cam_eeprom_ctrl_t *e_ctrl,
 			return -EINVAL;
 		}
 	}
+<<<<<<< HEAD
 	msleep(20);
+=======
+>>>>>>> ata-karner-lineage-21
 	return rc;
 }
 
@@ -2337,10 +2373,15 @@ int32_t cam_eeprom_parse_read_memory_map(struct device_node *of_node,
 	int32_t                         rc = 0;
 	struct cam_eeprom_soc_private  *soc_private;
 	struct cam_sensor_power_ctrl_t *power_info;
+<<<<<<< HEAD
 	int i;
 	int normal_crc_value = 0;
 
 	if (!e_ctrl || !of_node) {
+=======
+
+	if (!e_ctrl) {
+>>>>>>> ata-karner-lineage-21
 		CAM_ERR(CAM_EEPROM, "failed: e_ctrl is NULL");
 		return -EINVAL;
 	}
@@ -2365,6 +2406,7 @@ int32_t cam_eeprom_parse_read_memory_map(struct device_node *of_node,
 		rc = cam_eeprom_match_id(e_ctrl);
 		if (rc) {
 			CAM_DBG(CAM_EEPROM, "eeprom not matching %d", rc);
+<<<<<<< HEAD
 			//goto power_down;
 			rc = 0;
 		}
@@ -2403,6 +2445,19 @@ int32_t cam_eeprom_parse_read_memory_map(struct device_node *of_node,
 #endif
 	rc = cam_eeprom_power_down(e_ctrl);
 	if (rc < 0)
+=======
+			goto power_down;
+		}
+	}
+	rc = cam_eeprom_read_memory(e_ctrl, &e_ctrl->cal_data);
+	if (rc) {
+		CAM_ERR(CAM_EEPROM, "read_eeprom_memory failed");
+		goto power_down;
+	}
+
+	rc = cam_eeprom_power_down(e_ctrl);
+	if (rc)
+>>>>>>> ata-karner-lineage-21
 		CAM_ERR(CAM_EEPROM, "failed: eeprom power down rc %d", rc);
 
 	e_ctrl->cam_eeprom_state = CAM_EEPROM_ACQUIRE;
@@ -2452,6 +2507,13 @@ static int32_t cam_eeprom_get_dev_handle(struct cam_eeprom_ctrl_t *e_ctrl,
 
 	eeprom_acq_dev.device_handle =
 		cam_create_device_hdl(&bridge_params);
+<<<<<<< HEAD
+=======
+	if (eeprom_acq_dev.device_handle <= 0) {
+		CAM_ERR(CAM_EEPROM, "Can not create device handle");
+		return -EFAULT;
+	}
+>>>>>>> ata-karner-lineage-21
 	e_ctrl->bridge_intf.device_hdl = eeprom_acq_dev.device_handle;
 	e_ctrl->bridge_intf.session_hdl = eeprom_acq_dev.session_handle;
 
@@ -2984,13 +3046,23 @@ static int32_t cam_eeprom_parse_write_memory_packet(
 				break;
 			}
 		}
+<<<<<<< HEAD
 	}
 
 end:
+=======
+		cam_mem_put_cpu_buf(cmd_desc[i].mem_handle);
+	}
+	return rc;
+
+end:
+	cam_mem_put_cpu_buf(cmd_desc[i].mem_handle);
+>>>>>>> ata-karner-lineage-21
 	return rc;
 }
 
 /**
+<<<<<<< HEAD
  * cam_eeprom_calc_calmap_size - Calculate cal array size based on the cal map
  * @e_ctrl:       ctrl structure
  *
@@ -3040,6 +3112,8 @@ static int32_t cam_eeprom_calc_calmap_size(struct cam_eeprom_ctrl_t *e_ctrl)
 }
 
 /**
+=======
+>>>>>>> ata-karner-lineage-21
  * cam_eeprom_init_pkt_parser - Parse eeprom packet
  * @e_ctrl:       ctrl structure
  * @csl_packet:	  csl packet received
@@ -3192,9 +3266,18 @@ static int32_t cam_eeprom_init_pkt_parser(struct cam_eeprom_ctrl_t *e_ctrl,
 			}
 		}
 		e_ctrl->cal_data.num_map = num_map + 1;
+<<<<<<< HEAD
 	}
 
 end:
+=======
+		cam_mem_put_cpu_buf(cmd_desc[i].mem_handle);
+	}
+	return rc;
+
+end:
+	cam_mem_put_cpu_buf(cmd_desc[i].mem_handle);
+>>>>>>> ata-karner-lineage-21
 	return rc;
 }
 
@@ -3236,6 +3319,10 @@ static int32_t cam_eeprom_get_cal_data(struct cam_eeprom_ctrl_t *e_ctrl,
 			}
 			if (buf_size <= io_cfg->offsets[0]) {
 				CAM_ERR(CAM_EEPROM, "Not enough buffer");
+<<<<<<< HEAD
+=======
+				cam_mem_put_cpu_buf(io_cfg->mem_handle[0]);
+>>>>>>> ata-karner-lineage-21
 				rc = -EINVAL;
 				return rc;
 			}
@@ -3248,6 +3335,10 @@ static int32_t cam_eeprom_get_cal_data(struct cam_eeprom_ctrl_t *e_ctrl,
 			if (!read_buffer) {
 				CAM_ERR(CAM_EEPROM,
 					"invalid buffer to copy data");
+<<<<<<< HEAD
+=======
+				cam_mem_put_cpu_buf(io_cfg->mem_handle[0]);
+>>>>>>> ata-karner-lineage-21
 				rc = -EINVAL;
 				return rc;
 			}
@@ -3256,6 +3347,10 @@ static int32_t cam_eeprom_get_cal_data(struct cam_eeprom_ctrl_t *e_ctrl,
 			if (remain_len < e_ctrl->cal_data.num_data) {
 				CAM_ERR(CAM_EEPROM,
 					"failed to copy, Invalid size");
+<<<<<<< HEAD
+=======
+				cam_mem_put_cpu_buf(io_cfg->mem_handle[0]);
+>>>>>>> ata-karner-lineage-21
 				rc = -EINVAL;
 				return rc;
 			}
@@ -3264,6 +3359,10 @@ static int32_t cam_eeprom_get_cal_data(struct cam_eeprom_ctrl_t *e_ctrl,
 				e_ctrl->cal_data.num_data);
 			memcpy(read_buffer, e_ctrl->cal_data.mapdata,
 					e_ctrl->cal_data.num_data);
+<<<<<<< HEAD
+=======
+			cam_mem_put_cpu_buf(io_cfg->mem_handle[0]);
+>>>>>>> ata-karner-lineage-21
 		} else {
 			CAM_ERR(CAM_EEPROM, "Invalid direction");
 			rc = -EINVAL;
@@ -3273,6 +3372,7 @@ static int32_t cam_eeprom_get_cal_data(struct cam_eeprom_ctrl_t *e_ctrl,
 	return rc;
 }
 
+<<<<<<< HEAD
 static int32_t cam_eeprom_fill_configInfo(char *configString, uint32_t value, ConfigInfo_t *ConfigInfo)
 {
 	int32_t i, ret = 1;
@@ -3679,6 +3779,8 @@ static int32_t cam_eeprom_get_phone_ver(struct cam_eeprom_ctrl_t *e_ctrl,
 #endif
 }
 
+=======
+>>>>>>> ata-karner-lineage-21
 static int32_t delete_eeprom_request(struct i2c_settings_array *i2c_array)
 {
 	struct i2c_settings_list *i2c_list = NULL, *i2c_next = NULL;
@@ -3720,7 +3822,11 @@ static int32_t cam_eeprom_write(struct cam_eeprom_ctrl_t *e_ctrl)
 			&(i2c_set->list_head), list) {
 			rc = camera_io_dev_write_continuous(
 				&e_ctrl->io_master_info,
+<<<<<<< HEAD
 				&i2c_list->i2c_settings, 1);
+=======
+				&i2c_list->i2c_settings, 1, false);
+>>>>>>> ata-karner-lineage-21
 		if (rc < 0) {
 			CAM_ERR(CAM_EEPROM,
 				"Error in EEPROM write");
@@ -3748,11 +3854,18 @@ static int32_t cam_eeprom_pkt_parse(struct cam_eeprom_ctrl_t *e_ctrl, void *arg)
 	struct cam_config_dev_cmd       dev_config;
 	uintptr_t                        generic_pkt_addr;
 	size_t                          pkt_len;
+<<<<<<< HEAD
+=======
+	size_t                          remain_len = 0;
+>>>>>>> ata-karner-lineage-21
 	struct cam_packet              *csl_packet = NULL;
 	struct cam_eeprom_soc_private  *soc_private =
 		(struct cam_eeprom_soc_private *)e_ctrl->soc_info.soc_private;
 	struct cam_sensor_power_ctrl_t *power_info = &soc_private->power_info;
+<<<<<<< HEAD
 	uint8_t                         crc_check_retry_cnt = 0;
+=======
+>>>>>>> ata-karner-lineage-21
 
 	ioctl_ctrl = (struct cam_control *)arg;
 
@@ -3768,6 +3881,7 @@ static int32_t cam_eeprom_pkt_parse(struct cam_eeprom_ctrl_t *e_ctrl, void *arg)
 		return rc;
 	}
 
+<<<<<<< HEAD
 	CAM_INFO(CAM_EEPROM,
 		"Offset is out of bound: off: %lld, %zu",
 		dev_config.offset, pkt_len);
@@ -3787,10 +3901,43 @@ static int32_t cam_eeprom_pkt_parse(struct cam_eeprom_ctrl_t *e_ctrl, void *arg)
 		CAM_INFO(CAM_EEPROM, "e_ctrl->userspace_probe : %d", e_ctrl->userspace_probe);
 		if (e_ctrl->userspace_probe == false) {
 			CAM_ERR(CAM_EEPROM, "VR:: KERNEL PROBE ");
+=======
+	remain_len = pkt_len;
+	if ((sizeof(struct cam_packet) > pkt_len) ||
+		((size_t)dev_config.offset >= pkt_len -
+		sizeof(struct cam_packet))) {
+		CAM_ERR(CAM_EEPROM,
+			"Inval cam_packet strut size: %zu, len_of_buff: %zu",
+			 sizeof(struct cam_packet), pkt_len);
+		cam_mem_put_cpu_buf(dev_config.packet_handle);
+		rc = -EINVAL;
+		return rc;
+	}
+
+	remain_len -= (size_t)dev_config.offset;
+	csl_packet = (struct cam_packet *)
+		(generic_pkt_addr + (uint32_t)dev_config.offset);
+
+	if (cam_packet_util_validate_packet(csl_packet,
+		remain_len)) {
+		CAM_ERR(CAM_EEPROM, "Invalid packet params");
+		cam_mem_put_cpu_buf(dev_config.packet_handle);
+		rc = -EINVAL;
+		return rc;
+	}
+
+	switch (csl_packet->header.op_code & 0xFFFFFF) {
+	case CAM_EEPROM_PACKET_OPCODE_INIT:
+		if (e_ctrl->userspace_probe == false) {
+>>>>>>> ata-karner-lineage-21
 			rc = cam_eeprom_parse_read_memory_map(
 					e_ctrl->soc_info.dev->of_node, e_ctrl);
 			if (rc < 0) {
 				CAM_ERR(CAM_EEPROM, "Failed: rc : %d", rc);
+<<<<<<< HEAD
+=======
+				cam_mem_put_cpu_buf(dev_config.packet_handle);
+>>>>>>> ata-karner-lineage-21
 				return rc;
 			}
 			rc = cam_eeprom_get_cal_data(e_ctrl, csl_packet);
@@ -3806,6 +3953,7 @@ static int32_t cam_eeprom_pkt_parse(struct cam_eeprom_ctrl_t *e_ctrl, void *arg)
 		if (rc) {
 			CAM_ERR(CAM_EEPROM,
 				"Failed in parsing the pkt");
+<<<<<<< HEAD
 			return rc;
 		}
 
@@ -3824,6 +3972,12 @@ static int32_t cam_eeprom_pkt_parse(struct cam_eeprom_ctrl_t *e_ctrl, void *arg)
 			goto error;
 		}
 
+=======
+			cam_mem_put_cpu_buf(dev_config.packet_handle);
+			return rc;
+		}
+
+>>>>>>> ata-karner-lineage-21
 		e_ctrl->cal_data.mapdata =
 			vzalloc(e_ctrl->cal_data.num_data);
 		if (!e_ctrl->cal_data.mapdata) {
@@ -3832,6 +3986,7 @@ static int32_t cam_eeprom_pkt_parse(struct cam_eeprom_ctrl_t *e_ctrl, void *arg)
 			goto error;
 		}
 
+<<<<<<< HEAD
 eeropm_crc_check :
 		rc = cam_eeprom_power_up(e_ctrl,
 			&soc_private->power_info);
@@ -3840,6 +3995,8 @@ eeropm_crc_check :
 			goto memdata_free;
 		}
 
+=======
+>>>>>>> ata-karner-lineage-21
 		if (e_ctrl->eeprom_device_type == MSM_CAMERA_SPI_DEVICE) {
 			rc = cam_eeprom_match_id(e_ctrl);
 			if (rc) {
@@ -3849,6 +4006,7 @@ eeropm_crc_check :
 			}
 		}
 
+<<<<<<< HEAD
 		e_ctrl->cam_eeprom_state = CAM_EEPROM_CONFIG;
 		{
 			int i;
@@ -3919,6 +4077,21 @@ eeropm_crc_check :
 				// run this on eebin check
 				rc = cam_eeprom_get_phone_ver(e_ctrl, csl_packet);
 			}
+=======
+		rc = cam_eeprom_power_up(e_ctrl,
+			&soc_private->power_info);
+		if (rc) {
+			CAM_ERR(CAM_EEPROM, "failed rc %d", rc);
+			goto memdata_free;
+		}
+
+		e_ctrl->cam_eeprom_state = CAM_EEPROM_CONFIG;
+		rc = cam_eeprom_read_memory(e_ctrl, &e_ctrl->cal_data);
+		if (rc) {
+			CAM_ERR(CAM_EEPROM,
+				"read_eeprom_memory failed");
+			goto power_down;
+>>>>>>> ata-karner-lineage-21
 		}
 
 		rc = cam_eeprom_get_cal_data(e_ctrl, csl_packet);
@@ -3935,7 +4108,10 @@ eeropm_crc_check :
 		e_ctrl->cal_data.num_data = 0;
 		e_ctrl->cal_data.num_map = 0;
 		break;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ata-karner-lineage-21
 	case CAM_EEPROM_WRITE: {
 		struct i2c_settings_array *i2c_reg_settings =
 			&e_ctrl->wr_settings;
@@ -3945,6 +4121,10 @@ eeropm_crc_check :
 			csl_packet, e_ctrl);
 		if (rc < 0) {
 			CAM_ERR(CAM_EEPROM, "Failed: rc : %d", rc);
+<<<<<<< HEAD
+=======
+			cam_mem_put_cpu_buf(dev_config.packet_handle);
+>>>>>>> ata-karner-lineage-21
 			return rc;
 		}
 
@@ -3966,6 +4146,10 @@ eeropm_crc_check :
 			e_ctrl->eebin_info.size);
 		if (rc < 0) {
 			CAM_ERR(CAM_EEPROM, "Failed in erase : %d", rc);
+<<<<<<< HEAD
+=======
+			cam_mem_put_cpu_buf(dev_config.packet_handle);
+>>>>>>> ata-karner-lineage-21
 			return rc;
 		}
 
@@ -3975,6 +4159,10 @@ eeropm_crc_check :
 		rc = cam_eeprom_write(e_ctrl);
 		if (rc < 0) {
 			CAM_ERR(CAM_EEPROM, "Failed: rc : %d", rc);
+<<<<<<< HEAD
+=======
+			cam_mem_put_cpu_buf(dev_config.packet_handle);
+>>>>>>> ata-karner-lineage-21
 			return rc;
 		}
 
@@ -3986,7 +4174,10 @@ eeropm_crc_check :
 
 		break;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> ata-karner-lineage-21
 	default:
 		CAM_ERR(CAM_EEPROM, "Invalid op-code 0x%x",
 			csl_packet->header.op_code & 0xFFFFFF);
@@ -3994,12 +4185,20 @@ eeropm_crc_check :
 		break;
 	}
 
+<<<<<<< HEAD
+=======
+	cam_mem_put_cpu_buf(dev_config.packet_handle);
+>>>>>>> ata-karner-lineage-21
 	return rc;
 power_down:
 	cam_eeprom_power_down(e_ctrl);
 memdata_free:
 	vfree(e_ctrl->cal_data.mapdata);
 error:
+<<<<<<< HEAD
+=======
+	cam_mem_put_cpu_buf(dev_config.packet_handle);
+>>>>>>> ata-karner-lineage-21
 	kfree(power_info->power_setting);
 	kfree(power_info->power_down_setting);
 	power_info->power_setting = NULL;
@@ -4083,8 +4282,11 @@ int32_t cam_eeprom_driver_cmd(struct cam_eeprom_ctrl_t *e_ctrl, void *arg)
 
 		eeprom_cap.is_multimodule_mode =
 			e_ctrl->is_multimodule_mode;
+<<<<<<< HEAD
 		CAM_INFO(CAM_EEPROM, "eeprom_cap.is_multimodule_mode: %d, e_ctrl->is_multimodule_mode: %d",
 			eeprom_cap.is_multimodule_mode, e_ctrl->is_multimodule_mode);
+=======
+>>>>>>> ata-karner-lineage-21
 
 		if (copy_to_user(u64_to_user_ptr(cmd->handle),
 			&eeprom_cap,
@@ -4146,4 +4348,7 @@ release_mutex:
 
 	return rc;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ata-karner-lineage-21

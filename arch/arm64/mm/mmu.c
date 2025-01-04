@@ -669,13 +669,22 @@ static int __init map_entry_trampoline(void)
 	/* Map only the text into the trampoline page table */
 	memset(tramp_pg_dir, 0, PGD_SIZE);
 	__create_pgd_mapping(tramp_pg_dir, pa_start, TRAMP_VALIAS,
+<<<<<<< HEAD
 			     entry_tramp_text_size(), prot, pgd_pgtable_alloc,
 			     0);
+=======
+				entry_tramp_text_size(), prot, pgd_pgtable_alloc,
+				0);
+>>>>>>> ata-karner-lineage-21
 
 	/* Map both the text and data into the kernel page table */
 	for (i = 0; i < DIV_ROUND_UP(entry_tramp_text_size(), PAGE_SIZE); i++)
 		__set_fixmap(FIX_ENTRY_TRAMP_TEXT1 - i,
+<<<<<<< HEAD
 			     pa_start + i * PAGE_SIZE, prot);
+=======
+				pa_start + i * PAGE_SIZE, prot);
+>>>>>>> ata-karner-lineage-21
 
 	if (IS_ENABLED(CONFIG_RANDOMIZE_BASE)) {
 		extern char __entry_tramp_data_start[];
@@ -763,9 +772,12 @@ void __init paging_init(void)
 	set_memsize_kernel_type(MEMSIZE_KERNEL_PAGING);
 	pgd_phys = early_pgtable_alloc();
 	pgdp = pgd_set_fixmap(pgd_phys);
+<<<<<<< HEAD
 #ifdef CONFIG_UH_RKP
 	rkp_robuffer_init();
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	map_kernel(pgdp);
 	map_mem(pgdp);
 
@@ -792,7 +804,10 @@ void __init paging_init(void)
 	memblock_free(__pa_symbol(swapper_pg_dir) + PAGE_SIZE,
 		      __pa_symbol(swapper_pg_end) - __pa_symbol(swapper_pg_dir)
 		      - PAGE_SIZE);
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	set_memsize_kernel_type(MEMSIZE_KERNEL_OTHERS);
 }
 

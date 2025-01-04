@@ -58,9 +58,18 @@ static int cam_lrme_dev_open(struct v4l2_subdev *sd,
 {
 	struct cam_lrme_dev *lrme_dev = g_lrme_dev;
 
+<<<<<<< HEAD
 	if (!lrme_dev) {
 		CAM_ERR(CAM_LRME,
 			"LRME Dev not initialized, dev=%pK", lrme_dev);
+=======
+	cam_req_mgr_rwsem_read_op(CAM_SUBDEV_LOCK);
+
+	if (!lrme_dev) {
+		CAM_ERR(CAM_LRME,
+			"LRME Dev not initialized, dev=%pK", lrme_dev);
+		cam_req_mgr_rwsem_read_op(CAM_SUBDEV_UNLOCK);
+>>>>>>> ata-karner-lineage-21
 		return -ENODEV;
 	}
 
@@ -68,6 +77,11 @@ static int cam_lrme_dev_open(struct v4l2_subdev *sd,
 	lrme_dev->open_cnt++;
 	mutex_unlock(&lrme_dev->lock);
 
+<<<<<<< HEAD
+=======
+	cam_req_mgr_rwsem_read_op(CAM_SUBDEV_UNLOCK);
+
+>>>>>>> ata-karner-lineage-21
 	return 0;
 }
 

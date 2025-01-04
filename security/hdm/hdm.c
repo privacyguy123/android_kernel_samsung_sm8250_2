@@ -27,7 +27,10 @@
 #include <linux/fs.h>
 #include <linux/debugfs.h>
 #include <linux/uaccess.h>
+<<<<<<< HEAD
 #include <linux/uh.h>
+=======
+>>>>>>> ata-karner-lineage-21
 #include <linux/sec_class.h>
 #if defined(CONFIG_ARCH_QCOM)
 #include <linux/sched/signal.h>
@@ -366,6 +369,7 @@ static ssize_t store_hdm_policy(struct device *dev,
 	case HDM_KERNEL_POST:
 		hdm_post_setting(p);
 		break;
+<<<<<<< HEAD
 #if defined(CONFIG_ARCH_QCOM)
 #if defined(CONFIG_UH)
 	case HDM_HYP_CALL:
@@ -374,6 +378,8 @@ static ssize_t store_hdm_policy(struct device *dev,
 		break;
 #endif
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	default:
 		goto error;
 	}
@@ -400,11 +406,14 @@ static ssize_t store_hdm_test(struct device *dev, struct device_attribute *attr,
 {
 	unsigned long mode = 0xFFFFF;
 	size_t len = count;
+<<<<<<< HEAD
 #if defined(CONFIG_UH)
 	unsigned long command = 0;
 	int i = 0;
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 	if (count == 0) {
 		hdm_err("%s count = 0\n", __func__);
 		goto error;
@@ -432,6 +441,7 @@ static ssize_t store_hdm_test(struct device *dev, struct device_attribute *attr,
 		return count;
 	}
 
+<<<<<<< HEAD
 #if defined(CONFIG_ARCH_EXYNOS)
 	hdm_info("%s lsi uh call is supposed to be done here\n", __func__);
 	hdm_info("%s mode : 0x%x\n", __func__, mode);
@@ -480,6 +490,8 @@ static ssize_t store_hdm_test(struct device *dev, struct device_attribute *attr,
 #endif
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 error:
 	return count;
 }

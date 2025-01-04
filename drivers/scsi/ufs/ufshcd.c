@@ -3146,7 +3146,11 @@ static void ufshcd_init_clk_gating(struct ufs_hba *hba)
 	snprintf(wq_name, ARRAY_SIZE(wq_name), "ufs_clk_gating_%d",
 			hba->host->host_no);
 	hba->clk_gating.clk_gating_workq = alloc_ordered_workqueue("%s",
+<<<<<<< HEAD
 							   WQ_MEM_RECLAIM | WQ_HIGHPRI, wq_name);
+=======
+							   WQ_MEM_RECLAIM, wq_name);
+>>>>>>> ata-karner-lineage-21
 
 	gating->is_enabled = true;
 
@@ -4410,7 +4414,10 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
 	int tag;
 	int err = 0;
 	bool has_read_lock = false;
+<<<<<<< HEAD
 	bool cmd_sent = false;
+=======
+>>>>>>> ata-karner-lineage-21
 #if defined(CONFIG_UFSFEATURE) && defined(CONFIG_UFSHPB)
 	struct scsi_cmnd *pre_cmd;
 	struct ufshcd_lrb *add_lrbp;
@@ -4541,6 +4548,19 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
 		hba->lrb[tag].hpb_ctx_id = MAX_HPB_CONTEXT_ID;
 		goto send_orig_cmd;
 	}
+<<<<<<< HEAD
+=======
+
+	add_lrbp = &hba->lrb[add_tag];
+
+	pre_req_err = ufsf_hpb_prepare_add_lrbp(&hba->ufsf, add_tag);
+	if (pre_req_err)
+		hba->lrb[tag].hpb_ctx_id = MAX_HPB_CONTEXT_ID;
+send_orig_cmd:
+#endif
+	/* Vote PM QoS for the request */
+	ufshcd_vops_pm_qos_req_start(hba, cmd->request);
+>>>>>>> ata-karner-lineage-21
 
 	add_lrbp = &hba->lrb[add_tag];
 
@@ -4639,6 +4659,10 @@ out:
 		add_lrbp->cmd = NULL;
 		clear_bit_unlock(add_tag, &hba->lrb_in_use);
                 ufshcd_release_all(hba);
+<<<<<<< HEAD
+=======
+		ufshcd_vops_pm_qos_req_end(hba, pre_cmd->request, true);
+>>>>>>> ata-karner-lineage-21
 		ufsf_hpb_end_pre_req(&hba->ufsf, pre_cmd->request);
 	}
 #endif
@@ -13198,6 +13222,10 @@ out_error:
 }
 EXPORT_SYMBOL(ufshcd_alloc_host);
 
+<<<<<<< HEAD
+=======
+#if 0
+>>>>>>> ata-karner-lineage-21
 #if defined(SEC_UFS_ERROR_COUNT)
 /**
  * ufs_sec_send_errinfo - Send UFS Error Information to AP
@@ -13265,6 +13293,10 @@ static void ufs_sec_send_errinfo(void *data)
 #endif
 }
 #endif
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> ata-karner-lineage-21
 
 /**
  * ufshcd_init - Driver initialization routine
@@ -13483,11 +13515,15 @@ int ufshcd_init(struct ufs_hba *hba, void __iomem *mmio_base, unsigned int irq)
 	dev_info(hba->dev, "UFS test mode enabled\n");
 #endif
 
+<<<<<<< HEAD
 	/* init ufs_sec_debug function */
 	ufs_sec_send_errinfo(hba);
 	ufs_debug_func = ufs_sec_send_errinfo;
 
 	/* Hold auto suspend until async scan completes */
+=======
+	/* 	Hold auto suspend until async scan completes */
+>>>>>>> ata-karner-lineage-21
 	pm_runtime_get_sync(dev);
 	atomic_set(&hba->scsi_block_reqs_cnt, 0);
 

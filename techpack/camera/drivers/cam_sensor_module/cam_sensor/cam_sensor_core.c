@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
+<<<<<<< HEAD
  * Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2017-2021, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #include <linux/module.h>
@@ -10,6 +15,7 @@
 #include "cam_soc_util.h"
 #include "cam_trace.h"
 #include "cam_common_util.h"
+<<<<<<< HEAD
 #if defined(CONFIG_SENSOR_RETENTION)
 #include "cam_sensor_retention.h"
 #endif
@@ -312,20 +318,28 @@ int cam_sensor_wait_stream_off(struct cam_sensor_ctrl_t *s_ctrl)
 	return -1;
 }
 
+=======
+#include "cam_packet_util.h"
+
+>>>>>>> ata-karner-lineage-21
 static void cam_sensor_update_req_mgr(
 	struct cam_sensor_ctrl_t *s_ctrl,
 	struct cam_packet *csl_packet)
 {
 	struct cam_req_mgr_add_request add_req;
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_FRS_DRAM_TEST)
 	int rc = 0;
 	uint32_t frame_cnt = 0;
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 
 	add_req.link_hdl = s_ctrl->bridge_intf.link_hdl;
 	add_req.req_id = csl_packet->header.request_id;
 	CAM_DBG(CAM_SENSOR, " Rxed Req Id: %lld",
 		csl_packet->header.request_id);
+<<<<<<< HEAD
 
 #if defined(CONFIG_CAMERA_FRS_DRAM_TEST)
 	// read frame count
@@ -347,6 +361,8 @@ static void cam_sensor_update_req_mgr(
 	}
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 	add_req.dev_hdl = s_ctrl->bridge_intf.device_hdl;
 	add_req.skip_before_applying = 0;
 	if (s_ctrl->bridge_intf.crm_cb &&
@@ -382,6 +398,34 @@ static void cam_sensor_release_stream_rsc(
 	}
 }
 
+<<<<<<< HEAD
+=======
+static void cam_sensor_free_power_reg_rsc(
+	struct cam_sensor_ctrl_t *s_ctrl)
+{
+	struct i2c_settings_array *i2c_set = NULL;
+	int rc;
+
+	i2c_set = &(s_ctrl->i2c_data.poweron_reg_settings);
+	if (i2c_set->is_settings_valid == 1) {
+		i2c_set->is_settings_valid = -1;
+		rc = delete_request(i2c_set);
+		if (rc < 0)
+			CAM_ERR(CAM_SENSOR,
+				"failed while deleting PowerOnReg settings");
+	}
+
+	i2c_set = &(s_ctrl->i2c_data.poweroff_reg_settings);
+	if (i2c_set->is_settings_valid == 1) {
+		i2c_set->is_settings_valid = -1;
+		rc = delete_request(i2c_set);
+		if (rc < 0)
+			CAM_ERR(CAM_SENSOR,
+				"failed while deleting PowerOffReg settings");
+	}
+}
+
+>>>>>>> ata-karner-lineage-21
 static void cam_sensor_release_per_frame_resource(
 	struct cam_sensor_ctrl_t *s_ctrl)
 {
@@ -411,6 +455,10 @@ static int32_t cam_sensor_i2c_pkt_parse(struct cam_sensor_ctrl_t *s_ctrl,
 	struct cam_control *ioctl_ctrl = NULL;
 	struct cam_packet *csl_packet = NULL;
 	struct cam_cmd_buf_desc *cmd_desc = NULL;
+<<<<<<< HEAD
+=======
+	struct cam_buf_io_cfg *io_cfg = NULL;
+>>>>>>> ata-karner-lineage-21
 	struct i2c_settings_array *i2c_reg_settings = NULL;
 	size_t len_of_buff = 0;
 	size_t remain_len = 0;
@@ -454,7 +502,11 @@ static int32_t cam_sensor_i2c_pkt_parse(struct cam_sensor_ctrl_t *s_ctrl,
 	csl_packet = (struct cam_packet *)(generic_ptr +
 		(uint32_t)config.offset);
 
+<<<<<<< HEAD
 	if (cam_packet_util_validate_packet(csl_packet,
+=======
+	if ((csl_packet == NULL) || cam_packet_util_validate_packet(csl_packet,
+>>>>>>> ata-karner-lineage-21
 		remain_len)) {
 		CAM_ERR(CAM_SENSOR, "Invalid packet params");
 		rc = -EINVAL;
@@ -486,12 +538,15 @@ static int32_t cam_sensor_i2c_pkt_parse(struct cam_sensor_ctrl_t *s_ctrl,
 		break;
 	}
 	case CAM_SENSOR_PACKET_OPCODE_SENSOR_CONFIG: {
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_FRS_DRAM_TEST)
 		if (rear_frs_test_mode >= 1) {
 			CAM_ERR(CAM_SENSOR, "[FRS_DBG] SENSOR_CONFIG skip on test_mode(%ld)", rear_frs_test_mode);
 			return 0;
 		}
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 		i2c_reg_settings = &i2c_data->config_settings;
 		i2c_reg_settings->request_id = 0;
 		i2c_reg_settings->is_settings_valid = 1;
@@ -517,6 +572,7 @@ static int32_t cam_sensor_i2c_pkt_parse(struct cam_sensor_ctrl_t *s_ctrl,
 		i2c_reg_settings->is_settings_valid = 1;
 		break;
 	}
+<<<<<<< HEAD
 
 	case CAM_SENSOR_PACKET_OPCODE_SENSOR_MODE: {
 #if defined(CONFIG_CAMERA_ADAPTIVE_MIPI)
@@ -526,6 +582,30 @@ static int32_t cam_sensor_i2c_pkt_parse(struct cam_sensor_ctrl_t *s_ctrl,
 		break;
 	}
 
+=======
+	case CAM_SENSOR_PACKET_OPCODE_SENSOR_READ: {
+		i2c_reg_settings = &(i2c_data->read_settings);
+		i2c_reg_settings->request_id = 0;
+		i2c_reg_settings->is_settings_valid = 1;
+
+		CAM_DBG(CAM_SENSOR, "number of IO configs: %d:",
+			csl_packet->num_io_configs);
+		if (csl_packet->num_io_configs == 0) {
+			CAM_ERR(CAM_SENSOR, "No I/O configs to process");
+			goto end;
+		}
+
+		io_cfg = (struct cam_buf_io_cfg *) ((uint8_t *)
+			&csl_packet->payload +
+			csl_packet->io_configs_offset);
+
+		if (io_cfg == NULL) {
+			CAM_ERR(CAM_SENSOR, "I/O config is invalid(NULL)");
+			goto end;
+		}
+		break;
+	}
+>>>>>>> ata-karner-lineage-21
 	case CAM_SENSOR_PACKET_OPCODE_SENSOR_UPDATE: {
 		if ((s_ctrl->sensor_state == CAM_SENSOR_INIT) ||
 			(s_ctrl->sensor_state == CAM_SENSOR_ACQUIRE)) {
@@ -577,7 +657,11 @@ static int32_t cam_sensor_i2c_pkt_parse(struct cam_sensor_ctrl_t *s_ctrl,
 	cmd_desc = (struct cam_cmd_buf_desc *)(offset);
 
 	rc = cam_sensor_i2c_command_parser(&s_ctrl->io_master_info,
+<<<<<<< HEAD
 			i2c_reg_settings, cmd_desc, 1);
+=======
+			i2c_reg_settings, cmd_desc, 1, io_cfg);
+>>>>>>> ata-karner-lineage-21
 	if (rc < 0) {
 		CAM_ERR(CAM_SENSOR, "Fail parsing I2C Pkt: %d", rc);
 		goto end;
@@ -591,6 +675,7 @@ static int32_t cam_sensor_i2c_pkt_parse(struct cam_sensor_ctrl_t *s_ctrl,
 	}
 
 end:
+<<<<<<< HEAD
 	return rc;
 }
 
@@ -931,12 +1016,118 @@ static int32_t cam_sensor_i2c_modes_util(
 #endif
 		rc = camera_io_dev_write(io_master_info,
 			&(i2c_list->i2c_settings));
+=======
+	cam_mem_put_cpu_buf(config.packet_handle);
+	return rc;
+}
+
+static int32_t cam_sensor_restore_slave_info(struct cam_sensor_ctrl_t *s_ctrl)
+{
+	int32_t rc = 0;
+
+	switch (s_ctrl->io_master_info.master_type) {
+	case CCI_MASTER:
+		s_ctrl->io_master_info.cci_client->sid =
+			(s_ctrl->sensordata->slave_info.sensor_slave_addr >> 1);
+		s_ctrl->io_master_info.cci_client->i2c_freq_mode =
+			s_ctrl->sensordata->slave_info.i2c_freq_mode;
+		break;
+
+	case I2C_MASTER:
+		s_ctrl->io_master_info.client->addr =
+			 s_ctrl->sensordata->slave_info.sensor_slave_addr;
+		break;
+
+	case SPI_MASTER:
+		break;
+
+	default:
+		CAM_ERR(CAM_SENSOR, "Invalid master type: %d",
+				s_ctrl->io_master_info.master_type);
+		rc = -EINVAL;
+		break;
+	}
+
+	return rc;
+}
+
+static int32_t cam_sensor_update_i2c_info(struct cam_cmd_i2c_info *i2c_info,
+	struct cam_sensor_ctrl_t *s_ctrl,
+	bool isInit)
+{
+	int32_t rc = 0;
+	struct cam_sensor_cci_client   *cci_client = NULL;
+
+	switch (s_ctrl->io_master_info.master_type) {
+	case CCI_MASTER:
+		cci_client = s_ctrl->io_master_info.cci_client;
+		if (!cci_client) {
+			CAM_ERR(CAM_SENSOR, "failed: cci_client %pK",
+				cci_client);
+			return -EINVAL;
+		}
+		cci_client->cci_i2c_master = s_ctrl->cci_i2c_master;
+		cci_client->sid = i2c_info->slave_addr >> 1;
+		cci_client->retries = 3;
+		cci_client->id_map = 0;
+		cci_client->i2c_freq_mode = i2c_info->i2c_freq_mode;
+		CAM_DBG(CAM_SENSOR, " Master: %d sid: 0x%x freq_mode: %d",
+			cci_client->cci_i2c_master, i2c_info->slave_addr,
+			i2c_info->i2c_freq_mode);
+		break;
+
+	case I2C_MASTER:
+		s_ctrl->io_master_info.client->addr = i2c_info->slave_addr;
+		break;
+
+	case SPI_MASTER:
+		break;
+
+	default:
+		CAM_ERR(CAM_SENSOR, "Invalid master type: %d",
+			s_ctrl->io_master_info.master_type);
+		rc = -EINVAL;
+		break;
+	}
+
+	if (isInit) {
+		s_ctrl->sensordata->slave_info.sensor_slave_addr =
+			i2c_info->slave_addr;
+		s_ctrl->sensordata->slave_info.i2c_freq_mode =
+			i2c_info->i2c_freq_mode;
+	}
+
+	return rc;
+}
+
+static int32_t cam_sensor_i2c_modes_util(
+	struct cam_sensor_ctrl_t *s_ctrl,
+	struct i2c_settings_list *i2c_list,
+	bool force_low_priority)
+{
+	int32_t rc = 0;
+	uint32_t i, size;
+	struct camera_io_master *io_master_info;
+
+	if (s_ctrl == NULL) {
+		CAM_ERR(CAM_SENSOR, "Invalid args");
+		return -EINVAL;
+	}
+
+	io_master_info = &s_ctrl->io_master_info;
+
+	if (i2c_list->op_code == CAM_SENSOR_I2C_WRITE_RANDOM) {
+		rc = camera_io_dev_write(io_master_info,
+			&(i2c_list->i2c_settings),
+			force_low_priority);
+>>>>>>> ata-karner-lineage-21
 		if (rc < 0) {
 			CAM_ERR(CAM_SENSOR,
 				"Failed to random write I2C settings: %d",
 				rc);
 			return rc;
 		}
+<<<<<<< HEAD
 
 #if defined(CONFIG_CAMERA_FRS_DRAM_TEST)
 		if (i2c_list->i2c_settings.reg_setting[0].reg_addr == STREAM_ON_ADDR
@@ -964,11 +1155,17 @@ static int32_t cam_sensor_i2c_modes_util(
 			}
 		}
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	} else if (i2c_list->op_code == CAM_SENSOR_I2C_WRITE_SEQ) {
 		rc = camera_io_dev_write_continuous(
 			io_master_info,
 			&(i2c_list->i2c_settings),
+<<<<<<< HEAD
 			0);
+=======
+			0, force_low_priority);
+>>>>>>> ata-karner-lineage-21
 		if (rc < 0) {
 			CAM_ERR(CAM_SENSOR,
 				"Failed to seq write I2C settings: %d",
@@ -979,7 +1176,11 @@ static int32_t cam_sensor_i2c_modes_util(
 		rc = camera_io_dev_write_continuous(
 			io_master_info,
 			&(i2c_list->i2c_settings),
+<<<<<<< HEAD
 			1);
+=======
+			1, force_low_priority);
+>>>>>>> ata-karner-lineage-21
 		if (rc < 0) {
 			CAM_ERR(CAM_SENSOR,
 				"Failed to burst write I2C settings: %d",
@@ -1003,11 +1204,24 @@ static int32_t cam_sensor_i2c_modes_util(
 				return rc;
 			}
 		}
+<<<<<<< HEAD
+=======
+	} else if (i2c_list->op_code == CAM_SENSOR_I2C_SET_I2C_INFO) {
+		rc = cam_sensor_update_i2c_info(&i2c_list->slave_info,
+			s_ctrl,
+			false);
+	} else if ((i2c_list->op_code == CAM_SENSOR_I2C_READ_RANDOM) ||
+		(i2c_list->op_code == CAM_SENSOR_I2C_READ_SEQ)) {
+		rc = cam_sensor_i2c_read_data(
+			&s_ctrl->i2c_data.read_settings,
+			&s_ctrl->io_master_info);
+>>>>>>> ata-karner-lineage-21
 	}
 
 	return rc;
 }
 
+<<<<<<< HEAD
 int32_t cam_sensor_update_i2c_info(struct cam_cmd_i2c_info *i2c_info,
 	struct cam_sensor_ctrl_t *s_ctrl)
 {
@@ -1052,6 +1266,8 @@ int32_t cam_sensor_update_i2c_info(struct cam_cmd_i2c_info *i2c_info,
 	return rc;
 }
 
+=======
+>>>>>>> ata-karner-lineage-21
 int32_t cam_sensor_update_slave_info(struct cam_cmd_probe *probe_info,
 	struct cam_sensor_ctrl_t *s_ctrl)
 {
@@ -1080,7 +1296,12 @@ int32_t cam_sensor_update_slave_info(struct cam_cmd_probe *probe_info,
 
 int32_t cam_handle_cmd_buffers_for_probe(void *cmd_buf,
 	struct cam_sensor_ctrl_t *s_ctrl,
+<<<<<<< HEAD
 	int32_t cmd_buf_num, uint32_t cmd_buf_length, size_t remain_len)
+=======
+	int32_t cmd_buf_num, uint32_t cmd_buf_length, size_t remain_len,
+	struct cam_cmd_buf_desc   *cmd_desc)
+>>>>>>> ata-karner-lineage-21
 {
 	int32_t rc = 0;
 
@@ -1097,7 +1318,11 @@ int32_t cam_handle_cmd_buffers_for_probe(void *cmd_buf,
 			return -EINVAL;
 		}
 		i2c_info = (struct cam_cmd_i2c_info *)cmd_buf;
+<<<<<<< HEAD
 		rc = cam_sensor_update_i2c_info(i2c_info, s_ctrl);
+=======
+		rc = cam_sensor_update_i2c_info(i2c_info, s_ctrl, true);
+>>>>>>> ata-karner-lineage-21
 		if (rc < 0) {
 			CAM_ERR(CAM_SENSOR, "Failed in Updating the i2c Info");
 			return rc;
@@ -1123,6 +1348,45 @@ int32_t cam_handle_cmd_buffers_for_probe(void *cmd_buf,
 		}
 	}
 		break;
+<<<<<<< HEAD
+=======
+	case 2: {
+		struct i2c_settings_array *i2c_reg_settings = NULL;
+		struct i2c_data_settings *i2c_data = NULL;
+		struct cam_buf_io_cfg *io_cfg = NULL;
+
+		CAM_DBG(CAM_SENSOR, "poweron_reg_settings");
+		i2c_data = &(s_ctrl->i2c_data);
+		i2c_reg_settings = &i2c_data->poweron_reg_settings;
+		i2c_reg_settings->request_id = 0;
+		rc = cam_sensor_i2c_command_parser(&s_ctrl->io_master_info,
+				i2c_reg_settings, cmd_desc, 1, io_cfg);
+		if (rc < 0) {
+			CAM_ERR(CAM_SENSOR,
+				"Failed in updating power register settings");
+			return rc;
+		}
+	}
+		break;
+	case 3: {
+		struct i2c_settings_array *i2c_reg_settings = NULL;
+		struct i2c_data_settings *i2c_data = NULL;
+		struct cam_buf_io_cfg *io_cfg = NULL;
+
+		CAM_DBG(CAM_SENSOR, "poweroff_reg_settings");
+		i2c_data = &(s_ctrl->i2c_data);
+		i2c_reg_settings = &i2c_data->poweroff_reg_settings;
+		i2c_reg_settings->request_id = 0;
+		rc = cam_sensor_i2c_command_parser(&s_ctrl->io_master_info,
+				i2c_reg_settings, cmd_desc, 1, io_cfg);
+		if (rc < 0) {
+			CAM_ERR(CAM_SENSOR,
+				"Failed in updating power register settings");
+			return rc;
+		}
+	}
+		break;
+>>>>>>> ata-karner-lineage-21
 	default:
 		CAM_ERR(CAM_SENSOR, "Invalid command buffer");
 		break;
@@ -1170,7 +1434,11 @@ int32_t cam_handle_mem_ptr(uint64_t handle, struct cam_sensor_ctrl_t *s_ctrl)
 		rc = -EINVAL;
 		goto end;
 	}
+<<<<<<< HEAD
 	if (pkt->num_cmd_buf != 2) {
+=======
+	if (pkt->num_cmd_buf < 2) {
+>>>>>>> ata-karner-lineage-21
 		CAM_ERR(CAM_SENSOR, "Expected More Command Buffers : %d",
 			 pkt->num_cmd_buf);
 		rc = -EINVAL;
@@ -1190,6 +1458,10 @@ int32_t cam_handle_mem_ptr(uint64_t handle, struct cam_sensor_ctrl_t *s_ctrl)
 		if (cmd_desc[i].offset >= len) {
 			CAM_ERR(CAM_SENSOR,
 				"offset past length of buffer");
+<<<<<<< HEAD
+=======
+			cam_mem_put_cpu_buf(cmd_desc[i].mem_handle);
+>>>>>>> ata-karner-lineage-21
 			rc = -EINVAL;
 			goto end;
 		}
@@ -1197,6 +1469,10 @@ int32_t cam_handle_mem_ptr(uint64_t handle, struct cam_sensor_ctrl_t *s_ctrl)
 		if (cmd_desc[i].length > remain_len) {
 			CAM_ERR(CAM_SENSOR,
 				"Not enough buffer provided for cmd");
+<<<<<<< HEAD
+=======
+			cam_mem_put_cpu_buf(cmd_desc[i].mem_handle);
+>>>>>>> ata-karner-lineage-21
 			rc = -EINVAL;
 			goto end;
 		}
@@ -1205,6 +1481,7 @@ int32_t cam_handle_mem_ptr(uint64_t handle, struct cam_sensor_ctrl_t *s_ctrl)
 		ptr = (void *) cmd_buf;
 
 		rc = cam_handle_cmd_buffers_for_probe(ptr, s_ctrl,
+<<<<<<< HEAD
 			i, cmd_desc[i].length, remain_len);
 		if (rc < 0) {
 			CAM_ERR(CAM_SENSOR,
@@ -1214,6 +1491,20 @@ int32_t cam_handle_mem_ptr(uint64_t handle, struct cam_sensor_ctrl_t *s_ctrl)
 	}
 
 end:
+=======
+			i, cmd_desc[i].length, remain_len, &cmd_desc[i]);
+		if (rc < 0) {
+			CAM_ERR(CAM_SENSOR,
+				"Failed to parse the command Buffer Header");
+			cam_mem_put_cpu_buf(cmd_desc[i].mem_handle);
+			goto end;
+		}
+		cam_mem_put_cpu_buf(cmd_desc[i].mem_handle);
+	}
+
+end:
+	cam_mem_put_cpu_buf(handle);
+>>>>>>> ata-karner-lineage-21
 	return rc;
 }
 
@@ -1263,10 +1554,13 @@ void cam_sensor_shutdown(struct cam_sensor_ctrl_t *s_ctrl)
 		&s_ctrl->sensordata->power_info;
 	int rc = 0;
 
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_FRAME_CNT_DBG)
 	cam_sensor_thread_destroy(s_ctrl);
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 	if ((s_ctrl->sensor_state == CAM_SENSOR_INIT) &&
 		(s_ctrl->is_probe_succeed == 0))
 		return;
@@ -1317,6 +1611,7 @@ int cam_sensor_match_id(struct cam_sensor_ctrl_t *s_ctrl)
 	rc = camera_io_dev_read(
 		&(s_ctrl->io_master_info),
 		slave_info->sensor_id_reg_addr,
+<<<<<<< HEAD
 		&chipid, CAMERA_SENSOR_I2C_TYPE_WORD,
 		CAMERA_SENSOR_I2C_TYPE_WORD);
 
@@ -1325,6 +1620,16 @@ int cam_sensor_match_id(struct cam_sensor_ctrl_t *s_ctrl)
 		chipid, slave_info->sensor_id);
 
 	if (chipid != slave_info->sensor_id) {
+=======
+		&chipid,
+		s_ctrl->sensor_probe_addr_type,
+		s_ctrl->sensor_probe_data_type);
+
+	CAM_DBG(CAM_SENSOR, "read id: 0x%x expected id 0x%x:",
+		chipid, slave_info->sensor_id);
+
+	if (cam_sensor_id_by_mask(s_ctrl, chipid) != slave_info->sensor_id) {
+>>>>>>> ata-karner-lineage-21
 		CAM_WARN(CAM_SENSOR, "read id: 0x%x expected id 0x%x:",
 				chipid, slave_info->sensor_id);
 		return -ENODEV;
@@ -1332,6 +1637,7 @@ int cam_sensor_match_id(struct cam_sensor_ctrl_t *s_ctrl)
 	return rc;
 }
 
+<<<<<<< HEAD
 #if defined(CONFIG_SAMSUNG_FRONT_TOF) || defined(CONFIG_SAMSUNG_REAR_TOF)
 int cam_sensor_tofled_enable(struct cam_sensor_ctrl_t *s_ctrl)
 {
@@ -1397,6 +1703,8 @@ int cam_sensor_tofled_enable(struct cam_sensor_ctrl_t *s_ctrl)
 }
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 	void *arg)
 {
@@ -1404,6 +1712,7 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 	struct cam_control *cmd = (struct cam_control *)arg;
 	struct cam_sensor_power_ctrl_t *power_info =
 		&s_ctrl->sensordata->power_info;
+<<<<<<< HEAD
 #if 1
 	int RETRY_CNT = 3, i = 0;
 #endif
@@ -1411,6 +1720,8 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 	struct cam_hw_param *hw_param = NULL;
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 	if (!s_ctrl || !arg) {
 		CAM_ERR(CAM_SENSOR, "s_ctrl is NULL");
 		return -EINVAL;
@@ -1432,9 +1743,12 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 				"Already Sensor Probed in the slot");
 			break;
 		}
+<<<<<<< HEAD
 #if defined(CONFIG_USE_CAMERA_HW_BIG_DATA)
 		sec_sensor_position = s_ctrl->id;
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 
 		if (cmd->handle_type ==
 			CAM_HANDLE_MEM_HANDLE) {
@@ -1480,6 +1794,7 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 			CAM_ERR(CAM_SENSOR, "power up failed");
 			goto free_power_settings;
 		}
+<<<<<<< HEAD
 
 		/* Match sensor ID */
 		rc = cam_sensor_match_id(s_ctrl);
@@ -1606,6 +1921,33 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 			goto free_power_settings;
 		}
 #endif
+=======
+		if (s_ctrl->i2c_data.poweron_reg_settings.is_settings_valid) {
+			rc = cam_sensor_apply_settings(s_ctrl, 0,
+				CAM_SENSOR_PACKET_OPCODE_SENSOR_POWERON_REG);
+			if (rc < 0) {
+				CAM_ERR(CAM_SENSOR, "PowerOn REG_WR failed");
+				goto free_power_settings;
+			}
+		}
+
+		/* Match sensor ID */
+		rc = cam_sensor_match_id(s_ctrl);
+		if (rc < 0) {
+			cam_sensor_power_down(s_ctrl);
+			msleep(20);
+			goto free_power_settings;
+		}
+
+		if (s_ctrl->i2c_data.poweroff_reg_settings.is_settings_valid) {
+			rc = cam_sensor_apply_settings(s_ctrl, 0,
+				CAM_SENSOR_PACKET_OPCODE_SENSOR_POWEROFF_REG);
+			if (rc < 0) {
+				CAM_ERR(CAM_SENSOR, "PowerOff REG_WR failed");
+				goto free_power_settings;
+			}
+		}
+>>>>>>> ata-karner-lineage-21
 
 		CAM_INFO(CAM_SENSOR,
 			"Probe success,slot:%d,slave_addr:0x%x,sensor_id:0x%x",
@@ -1613,6 +1955,7 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 			s_ctrl->sensordata->slave_info.sensor_slave_addr,
 			s_ctrl->sensordata->slave_info.sensor_id);
 
+<<<<<<< HEAD
 #if defined(CONFIG_SAMSUNG_FRONT_TOF) || defined(CONFIG_SAMSUNG_REAR_TOF)
 		if (s_ctrl->sensordata->slave_info.sensor_id == 0x374)
 		{
@@ -1624,6 +1967,9 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 		}
 #endif
 
+=======
+		cam_sensor_free_power_reg_rsc(s_ctrl);
+>>>>>>> ata-karner-lineage-21
 		rc = cam_sensor_power_down(s_ctrl);
 		if (rc < 0) {
 			CAM_ERR(CAM_SENSOR, "fail in Sensor Power Down");
@@ -1644,8 +1990,13 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 		if ((s_ctrl->is_probe_succeed == 0) ||
 			(s_ctrl->sensor_state != CAM_SENSOR_INIT)) {
 			CAM_WARN(CAM_SENSOR,
+<<<<<<< HEAD
 				"Not in right state to aquire %d",
 				s_ctrl->sensor_state);
+=======
+				"Not in right state to aquire %d， probe %d",
+				s_ctrl->sensor_state, s_ctrl->is_probe_succeed);
+>>>>>>> ata-karner-lineage-21
 			rc = -EINVAL;
 			goto release_mutex;
 		}
@@ -1671,11 +2022,20 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 
 		sensor_acq_dev.device_handle =
 			cam_create_device_hdl(&bridge_params);
+<<<<<<< HEAD
+=======
+		if (sensor_acq_dev.device_handle <= 0) {
+			rc = -EFAULT;
+			CAM_ERR(CAM_SENSOR, "Can not create device handle");
+			goto release_mutex;
+		}
+>>>>>>> ata-karner-lineage-21
 		s_ctrl->bridge_intf.device_hdl = sensor_acq_dev.device_handle;
 		s_ctrl->bridge_intf.session_hdl = sensor_acq_dev.session_handle;
 
 		CAM_DBG(CAM_SENSOR, "Device Handle: %d",
 			sensor_acq_dev.device_handle);
+<<<<<<< HEAD
 
 #if defined(CONFIG_USE_CAMERA_HW_BIG_DATA)
 		if (sec_sensor_position < s_ctrl->id) {
@@ -1702,6 +2062,8 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 			g_s_ctrl_ssm = s_ctrl;
 		}
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 		if (copy_to_user(u64_to_user_ptr(cmd->handle),
 			&sensor_acq_dev,
 			sizeof(struct cam_sensor_acquire_dev))) {
@@ -1710,6 +2072,7 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 			goto release_mutex;
 		}
 
+<<<<<<< HEAD
 #if 1
 		for (i = 0; i < RETRY_CNT; i++) {
 			rc = cam_sensor_power_up(s_ctrl);
@@ -1737,12 +2100,15 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 			goto release_mutex;
 		}
 #else
+=======
+>>>>>>> ata-karner-lineage-21
 		rc = cam_sensor_power_up(s_ctrl);
 		if (rc < 0) {
 			CAM_ERR(CAM_SENSOR, "Sensor Power up failed");
 			goto release_mutex;
 		}
 
+<<<<<<< HEAD
 #if 1 //For factory module test
 		/* Match sensor ID */
 		rc = cam_sensor_match_id(s_ctrl);
@@ -1758,6 +2124,8 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 		}
 #endif
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 		s_ctrl->sensor_state = CAM_SENSOR_ACQUIRE;
 		s_ctrl->last_flush_req = 0;
 		CAM_INFO(CAM_SENSOR,
@@ -1785,6 +2153,7 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 			goto release_mutex;
 		}
 
+<<<<<<< HEAD
 #if defined(CONFIG_SAMSUNG_REAR_TOF) || defined(CONFIG_SAMSUNG_FRONT_TOF)
 		if (s_ctrl->sensordata->slave_info.sensor_id == TOF_SENSOR_ID_IMX516
 			|| s_ctrl->sensordata->slave_info.sensor_id == TOF_SENSOR_ID_IMX518) {
@@ -1793,6 +2162,8 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 		}
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 		rc = cam_sensor_power_down(s_ctrl);
 		if (rc < 0) {
 			CAM_ERR(CAM_SENSOR, "Sensor Power Down failed");
@@ -1825,6 +2196,7 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 		s_ctrl->streamon_count = 0;
 		s_ctrl->streamoff_count = 0;
 		s_ctrl->last_flush_req = 0;
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_FRS_DRAM_TEST)
 		// CAM_ERR(CAM_SENSOR, "[FRS_DBG] FRS init");
 		rear_frs_test_mode = 0;
@@ -1833,6 +2205,8 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 		g_s_ctrl_tof = NULL;
 		check_pd_ready = 0;
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	}
 		break;
 	case CAM_QUERY_CAP: {
@@ -1857,6 +2231,7 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 			goto release_mutex;
 		}
 
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_FRAME_CNT_DBG)
 		// To print frame count,
 		// echo 1 > /sys/module/cam_sensor_core/parameters/frame_cnt_dbg
@@ -1870,6 +2245,8 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 		}
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 		if (s_ctrl->i2c_data.streamon_settings.is_settings_valid &&
 			(s_ctrl->i2c_data.streamon_settings.request_id == 0)) {
 			rc = cam_sensor_apply_settings(s_ctrl, 0,
@@ -1896,9 +2273,12 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 			goto release_mutex;
 		}
 
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_FRAME_CNT_DBG)
 		cam_sensor_thread_destroy(s_ctrl);
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 		if (s_ctrl->i2c_data.streamoff_settings.is_settings_valid &&
 			(s_ctrl->i2c_data.streamoff_settings.request_id == 0)) {
 			rc = cam_sensor_apply_settings(s_ctrl, 0,
@@ -1916,10 +2296,13 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 			"CAM_STOP_DEV Success, sensor_id:0x%x,sensor_slave_addr:0x%x",
 			s_ctrl->sensordata->slave_info.sensor_id,
 			s_ctrl->sensordata->slave_info.sensor_slave_addr);
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_FRS_DRAM_TEST)
 		// CAM_ERR(CAM_SENSOR, "[FRS_DBG] FRS init");
 		rear_frs_test_mode = 0;
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	}
 		break;
 	case CAM_CONFIG_DEV: {
@@ -1986,6 +2369,33 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 			}
 			s_ctrl->sensor_state = CAM_SENSOR_CONFIG;
 		}
+<<<<<<< HEAD
+=======
+
+		if (s_ctrl->i2c_data.read_settings.is_settings_valid) {
+			rc = cam_sensor_apply_settings(s_ctrl, 0,
+				CAM_SENSOR_PACKET_OPCODE_SENSOR_READ);
+			if (rc < 0) {
+				CAM_ERR(CAM_SENSOR,
+					"cannot apply read settings");
+				delete_request(
+					&s_ctrl->i2c_data.read_settings);
+				goto release_mutex;
+			}
+			rc = delete_request(
+				&s_ctrl->i2c_data.read_settings);
+			if (rc < 0) {
+				CAM_ERR(CAM_SENSOR,
+					"Fail in deleting the read settings");
+				goto release_mutex;
+			}
+		}
+
+		CAM_DBG(CAM_SENSOR,
+			"CAM_CONFIG_DEV done sensor_id:0x%x,sensor_slave_addr:0x%x",
+			s_ctrl->sensordata->slave_info.sensor_id,
+			s_ctrl->sensordata->slave_info.sensor_slave_addr);
+>>>>>>> ata-karner-lineage-21
 	}
 		break;
 	default:
@@ -1999,16 +2409,23 @@ release_mutex:
 	return rc;
 
 free_power_settings:
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_FRS_DRAM_TEST)
 	// CAM_ERR(CAM_SENSOR, "[FRS_DBG] FRS init");
 	rear_frs_test_mode = 0;
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	kfree(power_info->power_setting);
 	kfree(power_info->power_down_setting);
 	power_info->power_setting = NULL;
 	power_info->power_down_setting = NULL;
 	power_info->power_down_setting_size = 0;
 	power_info->power_setting_size = 0;
+<<<<<<< HEAD
+=======
+	cam_sensor_free_power_reg_rsc(s_ctrl);
+>>>>>>> ata-karner-lineage-21
 	mutex_unlock(&(s_ctrl->cam_sensor_mutex));
 	return rc;
 }
@@ -2086,17 +2503,22 @@ int cam_sensor_power_up(struct cam_sensor_ctrl_t *s_ctrl)
 	int rc;
 	struct cam_sensor_power_ctrl_t *power_info;
 	struct cam_camera_slave_info *slave_info;
+<<<<<<< HEAD
 	struct cam_hw_soc_info *soc_info =
 		&s_ctrl->soc_info;
 #if defined(CONFIG_USE_CAMERA_HW_BIG_DATA)
 	struct cam_hw_param *hw_param = NULL;
 #endif
+=======
+	struct cam_hw_soc_info *soc_info;
+>>>>>>> ata-karner-lineage-21
 
 	if (!s_ctrl) {
 		CAM_ERR(CAM_SENSOR, "failed: %pK", s_ctrl);
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 #if defined(CONFIG_USE_CAMERA_HW_BIG_DATA)
 	if (s_ctrl != NULL) {
 		switch (s_ctrl->id) {
@@ -2188,6 +2610,8 @@ int cam_sensor_power_up(struct cam_sensor_ctrl_t *s_ctrl)
 	}
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 	power_info = &s_ctrl->sensordata->power_info;
 	slave_info = &(s_ctrl->sensordata->slave_info);
 
@@ -2196,6 +2620,11 @@ int cam_sensor_power_up(struct cam_sensor_ctrl_t *s_ctrl)
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
+=======
+	soc_info = &s_ctrl->soc_info;
+
+>>>>>>> ata-karner-lineage-21
 	if (s_ctrl->bob_pwm_switch) {
 		rc = cam_sensor_bob_pwm_mode_switch(soc_info,
 			s_ctrl->bob_reg_index, true);
@@ -2213,9 +2642,14 @@ int cam_sensor_power_up(struct cam_sensor_ctrl_t *s_ctrl)
 	}
 
 	rc = camera_io_init(&(s_ctrl->io_master_info));
+<<<<<<< HEAD
 	if (rc < 0) {
 		CAM_ERR(CAM_SENSOR, "cci_init failed: rc: %d", rc);
 	}
+=======
+	if (rc < 0)
+		CAM_ERR(CAM_SENSOR, "cci_init failed: rc: %d", rc);
+>>>>>>> ata-karner-lineage-21
 
 	return rc;
 }
@@ -2225,15 +2659,19 @@ int cam_sensor_power_down(struct cam_sensor_ctrl_t *s_ctrl)
 	struct cam_sensor_power_ctrl_t *power_info;
 	struct cam_hw_soc_info *soc_info;
 	int rc = 0;
+<<<<<<< HEAD
 #if defined(CONFIG_USE_CAMERA_HW_BIG_DATA)
 	struct cam_hw_param *hw_param = NULL;
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 
 	if (!s_ctrl) {
 		CAM_ERR(CAM_SENSOR, "failed: s_ctrl %pK", s_ctrl);
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD
 #if defined(CONFIG_USE_CAMERA_HW_BIG_DATA)
 	if (s_ctrl != NULL) {
 		switch (s_ctrl->id) {
@@ -2349,6 +2787,8 @@ int cam_sensor_power_down(struct cam_sensor_ctrl_t *s_ctrl)
 	}
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 	power_info = &s_ctrl->sensordata->power_info;
 	soc_info = &s_ctrl->soc_info;
 
@@ -2357,6 +2797,7 @@ int cam_sensor_power_down(struct cam_sensor_ctrl_t *s_ctrl)
 		return -EINVAL;
 	}
 	rc = cam_sensor_util_power_down(power_info, soc_info);
+<<<<<<< HEAD
 #if defined(CONFIG_SENSOR_RETENTION)
 	if (s_ctrl->sensordata->slave_info.sensor_id == RETENTION_SENSOR_ID) {
 		if (sensor_retention_mode == RETENTION_READY_TO_ON) {
@@ -2364,6 +2805,8 @@ int cam_sensor_power_down(struct cam_sensor_ctrl_t *s_ctrl)
 		}
 	}
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	if (rc < 0) {
 		CAM_ERR(CAM_SENSOR, "power down the core is failed:%d", rc);
 		return rc;
@@ -2391,18 +2834,30 @@ int cam_sensor_apply_settings(struct cam_sensor_ctrl_t *s_ctrl,
 	uint64_t top = 0, del_req_id = 0;
 	struct i2c_settings_array *i2c_set = NULL;
 	struct i2c_settings_list *i2c_list;
+<<<<<<< HEAD
+=======
+	bool force_low_priority = false;
+>>>>>>> ata-karner-lineage-21
 
 	if (req_id == 0) {
 		switch (opcode) {
 		case CAM_SENSOR_PACKET_OPCODE_SENSOR_STREAMON: {
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_FRAME_CNT_DBG)
 			CAM_ERR(CAM_SENSOR, "[CNT_DBG][APPLY] CAM_SENSOR_PACKET_OPCODE_SENSOR_STREAMON");
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 			i2c_set = &s_ctrl->i2c_data.streamon_settings;
 			break;
 		}
 		case CAM_SENSOR_PACKET_OPCODE_SENSOR_INITIAL_CONFIG: {
 			i2c_set = &s_ctrl->i2c_data.init_settings;
+<<<<<<< HEAD
+=======
+			force_low_priority =
+				s_ctrl->force_low_priority_for_init_setting;
+>>>>>>> ata-karner-lineage-21
 			break;
 		}
 		case CAM_SENSOR_PACKET_OPCODE_SENSOR_CONFIG: {
@@ -2410,18 +2865,37 @@ int cam_sensor_apply_settings(struct cam_sensor_ctrl_t *s_ctrl,
 			break;
 		}
 		case CAM_SENSOR_PACKET_OPCODE_SENSOR_STREAMOFF: {
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_FRAME_CNT_DBG)
 			CAM_ERR(CAM_SENSOR, "[CNT_DBG][APPLY] CAM_SENSOR_PACKET_OPCODE_SENSOR_STREAMOFF");
 #endif
 			i2c_set = &s_ctrl->i2c_data.streamoff_settings;
 			break;
 		}
+=======
+			i2c_set = &s_ctrl->i2c_data.streamoff_settings;
+			break;
+		}
+		case CAM_SENSOR_PACKET_OPCODE_SENSOR_READ: {
+			i2c_set = &s_ctrl->i2c_data.read_settings;
+			break;
+		}
+		case CAM_SENSOR_PACKET_OPCODE_SENSOR_POWERON_REG: {
+			i2c_set = &s_ctrl->i2c_data.poweron_reg_settings;
+			break;
+		}
+		case CAM_SENSOR_PACKET_OPCODE_SENSOR_POWEROFF_REG: {
+			i2c_set = &s_ctrl->i2c_data.poweroff_reg_settings;
+			break;
+		}
+>>>>>>> ata-karner-lineage-21
 		case CAM_SENSOR_PACKET_OPCODE_SENSOR_UPDATE:
 		case CAM_SENSOR_PACKET_OPCODE_SENSOR_PROBE:
 		default:
 			return 0;
 		}
 		if (i2c_set->is_settings_valid == 1) {
+<<<<<<< HEAD
 
 #if defined(CONFIG_CAMERA_ADAPTIVE_MIPI)
 			if (opcode == CAM_SENSOR_PACKET_OPCODE_SENSOR_STREAMON)
@@ -2483,6 +2957,19 @@ int cam_sensor_apply_settings(struct cam_sensor_ctrl_t *s_ctrl,
 			{
 				cam_sensor_wait_stream_off(s_ctrl);
 			}
+=======
+			list_for_each_entry(i2c_list,
+				&(i2c_set->list_head), list) {
+				rc = cam_sensor_i2c_modes_util(s_ctrl,
+					i2c_list, force_low_priority);
+				if (rc < 0) {
+					CAM_ERR(CAM_SENSOR,
+						"Failed to apply settings: %d",
+						rc);
+					goto EXIT_RESTORE;
+				}
+			}
+>>>>>>> ata-karner-lineage-21
 		}
 	} else {
 		offset = req_id % MAX_PER_FRAME_ARRAY;
@@ -2491,15 +2978,24 @@ int cam_sensor_apply_settings(struct cam_sensor_ctrl_t *s_ctrl,
 			i2c_set->request_id == req_id) {
 			list_for_each_entry(i2c_list,
 				&(i2c_set->list_head), list) {
+<<<<<<< HEAD
 				rc = cam_sensor_i2c_modes_util(
 					s_ctrl,
 					&(s_ctrl->io_master_info),
 					i2c_list);
+=======
+				rc = cam_sensor_i2c_modes_util(s_ctrl,
+					i2c_list, force_low_priority);
+>>>>>>> ata-karner-lineage-21
 				if (rc < 0) {
 					CAM_ERR(CAM_SENSOR,
 						"Failed to apply settings: %d",
 						rc);
+<<<<<<< HEAD
 					return rc;
+=======
+					goto EXIT_RESTORE;
+>>>>>>> ata-karner-lineage-21
 				}
 			}
 		} else {
@@ -2529,7 +3025,11 @@ int cam_sensor_apply_settings(struct cam_sensor_ctrl_t *s_ctrl,
 		}
 
 		if (!del_req_id)
+<<<<<<< HEAD
 			return rc;
+=======
+			goto EXIT_RESTORE;
+>>>>>>> ata-karner-lineage-21
 
 		CAM_DBG(CAM_SENSOR, "top: %llu, del_req_id:%llu",
 			top, del_req_id);
@@ -2550,6 +3050,12 @@ int cam_sensor_apply_settings(struct cam_sensor_ctrl_t *s_ctrl,
 		}
 	}
 
+<<<<<<< HEAD
+=======
+EXIT_RESTORE:
+	(void)cam_sensor_restore_slave_info(s_ctrl);
+
+>>>>>>> ata-karner-lineage-21
 	return rc;
 }
 
@@ -2642,6 +3148,7 @@ int32_t cam_sensor_flush_request(struct cam_req_mgr_flush_request *flush_req)
 	mutex_unlock(&(s_ctrl->cam_sensor_mutex));
 	return rc;
 }
+<<<<<<< HEAD
 
 #if defined(CONFIG_USE_CAMERA_HW_BIG_DATA)
 void msm_is_sec_init_all_cnt(void)
@@ -2959,3 +3466,5 @@ void cam_sensor_ssm_i2c_write(uint32_t addr, uint32_t data,
 	}
 }
 #endif
+=======
+>>>>>>> ata-karner-lineage-21

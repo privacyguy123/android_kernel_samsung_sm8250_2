@@ -704,6 +704,7 @@ struct wireless_dev *__wlan_hdd_add_virtual_intf(struct wiphy *wiphy,
 
 	adapter = NULL;
 	cfg_p2p_get_device_addr_admin(hdd_ctx->psoc, &p2p_dev_addr_admin);
+<<<<<<< HEAD
 #ifdef SEC_READ_MACADDR_SYSFS
 	if ((p2p_dev_addr_admin &&
 	    (mode == QDF_P2P_GO_MODE || mode == QDF_P2P_CLIENT_MODE)
@@ -712,6 +713,10 @@ struct wireless_dev *__wlan_hdd_add_virtual_intf(struct wiphy *wiphy,
 	if (p2p_dev_addr_admin &&
 	    (mode == QDF_P2P_GO_MODE || mode == QDF_P2P_CLIENT_MODE)) {
 #endif //SEC_READ_MACADDR_SYSFS
+=======
+	if (p2p_dev_addr_admin &&
+	    (mode == QDF_P2P_GO_MODE || mode == QDF_P2P_CLIENT_MODE)) {
+>>>>>>> ata-karner-lineage-21
 		/*
 		 * Generate the P2P Interface Address. this address must be
 		 * different from the P2P Device Address.

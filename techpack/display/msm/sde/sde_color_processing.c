@@ -12,6 +12,7 @@
 #include "sde_color_processing.h"
 #include "sde_kms.h"
 #include "sde_crtc.h"
+#include "sde_plane.h"
 #include "sde_hw_dspp.h"
 #include "sde_hw_lm.h"
 #include "sde_ad4.h"
@@ -1426,16 +1427,32 @@ static int sde_cp_crtc_checkfeature(struct sde_cp_node *prop_node,
 	return ret;
 }
 
-static void sde_cp_crtc_setfeature(struct sde_cp_node *prop_node,
-				   struct sde_crtc *sde_crtc)
+static int sde_cp_crtc_checkfeature(struct sde_cp_node *prop_node,
+	struct sde_crtc *sde_crtc, struct sde_crtc_state *sde_crtc_state)
 {
 	struct sde_hw_cp_cfg hw_cfg;
 	struct sde_hw_mixer *hw_lm;
 	struct sde_hw_dspp *hw_dspp;
-	u32 num_mixers = sde_crtc->num_mixers;
+	u32 num_mixers;
 	int i = 0, ret = 0;
 	bool feature_enabled = false;
-	struct sde_mdss_cfg *catalog = NULL;
+	feature_wrapper check_feature = NULL;
+
+	if (!prop_node || !sde_crtc || !sde_crtc_state) {
+		DRM_ERROR("invalid arguments");
+		return -EINVAL;
+	}
+
+	num_mixers = sde_crtc->num_mixers;
+
+	if (prop_node->feature >= SDE_CP_CRTC_MAX_FEATURES) {
+		DRM_ERROR("invalid feature %d\n", prop_node->feature);
+		return -EINVAL;
+	}
+
+	check_feature = check_crtc_feature_wrappers[prop_node->feature];
+	if (check_feature == NULL)
+		return 0;
 
 	memset(&hw_cfg, 0, sizeof(hw_cfg));
 	sde_cp_get_hw_payload(prop_node, &hw_cfg, &feature_enabled);
@@ -1447,6 +1464,71 @@ static void sde_cp_crtc_setfeature(struct sde_cp_node *prop_node,
 		if (!hw_dspp || i >= DSPP_MAX)
 			continue;
 		hw_cfg.dspp[i] = hw_dspp;
+	}
+
+	for (i = 0; i < num_mixers && !ret; i++) {
+		hw_lm = sde_crtc->mixers[i].hw_lm;
+		hw_dspp = sde_crtc->mixers[i].hw_dspp;
+		if (!hw_lm) {
+			ret = -EINVAL;
+			continue;
+		}
+		hw_cfg.ctl = sde_crtc->mixers[i].hw_ctl;
+		hw_cfg.mixer_info = hw_lm;
+
+		/* use incoming state information */
+		hw_cfg.displayh = num_mixers *
+				sde_crtc_state->lm_roi[i].w;
+		hw_cfg.displayv = sde_crtc_state->lm_roi[i].h;
+
+		DRM_DEBUG_DRIVER("check cp feature %d on mixer %d\n",
+				prop_node->feature, hw_lm->idx - LM_0);
+		ret = check_feature(hw_dspp, &hw_cfg, sde_crtc);
+		if (ret)
+			break;
+	}
+
+	return ret;
+}
+
+static void sde_cp_crtc_setfeature(struct sde_cp_node *prop_node,
+				   struct sde_crtc *sde_crtc)
+{
+	struct sde_hw_cp_cfg hw_cfg;
+	struct sde_hw_mixer *hw_lm;
+	struct sde_hw_dspp *hw_dspp;
+	u32 num_mixers = sde_crtc->num_mixers;
+	int i = 0, ret = 0;
+	bool feature_enabled = false;
+	struct sde_mdss_cfg *catalog = NULL;
+	struct drm_crtc *drm_crtc = &sde_crtc->base;
+	struct sde_crtc_state *cstate = to_sde_crtc_state(drm_crtc->state);
+	struct drm_property_blob *blob;
+	struct drm_msm_pcc *pcc_cfg;
+
+	memset(&hw_cfg, 0, sizeof(hw_cfg));
+	sde_cp_get_hw_payload(prop_node, &hw_cfg, &feature_enabled);
+	hw_cfg.num_of_mixers = sde_crtc->num_mixers;
+	hw_cfg.last_feature = 0;
+
+	for (i = 0; i < num_mixers; i++) {
+		hw_dspp = sde_crtc->mixers[i].hw_dspp;
+		if (!hw_dspp || i >= DSPP_MAX)
+			continue;
+		hw_cfg.dspp[i] = hw_dspp;
+	}
+
+	if (prop_node->feature == SDE_CP_CRTC_DSPP_PCC) {
+		blob = prop_node->blob_ptr;
+		if (blob != NULL) {
+			pcc_cfg = blob->data;
+			if (pcc_cfg->r.c == 0 && pcc_cfg->b.c == 0 && pcc_cfg->g.c == 0) {
+				cstate->color_invert_on = false;
+				hw_cfg.payload = NULL;
+				hw_cfg.len = 0;
+			} else
+				cstate->color_invert_on = true;
+		}
 	}
 
 	if ((prop_node->feature >= SDE_CP_CRTC_MAX_FEATURES) ||
@@ -4036,3 +4118,27 @@ void sde_cp_crtc_disable(struct drm_crtc *drm_crtc)
 	mutex_unlock(&crtc->crtc_cp_lock);
 	vfree(info);
 }
+<<<<<<< HEAD
+=======
+
+const struct drm_msm_pcc *sde_cp_crtc_get_pcc_cfg(struct drm_crtc *drm_crtc)
+{
+	struct drm_property_blob *blob = NULL;
+	struct sde_cp_node *prop_node = NULL;
+	struct sde_crtc *crtc;
+
+	crtc = to_sde_crtc(drm_crtc);
+
+	mutex_lock(&crtc->crtc_cp_lock);
+	list_for_each_entry(prop_node, &crtc->feature_list, feature_list) {
+		if (prop_node->feature == SDE_CP_CRTC_DSPP_PCC) {
+			blob = prop_node->blob_ptr;
+			break;
+		}
+	}
+
+	mutex_unlock(&crtc->crtc_cp_lock);
+
+	return blob ? blob->data : NULL;
+}
+>>>>>>> ata-karner-lineage-21

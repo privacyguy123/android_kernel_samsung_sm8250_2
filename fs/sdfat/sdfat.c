@@ -4766,6 +4766,15 @@ enum {
 	Opt_discard,
 	Opt_fs,
 	Opt_adj_req,
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SDFAT_USE_FOR_VFAT
+	Opt_shortname_lower,
+	Opt_shortname_win95,
+	Opt_shortname_winnt,
+	Opt_shortname_mixed,
+#endif /* CONFIG_SDFAT_USE_FOR_VFAT */
+>>>>>>> ata-karner-lineage-21
 };
 
 static const match_table_t sdfat_tokens = {
@@ -4794,6 +4803,15 @@ static const match_table_t sdfat_tokens = {
 	{Opt_discard, "discard"},
 	{Opt_fs, "fs=%s"},
 	{Opt_adj_req, "adj_req"},
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SDFAT_USE_FOR_VFAT
+	{Opt_shortname_lower, "shortname=lower"},
+	{Opt_shortname_win95, "shortname=win95"},
+	{Opt_shortname_winnt, "shortname=winnt"},
+	{Opt_shortname_mixed, "shortname=mixed"},
+#endif /* CONFIG_SDFAT_USE_FOR_VFAT */
+>>>>>>> ata-karner-lineage-21
 	{Opt_err, NULL}
 };
 
@@ -4960,6 +4978,17 @@ static int parse_options(struct super_block *sb, char *options, int silent,
 			IMSG("adjust request config is not enabled. ignore\n");
 #endif
 			break;
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SDFAT_USE_FOR_VFAT
+		case Opt_shortname_lower:
+		case Opt_shortname_win95:
+		case Opt_shortname_mixed:
+			pr_warn("[SDFAT] DRAGONS AHEAD! sdFAT only understands \"shortname=winnt\"!\n");
+		case Opt_shortname_winnt:
+			break;
+#endif /* CONFIG_SDFAT_USE_FOR_VFAT */
+>>>>>>> ata-karner-lineage-21
 		default:
 			if (!silent) {
 				sdfat_msg(sb, KERN_ERR,
@@ -5299,6 +5328,39 @@ static struct file_system_type sdfat_fs_type = {
 #endif /* CONFIG_SDFAT_DBG_IOCTL */
 	.fs_flags    = FS_REQUIRES_DEV,
 };
+<<<<<<< HEAD
+=======
+MODULE_ALIAS_FS("sdfat");
+
+#ifdef CONFIG_SDFAT_USE_FOR_EXFAT
+static struct file_system_type exfat_fs_type = {
+	.owner       = THIS_MODULE,
+	.name        = "exfat",
+	.mount       = sdfat_fs_mount,
+#ifdef CONFIG_SDFAT_DBG_IOCTL
+	.kill_sb    = sdfat_debug_kill_sb,
+#else
+	.kill_sb    = kill_block_super,
+#endif /* CONFIG_SDFAT_DBG_IOCTL */
+	.fs_flags    = FS_REQUIRES_DEV,
+};
+MODULE_ALIAS_FS("exfat");
+#endif /* CONFIG_SDFAT_USE_FOR_EXFAT */
+
+#ifdef CONFIG_SDFAT_USE_FOR_VFAT
+static struct file_system_type vfat_fs_type = {
+	.owner       = THIS_MODULE,
+	.name        = "vfat",
+	.mount       = sdfat_fs_mount,
+#ifdef CONFIG_SDFAT_DBG_IOCTL
+	.kill_sb    = sdfat_debug_kill_sb,
+#else
+	.kill_sb    = kill_block_super,
+#endif /* CONFIG_SDFAT_DBG_IOCTL */
+	.fs_flags    = FS_REQUIRES_DEV,
+};
+#endif /* CONFIG_SDFAT_USE_FOR_VFAT */
+>>>>>>> ata-karner-lineage-21
 
 static int __init init_sdfat_fs(void)
 {
@@ -5342,6 +5404,25 @@ static int __init init_sdfat_fs(void)
 		goto error;
 	}
 
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SDFAT_USE_FOR_EXFAT
+	err = register_filesystem(&exfat_fs_type);
+	if (err) {
+		pr_err("[SDFAT] failed to register for exfat filesystem\n");
+		goto error;
+	}
+#endif /* CONFIG_SDFAT_USE_FOR_EXFAT */
+
+#ifdef CONFIG_SDFAT_USE_FOR_VFAT
+	err = register_filesystem(&vfat_fs_type);
+	if (err) {
+		pr_err("[SDFAT] failed to register for vfat filesystem\n");
+		goto error;
+	}
+#endif /* CONFIG_SDFAT_USE_FOR_VFAT */
+
+>>>>>>> ata-karner-lineage-21
 	return 0;
 error:
 	sdfat_uevent_uninit();
@@ -5380,7 +5461,16 @@ static void __exit exit_sdfat_fs(void)
 
 	sdfat_destroy_inodecache();
 	unregister_filesystem(&sdfat_fs_type);
+<<<<<<< HEAD
 
+=======
+#ifdef CONFIG_SDFAT_USE_FOR_EXFAT
+	unregister_filesystem(&exfat_fs_type);
+#endif /* CONFIG_SDFAT_USE_FOR_EXFAT */
+#ifdef CONFIG_SDFAT_USE_FOR_VFAT
+	unregister_filesystem(&vfat_fs_type);
+#endif /* CONFIG_SDFAT_USE_FOR_VFAT */
+>>>>>>> ata-karner-lineage-21
 	fsapi_shutdown();
 }
 

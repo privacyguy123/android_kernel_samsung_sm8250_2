@@ -55,10 +55,13 @@
 
 #include <linux/sec_debug.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_CFP_ROPP
 #include <linux/cfp.h>
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 static const char *handler[]= {
 	"Synchronous Abort",
 	"IRQ",
@@ -165,9 +168,12 @@ void dump_backtrace(struct pt_regs *regs, struct task_struct *tsk)
 	unsigned long cur_sp = 0;
 	unsigned long cur_fp = 0;
 
+<<<<<<< HEAD
 #if (defined CONFIG_CFP_ROPP) && (defined CONFIG_CFP_TEST)
 	unsigned long value = 0x0;
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 #ifdef CONFIG_SEC_DEBUG
 	unsigned long prev_fp = 0;
 #endif

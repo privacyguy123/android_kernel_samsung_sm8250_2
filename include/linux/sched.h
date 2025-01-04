@@ -1482,10 +1482,13 @@ struct task_struct {
 	/* Used by LSM modules for access restriction: */
 	void				*security;
 #endif
+<<<<<<< HEAD
 #ifdef CONFIG_PERF_MGR
 	int drawing_flag;
 	int drawing_mig_boost;
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 
 	/* task is frozen/stopped (used by the cgroup freezer) */
 	ANDROID_KABI_USE(1, unsigned frozen:1);

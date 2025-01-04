@@ -1,6 +1,11 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
+<<<<<<< HEAD
  * Copyright (c) 2016-2019, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2016-2021, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #ifndef _CAM_ISP_HW_MGR_INTF_H_
@@ -185,12 +190,15 @@ struct cam_isp_hw_epoch_event_data {
  *
  * @num_handles:           Number of resource handeles
  * @resource_handle:       Resource handle array
+ * @last_consumed_addr:    Last consumed addr
  * @timestamp:             Timestamp for the buf done event
  *
  */
 struct cam_isp_hw_done_event_data {
 	uint32_t             num_handles;
 	uint32_t             resource_handle[
+				CAM_NUM_OUT_PER_COMP_IRQ_MAX];
+	uint32_t             last_consumed_addr[
 				CAM_NUM_OUT_PER_COMP_IRQ_MAX];
 	uint64_t       timestamp;
 };
@@ -228,6 +236,11 @@ enum cam_isp_hw_mgr_command {
 	CAM_ISP_HW_MGR_CMD_RESUME_HW,
 	CAM_ISP_HW_MGR_CMD_SOF_DEBUG,
 	CAM_ISP_HW_MGR_CMD_CTX_TYPE,
+<<<<<<< HEAD
+=======
+	CAM_ISP_HW_MGR_GET_PACKET_OPCODE,
+	CAM_ISP_HW_MGR_GET_LAST_CDM_DONE,
+>>>>>>> ata-karner-lineage-21
 	CAM_ISP_HW_MGR_CMD_MAX,
 };
 
@@ -240,15 +253,29 @@ enum cam_isp_ctx_type {
 /**
  * struct cam_isp_hw_cmd_args - Payload for hw manager command
  *
+<<<<<<< HEAD
  * @cmd_type               HW command type
  * @sof_irq_enable         To debug if SOF irq is enabled
  * @ctx_type               RDI_ONLY, PIX and RDI, or FS2
+=======
+ * @cmd_type:              HW command type
+ * @cmd_data:              Command data
+ * @sof_irq_enable:        To debug if SOF irq is enabled
+ * @ctx_type:              RDI_ONLY, PIX and RDI, or FS2
+ * @packet_op_code:        Packet opcode
+ * @last_cdm_done:         Last cdm done request
+>>>>>>> ata-karner-lineage-21
  */
 struct cam_isp_hw_cmd_args {
 	uint32_t                          cmd_type;
 	union {
 		uint32_t                      sof_irq_enable;
 		uint32_t                      ctx_type;
+<<<<<<< HEAD
+=======
+		uint32_t                      packet_op_code;
+		uint64_t                      last_cdm_done;
+>>>>>>> ata-karner-lineage-21
 	} u;
 };
 

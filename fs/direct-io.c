@@ -479,8 +479,11 @@ static inline void dio_bio_submit(struct dio *dio, struct dio_submit *sdio)
 
 	dio->bio_disk = bio->bi_disk;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ata-karner-lineage-21
 #ifdef CONFIG_FS_HPB
 	if (dio->flags & DIO_HPB_IO)
 		bio->bi_opf |= REQ_HPB_PREFER;

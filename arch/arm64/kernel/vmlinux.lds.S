@@ -258,7 +258,10 @@ SECTIONS
 	swapper_pg_dir = .;
 	. += SWAPPER_DIR_SIZE;
 	swapper_pg_end = .;
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	__pecoff_data_size = ABSOLUTE(. - __initdata_begin);
 	_end = .;
 

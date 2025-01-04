@@ -990,7 +990,11 @@ int elevator_init_mq(struct request_queue *q)
 	struct elevator_type *e;
 	int err = 0;
 
+<<<<<<< HEAD
 	if (q->tag_set && q->tag_set->flags & BLK_MQ_F_NO_SCHED_BY_DEFAULT)
+=======
+	if (q->tag_set && q->tag_set->flags & BLK_MQ_F_NO_SCHED)
+>>>>>>> ata-karner-lineage-21
 		return 0;
 
 	if (q->nr_hw_queues != 1)

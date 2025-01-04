@@ -826,6 +826,7 @@ static void check_stack_usage(void)
 #else
 static inline void check_stack_usage(void) {}
 #endif
+<<<<<<< HEAD
 
 #ifndef CONFIG_PROFILING
 static BLOCKING_NOTIFIER_HEAD(task_exit_notifier);
@@ -853,6 +854,8 @@ void profile_task_exit(struct task_struct *tsk)
 }
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 void __noreturn do_exit(long code)
 {
 	struct task_struct *tsk = current;

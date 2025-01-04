@@ -10,6 +10,11 @@ CONFIG_BCM4389=y
 CONFIG_BCM4375=n
 endif
 endif
+<<<<<<< HEAD
+=======
+$(warning CONFIG_BCM4389 = $(CONFIG_BCM4389))
+$(warning CONFIG_BCM4375 = $(CONFIG_BCM4375))
+>>>>>>> ata-karner-lineage-21
 
 ifeq ($(CONFIG_BCM4389),y)
 obj-$(CONFIG_BCM4389)   += bcmdhd_101_10/

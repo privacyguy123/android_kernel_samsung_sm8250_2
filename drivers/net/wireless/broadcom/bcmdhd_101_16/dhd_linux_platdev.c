@@ -865,7 +865,11 @@ static int dhd_wifi_platform_load_usb(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int dhd_wifi_platform_load()
+=======
+static int dhd_wifi_platform_load(void)
+>>>>>>> ata-karner-lineage-21
 {
 	int err = 0;
 

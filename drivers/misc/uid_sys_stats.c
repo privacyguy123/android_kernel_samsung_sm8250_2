@@ -36,6 +36,13 @@
 #define BG_STAT_VER		3
 #endif
 
+#ifdef CONFIG_SDCARD_FS
+#include <linux/kobject.h>
+#include <linux/sysfs.h>
+
+#define BG_STAT_VER		3
+#endif
+
 #define UID_HASH_BITS	10
 DECLARE_HASHTABLE(hash_table, UID_HASH_BITS);
 

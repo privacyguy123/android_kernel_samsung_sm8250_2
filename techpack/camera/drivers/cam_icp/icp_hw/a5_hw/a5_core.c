@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
+<<<<<<< HEAD
  * Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2017-2021, The Linux Foundation. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #include <linux/slab.h>
@@ -235,6 +239,56 @@ fw_download_failed:
 	return rc;
 }
 
+<<<<<<< HEAD
+=======
+static int cam_a5_fw_dump(
+	struct cam_icp_hw_dump_args    *dump_args,
+	struct cam_a5_device_core_info *core_info)
+{
+	u8                         *dest;
+	u8                         *src;
+	uint64_t                    size_required;
+	struct cam_icp_dump_header *hdr;
+
+	if (!core_info || !dump_args) {
+		CAM_ERR(CAM_ICP, "invalid params %pK %pK",
+		    core_info, dump_args);
+		return -EINVAL;
+	}
+	if (!core_info->fw_kva_addr || !dump_args->cpu_addr) {
+		CAM_ERR(CAM_ICP, "invalid params %pK, 0x%zx",
+		    core_info->fw_kva_addr, dump_args->cpu_addr);
+		return -EINVAL;
+	}
+
+	size_required = core_info->fw_buf_len +
+		sizeof(struct cam_icp_dump_header);
+
+	if (dump_args->buf_len <= dump_args->offset) {
+		CAM_WARN(CAM_ICP, "Dump offset overshoot len %zu offset %zu",
+			dump_args->buf_len, dump_args->offset);
+		return -ENOSPC;
+	}
+
+	if ((dump_args->buf_len - dump_args->offset) < size_required) {
+		CAM_WARN(CAM_ICP, "Dump buffer exhaust required %llu len %llu",
+			size_required, core_info->fw_buf_len);
+		return -ENOSPC;
+	}
+
+	dest = (u8 *)dump_args->cpu_addr + dump_args->offset;
+	hdr = (struct cam_icp_dump_header *)dest;
+	scnprintf(hdr->tag, CAM_ICP_DUMP_TAG_MAX_LEN, "ICP_FW:");
+	hdr->word_size = sizeof(u8);
+	hdr->size = core_info->fw_buf_len;
+	src = (u8 *)core_info->fw_kva_addr;
+	dest = (u8 *)dest + sizeof(struct cam_icp_dump_header);
+	memcpy_fromio(dest, src, core_info->fw_buf_len);
+	dump_args->offset += hdr->size + sizeof(struct cam_icp_dump_header);
+	return 0;
+}
+
+>>>>>>> ata-karner-lineage-21
 int cam_a5_init_hw(void *device_priv,
 	void *init_hw_args, uint32_t arg_size)
 {
@@ -488,6 +542,10 @@ int cam_a5_process_cmd(void *device_priv, uint32_t cmd_type,
 		break;
 	case CAM_ICP_A5_CMD_UBWC_CFG: {
 		struct a5_ubwc_cfg_ext *ubwc_cfg_ext = NULL;
+<<<<<<< HEAD
+=======
+		uint32_t *disable_ubwc_comp;
+>>>>>>> ata-karner-lineage-21
 
 		a5_soc = soc_info->soc_private;
 		if (!a5_soc) {
@@ -495,6 +553,16 @@ int cam_a5_process_cmd(void *device_priv, uint32_t cmd_type,
 			return -EINVAL;
 		}
 
+<<<<<<< HEAD
+=======
+		if (!cmd_args) {
+			CAM_ERR(CAM_ICP, "Invalid args");
+			return -EINVAL;
+		}
+
+		disable_ubwc_comp = (uint32_t *)cmd_args;
+
+>>>>>>> ata-karner-lineage-21
 		if (a5_soc->ubwc_config_ext) {
 			/* Invoke kernel API to determine DDR type */
 			ddr_type = of_fdt_get_ddrtype();
@@ -511,10 +579,31 @@ int cam_a5_process_cmd(void *device_priv, uint32_t cmd_type,
 				ubwc_cfg_ext->ubwc_bps_fetch_cfg[index];
 			ubwc_bps_cfg[1] =
 				ubwc_cfg_ext->ubwc_bps_write_cfg[index];
+<<<<<<< HEAD
 			rc = hfi_cmd_ubwc_config_ext(&ubwc_ipe_cfg[0],
 					&ubwc_bps_cfg[0]);
 		} else {
 			rc = hfi_cmd_ubwc_config(a5_soc->uconfig.ubwc_cfg);
+=======
+
+			if (*disable_ubwc_comp) {
+				ubwc_ipe_cfg[1] &= ~CAM_ICP_UBWC_COMP_EN;
+				ubwc_bps_cfg[1] &= ~CAM_ICP_UBWC_COMP_EN;
+				CAM_DBG(CAM_ISP,
+					"UBWC comp force disable, ubwc_ipe_cfg:  0x%x, ubwc_bps_cfg: 0x%x",
+					ubwc_ipe_cfg[1], ubwc_bps_cfg[1]);
+			}
+
+			rc = hfi_cmd_ubwc_config_ext(&ubwc_ipe_cfg[0],
+					&ubwc_bps_cfg[0]);
+		} else {
+			if (*disable_ubwc_comp)
+				rc = hfi_cmd_ubwc_config(
+					a5_soc->uconfig.ubwc_cfg, true);
+			else
+				rc = hfi_cmd_ubwc_config(
+					a5_soc->uconfig.ubwc_cfg, false);
+>>>>>>> ata-karner-lineage-21
 		}
 
 		break;
@@ -543,6 +632,15 @@ int cam_a5_process_cmd(void *device_priv, uint32_t cmd_type,
 			core_info->cpas_handle, &ahb_vote);
 		break;
 	}
+<<<<<<< HEAD
+=======
+	case CAM_ICP_A5_CMD_HW_DUMP: {
+		struct cam_icp_hw_dump_args *dump_args = cmd_args;
+
+		rc = cam_a5_fw_dump(dump_args, core_info);
+		break;
+	}
+>>>>>>> ata-karner-lineage-21
 	default:
 		break;
 	}

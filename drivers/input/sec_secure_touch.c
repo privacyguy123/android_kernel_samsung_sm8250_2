@@ -15,7 +15,10 @@ struct sec_secure_touch *g_ss_touch;
 
 #include <linux/input/sec_secure_touch.h>
 #include <linux/notifier.h>
+<<<<<<< HEAD
 #include <linux/of.h>
+=======
+>>>>>>> ata-karner-lineage-21
 
 int sec_secure_touch_set_device(struct sec_secure_touch *data, int dev_num);
 void sec_secure_touch_sysfs_notify(struct sec_secure_touch *data);

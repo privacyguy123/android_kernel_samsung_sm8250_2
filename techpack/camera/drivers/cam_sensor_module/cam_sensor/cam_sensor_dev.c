@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
+<<<<<<< HEAD
  * Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2017-2021, The Linux Foundation. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #include "cam_sensor_dev.h"
@@ -183,6 +187,12 @@ static int32_t cam_sensor_driver_i2c_probe(struct i2c_client *client,
 	INIT_LIST_HEAD(&(s_ctrl->i2c_data.config_settings.list_head));
 	INIT_LIST_HEAD(&(s_ctrl->i2c_data.streamon_settings.list_head));
 	INIT_LIST_HEAD(&(s_ctrl->i2c_data.streamoff_settings.list_head));
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&(s_ctrl->i2c_data.poweron_reg_settings.list_head));
+	INIT_LIST_HEAD(&(s_ctrl->i2c_data.poweroff_reg_settings.list_head));
+	INIT_LIST_HEAD(&(s_ctrl->i2c_data.read_settings.list_head));
+>>>>>>> ata-karner-lineage-21
 
 	for (i = 0; i < MAX_PER_FRAME_ARRAY; i++)
 		INIT_LIST_HEAD(&(s_ctrl->i2c_data.per_frame[i].list_head));
@@ -327,6 +337,12 @@ static int32_t cam_sensor_driver_platform_probe(
 	INIT_LIST_HEAD(&(s_ctrl->i2c_data.config_settings.list_head));
 	INIT_LIST_HEAD(&(s_ctrl->i2c_data.streamon_settings.list_head));
 	INIT_LIST_HEAD(&(s_ctrl->i2c_data.streamoff_settings.list_head));
+<<<<<<< HEAD
+=======
+	INIT_LIST_HEAD(&(s_ctrl->i2c_data.poweron_reg_settings.list_head));
+	INIT_LIST_HEAD(&(s_ctrl->i2c_data.poweroff_reg_settings.list_head));
+	INIT_LIST_HEAD(&(s_ctrl->i2c_data.read_settings.list_head));
+>>>>>>> ata-karner-lineage-21
 
 	for (i = 0; i < MAX_PER_FRAME_ARRAY; i++)
 		INIT_LIST_HEAD(&(s_ctrl->i2c_data.per_frame[i].list_head));

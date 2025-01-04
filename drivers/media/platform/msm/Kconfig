@@ -60,4 +60,8 @@ source "drivers/media/platform/msm/synx/Kconfig"
 source "drivers/media/platform/msm/dvb/Kconfig"
 source "drivers/media/platform/msm/broadcast/Kconfig"
 source "drivers/media/platform/msm/sde/Kconfig"
+<<<<<<< HEAD
 source "techpack/camera/drivers/Kconfig"
+=======
+source "techpack/sec-camera/drivers/Kconfig"
+>>>>>>> ata-karner-lineage-21

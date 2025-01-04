@@ -253,7 +253,11 @@ static struct cam_camnoc_specific
 			.access_type = CAM_REG_TYPE_READ_WRITE,
 			.masked_value = 0,
 			.offset = 0x2430, /* SPECIFIC_IFE01_PRIORITYLUT_LOW */
+<<<<<<< HEAD
 			.value = 0x66665643,
+=======
+			.value = 0x66665433,
+>>>>>>> ata-karner-lineage-21
 		},
 		.priority_lut_high = {
 			.enable = true,
@@ -290,7 +294,11 @@ static struct cam_camnoc_specific
 			.access_type = CAM_REG_TYPE_READ_WRITE,
 			.masked_value = 0,
 			.offset = 0x2588, /* SPECIFIC_IFE01_ENCCTL_LOW */
+<<<<<<< HEAD
 			.value = 1,
+=======
+			.value = 5,
+>>>>>>> ata-karner-lineage-21
 		},
 	},
 	{
@@ -301,7 +309,11 @@ static struct cam_camnoc_specific
 			.access_type = CAM_REG_TYPE_READ_WRITE,
 			.masked_value = 0,
 			.offset = 0x2630, /* SPECIFIC_IFE23_PRIORITYLUT_LOW */
+<<<<<<< HEAD
 			.value = 0x66665643,
+=======
+			.value = 0x66665433,
+>>>>>>> ata-karner-lineage-21
 		},
 		.priority_lut_high = {
 			.enable = true,
@@ -338,7 +350,11 @@ static struct cam_camnoc_specific
 			.access_type = CAM_REG_TYPE_READ_WRITE,
 			.masked_value = 0,
 			.offset = 0x2788, /* SPECIFIC_IFE23_ENCCTL_LOW */
+<<<<<<< HEAD
 			.value = 1,
+=======
+			.value = 5,
+>>>>>>> ata-karner-lineage-21
 		},
 	},
 	{
@@ -366,7 +382,11 @@ static struct cam_camnoc_specific
 			/* SPECIFIC_IBL_RD_URGENCY_LOW_READ_MASK */
 			.mask = 0x7,
 			/* SPECIFIC_IBL_RD_URGENCY_LOW_READ_SHIFT */
+<<<<<<< HEAD
 			.shift = 0x4,
+=======
+			.shift = 0,
+>>>>>>> ata-karner-lineage-21
 			.value = 3,
 		},
 		.danger_lut = {
@@ -431,14 +451,22 @@ static struct cam_camnoc_specific
 			.access_type = CAM_REG_TYPE_READ_WRITE,
 			.masked_value = 0,
 			.offset = 0x2A48, /* SPECIFIC_IBL_WR_SAFELUT_LOW */
+<<<<<<< HEAD
 			.value = 0x0,
+=======
+			.value = 0xFFF,
+>>>>>>> ata-karner-lineage-21
 		},
 		.ubwc_ctl = {
 			.enable = true,
 			.access_type = CAM_REG_TYPE_READ_WRITE,
 			.masked_value = 0,
 			.offset = 0x2B88, /* SPECIFIC_IBL_WR_ENCCTL_LOW */
+<<<<<<< HEAD
 			.value = 1,
+=======
+			.value = 5,
+>>>>>>> ata-karner-lineage-21
 		},
 	},
 	{
@@ -521,6 +549,14 @@ static struct cam_cpas_hw_errata_wa_list cam170_cpas200_errata_wa_list = {
 	},
 };
 
+<<<<<<< HEAD
+=======
+struct cam_camnoc_fifo_lvl_info cam170_cpas200_camnoc_fifo_info = {
+	.IFE02_MAXWR_LOW = 0x420,
+	.IFE13_MAXWR_LOW = 0x820,
+};
+
+>>>>>>> ata-karner-lineage-21
 static struct cam_camnoc_info cam170_cpas200_camnoc_info = {
 	.specific = &cam_cpas_v170_200_camnoc_specific[0],
 	.specific_size = ARRAY_SIZE(cam_cpas_v170_200_camnoc_specific),
@@ -529,6 +565,10 @@ static struct cam_camnoc_info cam170_cpas200_camnoc_info = {
 	.irq_err_size = ARRAY_SIZE(cam_cpas_v170_200_irq_err),
 	.err_logger = &cam170_cpas200_err_logger_offsets,
 	.errata_wa_list = &cam170_cpas200_errata_wa_list,
+<<<<<<< HEAD
+=======
+	.fill_lvl_register = &cam170_cpas200_camnoc_fifo_info,
+>>>>>>> ata-karner-lineage-21
 };
 
 #endif /* _CPASTOP_V170_200_H_ */

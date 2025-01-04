@@ -8223,6 +8223,7 @@ static const struct hdd_drv_cmd hdd_drv_cmds[] = {
 	{"CHANNEL_SWITCH",            drv_cmd_set_channel_switch, true},
 	{"SETANTENNAMODE",            drv_cmd_set_antenna_mode, true},
 	{"GETANTENNAMODE",            drv_cmd_get_antenna_mode, false},
+<<<<<<< HEAD
 #ifdef CONFIG_SEC
 	{"P2P_ECSA",                  drv_cmd_set_channel_switch, true},
 	{"SET_INDOOR_CHANNELS",       drv_cmd_set_disable_chan_list, true},
@@ -8231,6 +8232,10 @@ static const struct hdd_drv_cmd hdd_drv_cmds[] = {
 	{"SET_DISABLE_CHANNEL_LIST",  drv_cmd_set_disable_chan_list, true},
 	{"GET_DISABLE_CHANNEL_LIST",  drv_cmd_get_disable_chan_list, false},
 #endif /* CONFIG_SEC */
+=======
+	{"SET_DISABLE_CHANNEL_LIST",  drv_cmd_set_disable_chan_list, true},
+	{"GET_DISABLE_CHANNEL_LIST",  drv_cmd_get_disable_chan_list, false},
+>>>>>>> ata-karner-lineage-21
 	{"GET_ANI_LEVEL",             drv_cmd_get_ani_level, false},
 #ifdef FUNC_CALL_MAP
 	{"GET_FUNCTION_CALL_MAP",     drv_cmd_get_function_call_map, true},

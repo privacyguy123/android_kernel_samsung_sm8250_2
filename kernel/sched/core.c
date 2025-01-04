@@ -29,6 +29,11 @@
 #include <trace/events/sched.h>
 
 #include <linux/sec_debug.h>
+<<<<<<< HEAD
+=======
+
+DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
+>>>>>>> ata-karner-lineage-21
 
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
 

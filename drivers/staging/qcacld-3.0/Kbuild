@@ -3324,6 +3324,7 @@ cppflags-$(CONFIG_DUMP_REO_QUEUE_INFO_IN_DDR) += -DDUMP_REO_QUEUE_INFO_IN_DDR
 
 KBUILD_CPPFLAGS += $(cppflags-y)
 
+<<<<<<< HEAD
 ########## SAMSUNG FEATURE ###########
 CONFIG_WLAN_SAMSUNG_FEATURE=y
 
@@ -3340,6 +3341,8 @@ EXTRA_CFLAGS += -DSEC_WRITE_SOFTAP_INFO_IN_SYSFS
 
 endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 ccflags-y += -Wmissing-prototypes
 
 ifeq ($(call cc-option-yn, -Wheader-guard), y)

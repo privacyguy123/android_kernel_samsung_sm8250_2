@@ -11,6 +11,10 @@
 #include <linux/err.h>
 #include <linux/sched.h>
 #include <linux/input.h>
+<<<<<<< HEAD
+=======
+#include <linux/of.h>
+>>>>>>> ata-karner-lineage-21
 //#if defined(CONFIG_SEC_SYSFS)
 //#include <linux/sec_sysfs.h>
 //#elif defined(CONFIG_DRV_SAMSUNG)

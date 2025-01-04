@@ -1483,10 +1483,13 @@ int usb_stor_port_reset(struct us_data *us)
 			usb_stor_dbg(us, "No reset during disconnect\n");
 		} else {
 			if (test_bit(US_FLIDX_TIMED_OUT, &us->dflags)) {
+<<<<<<< HEAD
 #ifdef CONFIG_USB_DEBUG_DETAILED_LOG
 				printk(KERN_ERR USB_STORAGE "%s remove device\n",
 					__func__);
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 				result = usb_remove_device(us->pusb_dev);
 			} else {
 				result = usb_reset_device(us->pusb_dev);

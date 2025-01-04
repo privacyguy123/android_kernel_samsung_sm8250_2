@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
+<<<<<<< HEAD
  * Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2017-2021, The Linux Foundation. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #include <linux/init.h>
@@ -443,7 +447,11 @@ static int cam_sync_handle_create(struct cam_private_ioctl_arg *k_ioctl)
 		CAM_ERR(CAM_SYNC, "copy from user failed size:%d",
 			k_ioctl->size);
 		return -EFAULT;
+<<<<<<< HEAD
 	}
+=======
+	sync_create.name[SYNC_DEBUG_NAME_LEN] = '\0';
+>>>>>>> ata-karner-lineage-21
 
 	result = cam_sync_create(&sync_create.sync_obj,
 		sync_create.name);

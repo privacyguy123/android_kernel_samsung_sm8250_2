@@ -23,10 +23,13 @@
 #include "cds_api.h"
 #include "wma.h"
 #include "wlan_fwol_tgt_api.h"
+<<<<<<< HEAD
 
 #ifdef SEC_CONFIG_PSM_SYSFS
 extern int wlan_hdd_sec_get_psm(void);
 #endif /* SEC_CONFIG_PSM_SYSFS */
+=======
+>>>>>>> ata-karner-lineage-21
 
 struct wlan_fwol_psoc_obj *fwol_get_psoc_obj(struct wlan_objmgr_psoc *psoc)
 {

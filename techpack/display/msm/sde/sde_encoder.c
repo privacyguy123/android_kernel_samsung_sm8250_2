@@ -250,6 +250,11 @@ const char *sde_enc_rc_states_str[SDE_ENC_RC_STATE_MAX] = {
  * @recovery_events_enabled:	status of hw recovery feature enable by client
  * @elevated_ahb_vote:		increase AHB bus speed for the first frame
  *				after power collapse
+<<<<<<< HEAD
+=======
+ * @pm_qos_cpu_req:		qos request for all cpu core frequency
+ * @valid_cpu_mask:		actual voted cpu core mask
+>>>>>>> ata-karner-lineage-21
  * @mode_info:                  stores the current mode and should be used
  *				 only in commit phase
  */
@@ -318,6 +323,11 @@ struct sde_encoder_virt {
 
 	bool recovery_events_enabled;
 	bool elevated_ahb_vote;
+<<<<<<< HEAD
+=======
+	struct dev_pm_qos_request pm_qos_cpu_req[NR_CPUS];
+	struct cpumask valid_cpu_mask;
+>>>>>>> ata-karner-lineage-21
 	struct msm_mode_info mode_info;
 };
 
@@ -339,6 +349,72 @@ void sde_encoder_uidle_enable(struct drm_encoder *drm_enc, bool enable)
 	}
 }
 
+<<<<<<< HEAD
+=======
+static void _sde_encoder_pm_qos_add_request(struct drm_encoder *drm_enc)
+{
+	struct sde_encoder_virt *sde_enc = to_sde_encoder_virt(drm_enc);
+	struct msm_drm_private *priv;
+	struct sde_kms *sde_kms;
+	struct device *cpu_dev;
+	struct cpumask *cpu_mask = NULL;
+	int cpu = 0;
+	u32 cpu_dma_latency;
+	priv = drm_enc->dev->dev_private;
+	sde_kms = to_sde_kms(priv->kms);
+
+	if (!sde_kms->catalog || !sde_kms->catalog->perf.cpu_mask)
+		return;
+
+	cpu_dma_latency = sde_kms->catalog->perf.cpu_dma_latency;
+	cpumask_clear(&sde_enc->valid_cpu_mask);
+
+	if (sde_enc->mode_info.frame_rate > FPS60)
+		cpu_mask = to_cpumask(&sde_kms->catalog->perf.cpu_mask_perf);
+	if (!cpu_mask &&
+			sde_encoder_check_curr_mode(drm_enc,
+				MSM_DISPLAY_CMD_MODE))
+		cpu_mask = to_cpumask(&sde_kms->catalog->perf.cpu_mask);
+
+	if (!cpu_mask)
+		return;
+
+	for_each_cpu(cpu, cpu_mask) {
+		cpu_dev = get_cpu_device(cpu);
+		if (!cpu_dev) {
+			SDE_ERROR("%s: failed to get cpu%d device\n", __func__,
+					cpu);
+			return;
+		}
+		cpumask_set_cpu(cpu, &sde_enc->valid_cpu_mask);
+		dev_pm_qos_add_request(cpu_dev,
+				&sde_enc->pm_qos_cpu_req[cpu],
+				DEV_PM_QOS_RESUME_LATENCY, cpu_dma_latency);
+		SDE_EVT32(DRMID(drm_enc), cpu_dma_latency, cpu);
+	}
+}
+
+static void _sde_encoder_pm_qos_remove_request(struct drm_encoder *drm_enc)
+{
+	struct sde_encoder_virt *sde_enc = to_sde_encoder_virt(drm_enc);
+
+	struct device *cpu_dev;
+	int cpu = 0;
+
+	for_each_cpu(cpu, &sde_enc->valid_cpu_mask) {
+		cpu_dev = get_cpu_device(cpu);
+		if (!cpu_dev) {
+			SDE_ERROR("%s: failed to get cpu%d device\n", __func__,
+					cpu);
+			continue;
+		}
+		dev_pm_qos_remove_request(&sde_enc->pm_qos_cpu_req[cpu]);
+		SDE_EVT32(DRMID(drm_enc), cpu);
+	}
+	cpumask_clear(&sde_enc->valid_cpu_mask);
+}
+
+>>>>>>> ata-karner-lineage-21
 static bool _sde_encoder_is_autorefresh_enabled(
 		struct sde_encoder_virt *sde_enc)
 {
@@ -2249,6 +2325,11 @@ static int _sde_encoder_resource_control_helper(struct drm_encoder *drm_enc,
 	int rc;
 
 	sde_enc = to_sde_encoder_virt(drm_enc);
+<<<<<<< HEAD
+=======
+	priv = drm_enc->dev->dev_private;
+	sde_kms = to_sde_kms(priv->kms);
+>>>>>>> ata-karner-lineage-21
 
 	SDE_DEBUG_ENC(sde_enc, "enable:%d\n", enable);
 	SDE_EVT32(DRMID(drm_enc), enable);
@@ -2280,7 +2361,15 @@ static int _sde_encoder_resource_control_helper(struct drm_encoder *drm_enc,
 		/* enable all the irq */
 		_sde_encoder_irq_control(drm_enc, true);
 
+<<<<<<< HEAD
 	} else {
+=======
+		_sde_encoder_pm_qos_add_request(drm_enc);
+
+	} else {
+		_sde_encoder_pm_qos_remove_request(drm_enc);
+
+>>>>>>> ata-karner-lineage-21
 		/* disable all the irq */
 		_sde_encoder_irq_control(drm_enc, false);
 
@@ -2452,6 +2541,7 @@ static int _sde_encoder_rc_kickoff(struct drm_encoder *drm_enc,
 	msm_idle_set_state(drm_enc, true);
 
 	mutex_lock(&sde_enc->rc_lock);
+
 
 	/* return if the resource control is already in ON state */
 	if (sde_enc->rc_state == SDE_ENC_RC_STATE_ON) {
@@ -2726,6 +2816,7 @@ static int _sde_encoder_rc_pre_modeset(struct drm_encoder *drm_enc,
 		SDE_ENC_RC_STATE_MODESET, SDE_EVTLOG_FUNC_CASE5);
 
 	sde_enc->rc_state = SDE_ENC_RC_STATE_MODESET;
+	_sde_encoder_pm_qos_remove_request(drm_enc);
 
 end:
 	mutex_unlock(&sde_enc->rc_lock);
@@ -2764,6 +2855,7 @@ static int _sde_encoder_rc_post_modeset(struct drm_encoder *drm_enc,
 			SDE_ENC_RC_STATE_ON, SDE_EVTLOG_FUNC_CASE6);
 
 	sde_enc->rc_state = SDE_ENC_RC_STATE_ON;
+	_sde_encoder_pm_qos_add_request(drm_enc);
 
 end:
 	mutex_unlock(&sde_enc->rc_lock);
@@ -3282,6 +3374,26 @@ static void _sde_encoder_input_handler_register(
 	}
 }
 
+<<<<<<< HEAD
+=======
+#if !defined(CONFIG_DISPLAY_SAMSUNG) /* CL 16617782 : Excessive delay in setPowerMode because of pending display off */
+static void _sde_encoder_input_handler_unregister(
+		struct drm_encoder *drm_enc)
+{
+	struct sde_encoder_virt *sde_enc = to_sde_encoder_virt(drm_enc);
+
+	if (!sde_encoder_check_curr_mode(drm_enc, MSM_DISPLAY_CMD_MODE))
+		return;
+
+	if (sde_enc->input_handler && sde_enc->input_handler->private) {
+		input_unregister_handler(sde_enc->input_handler);
+		sde_enc->input_handler->private = NULL;
+	}
+
+}
+#endif
+
+>>>>>>> ata-karner-lineage-21
 static int _sde_encoder_input_handler(
 		struct sde_encoder_virt *sde_enc)
 {
@@ -3605,11 +3717,15 @@ static void sde_encoder_virt_disable(struct drm_encoder *drm_enc)
 		sde_encoder_wait_for_event(drm_enc, MSM_ENC_TX_COMPLETE);
 
 #if !defined(CONFIG_DISPLAY_SAMSUNG) /* CL 16617782 : Excessive delay in setPowerMode because of pending display off */
+<<<<<<< HEAD
 	if (sde_enc->input_handler && sde_enc->input_handler_registered &&
 		sde_encoder_check_curr_mode(drm_enc, MSM_DISPLAY_CMD_MODE)) {
 		input_unregister_handler(sde_enc->input_handler);
 		sde_enc->input_handler_registered = false;
 	}
+=======
+	_sde_encoder_input_handler_unregister(drm_enc);
+>>>>>>> ata-karner-lineage-21
 #endif
 
 	/*
@@ -4531,6 +4647,10 @@ void sde_encoder_trigger_kickoff_pending(struct drm_encoder *drm_enc)
 	struct sde_rect curr_roi;
 	struct sde_rect prev_roi;
 	struct drm_display_mode *adj_mode;
+<<<<<<< HEAD
+=======
+	struct drm_connector *drm_conn;
+>>>>>>> ata-karner-lineage-21
 	u32 scheduler_status = INVALID_CTL_STATUS;
 
 	if (!drm_enc) {
@@ -4539,6 +4659,10 @@ void sde_encoder_trigger_kickoff_pending(struct drm_encoder *drm_enc)
 	}
 	sde_enc = to_sde_encoder_virt(drm_enc);
 	adj_mode = &sde_enc->crtc->state->adjusted_mode;
+<<<<<<< HEAD
+=======
+	drm_conn = sde_enc->cur_master->connector;
+>>>>>>> ata-karner-lineage-21
 
 	_sde_encoder_get_connector_roi(sde_enc, &curr_roi);
 	if (sde_kms_rect_is_null(&curr_roi)) {

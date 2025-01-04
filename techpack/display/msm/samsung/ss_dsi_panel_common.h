@@ -98,11 +98,25 @@ extern bool enable_pr_debug;
 
 #define LOG_KEYWORD "[SDE]"
 
+<<<<<<< HEAD
 static inline void LCD_DEBUG(const char *fmt, ...) {}
 
 static inline void LCD_INFO(const char *fmt, ...) {}
 static inline void LCD_INFO_ONCE(const char *fmt, ...) {}
 static inline void LCD_ERR(const char *fmt, ...) {}
+=======
+#define LCD_DEBUG(X, ...)	\
+		do {	\
+			if (enable_pr_debug)	\
+				pr_info("%s %s : "X, LOG_KEYWORD, __func__, ## __VA_ARGS__);\
+			else	\
+				pr_debug("%s %s : "X, LOG_KEYWORD, __func__, ## __VA_ARGS__);\
+		} while (0)	\
+
+#define LCD_INFO(X, ...) pr_info("%s %s : "X, LOG_KEYWORD, __func__, ## __VA_ARGS__)
+#define LCD_INFO_ONCE(X, ...) pr_info_once("%s %s : "X, LOG_KEYWORD, __func__, ## __VA_ARGS__)
+#define LCD_ERR(X, ...) pr_err("%s %s : "X, LOG_KEYWORD, __func__, ## __VA_ARGS__)
+>>>>>>> ata-karner-lineage-21
 
 #define MAX_PANEL_NAME_SIZE 100
 
@@ -1948,8 +1962,13 @@ int ss_get_lfd_div(struct samsung_display_driver_data *vdd, enum LFD_SCOPE_ID sc
 			u32 *out_min_div, u32 *out_max_div);
 
 //void ss_dsi_panel_registered(struct dsi_panel *pdata);
+<<<<<<< HEAD
 static inline void ss_set_max_cpufreq(struct samsung_display_driver_data *vdd,
 		int enable, enum mdss_cpufreq_cluster cluster) {}
+=======
+void ss_set_max_cpufreq(struct samsung_display_driver_data *vdd,
+		int enable, enum mdss_cpufreq_cluster cluster);
+>>>>>>> ata-karner-lineage-21
 void ss_set_max_mem_bw(struct samsung_display_driver_data *vdd, int enable);
 void ss_set_exclusive_tx_packet(
 		struct samsung_display_driver_data *vdd,

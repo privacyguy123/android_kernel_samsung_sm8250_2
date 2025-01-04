@@ -83,7 +83,10 @@ struct partition {
 	__le32 nr_sects;		/* nr of sectors in partition */
 } __attribute__((packed));
 
+<<<<<<< HEAD
 #define FSYNC_TIME_GROUP_MAX 4
+=======
+>>>>>>> ata-karner-lineage-21
 #define IO_SIZE_GROUP_MAX 8
 struct disk_stats {
 	u64 nsecs[NR_STAT_GROUPS];
@@ -192,7 +195,10 @@ struct accumulated_io_stats {
 	unsigned long sectors[3];	/* READ, WRITE, DISCARD */
 	unsigned long ios[3];
 	unsigned long size_cnt[3][IO_SIZE_GROUP_MAX];
+<<<<<<< HEAD
 	unsigned long fsync_time_cnt[FSYNC_TIME_GROUP_MAX];
+=======
+>>>>>>> ata-karner-lineage-21
 	unsigned long iot;		/* sec */
 };
 

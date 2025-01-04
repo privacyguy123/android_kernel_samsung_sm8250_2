@@ -897,10 +897,13 @@ int inet_recvmsg(struct socket *sock, struct msghdr *msg, size_t size,
 	if (err >= 0)
 		msg->msg_namelen = addr_len;
 
+<<<<<<< HEAD
 #ifdef CONFIG_NET_ANALYTICS
 	net_usr_rx(sk, err);
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 	return err;
 }
 EXPORT_SYMBOL(inet_recvmsg);

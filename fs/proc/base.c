@@ -106,10 +106,13 @@
 #include <linux/delayacct.h>
 #endif
 
+<<<<<<< HEAD
 #ifdef CONFIG_KSU_SUSFS
 #include <linux/susfs.h>
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 /* NOTE:
  *	Implementing inode permission operations in /proc is almost
  *	certainly an error.  Permission checks need to happen during

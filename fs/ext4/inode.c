@@ -5914,7 +5914,10 @@ int ext4_setattr(struct dentry *dentry, struct iattr *attr)
 	if (orphan && inode->i_nlink)
 		ext4_orphan_del(NULL, inode);
 
+<<<<<<< HEAD
 	if (!error && (ia_valid & ATTR_MODE)) {
+=======
+>>>>>>> ata-karner-lineage-21
 		rc = posix_acl_chmod(inode, inode->i_mode);
 #ifdef CONFIG_FS_HPB
 		if (__is_hpb_file(dentry->d_name.name, inode))
@@ -5922,7 +5925,10 @@ int ext4_setattr(struct dentry *dentry, struct iattr *attr)
 		else
 			ext4_clear_inode_state(inode, EXT4_STATE_HPB);
 #endif
+<<<<<<< HEAD
 	}
+=======
+>>>>>>> ata-karner-lineage-21
 
 err_out:
 	ext4_std_error(inode->i_sb, error);

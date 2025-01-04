@@ -755,7 +755,14 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
 	}
 #endif
 
+<<<<<<< HEAD
 	__submit_bio(fio->sbi, bio, fio->type);
+=======
+	if (is_read_io(fio->op))
+		__f2fs_submit_read_bio(fio->sbi, bio, fio->type);
+	else
+		__submit_bio(fio->sbi, bio, fio->type);
+>>>>>>> ata-karner-lineage-21
 	return 0;
 }
 

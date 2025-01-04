@@ -1171,6 +1171,7 @@ static int s2dos05_pmic_resume(struct device *dev)
 	struct s2dos05_dev *s2dos05 = info->iodev;
 
 	pr_info("%s adc_mode : %d\n", __func__, s2dos05->adc_mode);
+<<<<<<< HEAD
 	if (s2dos05->adc_mode > 0) {
 		int ret = s2dos05_update_reg(s2dos05->i2c, S2DOS05_REG_PWRMT_CTRL2,
 				s2dos05->adc_en_val & 0x80, ADC_EN_MASK);
@@ -1179,6 +1180,16 @@ static int s2dos05_pmic_resume(struct device *dev)
 			pr_err("%s: Failed to update_reg: %d\n", __func__, ret);
 #endif /* CONFIG_SEC_PM_DEBUG */
 	}
+=======
+#ifdef CONFIG_SEC_PM_DEBUG
+	if (s2dos05->adc_mode > 0) {
+		int ret = s2dos05_update_reg(s2dos05->i2c, S2DOS05_REG_PWRMT_CTRL2,
+				s2dos05->adc_en_val & 0x80, ADC_EN_MASK);
+		if (ret < 0)
+			pr_err("%s: Failed to update_reg: %d\n", __func__, ret);
+	}
+#endif /* CONFIG_SEC_PM_DEBUG */
+>>>>>>> ata-karner-lineage-21
 
 	return 0;
 }

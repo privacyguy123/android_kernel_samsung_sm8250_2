@@ -79,7 +79,11 @@ static void flip_cover_work(struct work_struct *work)
 
 	if (first == second) {
 		flip_cover = first;
+<<<<<<< HEAD
 		input_report_switch(ddata->input, SW_FLIP, flip_cover);
+=======
+		input_report_switch(ddata->input, SW_LID, flip_cover);
+>>>>>>> ata-karner-lineage-21
 		input_sync(ddata->input);
 	}
 }
@@ -99,7 +103,11 @@ static void flip_cover_work(struct work_struct *work)
 
 	flip_cover = first;
 	input_report_switch(ddata->input,
+<<<<<<< HEAD
 			SW_FLIP, ddata->flip_cover);
+=======
+			SW_LID, ddata->flip_cover);
+>>>>>>> ata-karner-lineage-21
 	input_sync(ddata->input);
 #else
 	ddata->flip_cover = !gpio_get_value(ddata->gpio_flip_cover_key1) & !gpio_get_value(ddata->gpio_flip_cover_key2);
@@ -111,7 +119,11 @@ static void flip_cover_work(struct work_struct *work)
 			ddata->emulated_hall_ic_status = !ddata->emulated_hall_ic_status;
 			pr_info("keys:%s #1 : %d , %d\n", __func__, first, ddata->emulated_hall_ic_status);	
 			input_report_switch(ddata->input,
+<<<<<<< HEAD
 					SW_FLIP, ddata->emulated_hall_ic_status);
+=======
+					SW_LID, ddata->emulated_hall_ic_status);
+>>>>>>> ata-karner-lineage-21
 			input_sync(ddata->input);
 		}
 		flip_cover = first;
@@ -280,7 +292,11 @@ static int hall_probe(struct platform_device *pdev)
 	input->dev.parent = &pdev->dev;
 
 	input->evbit[0] |= BIT_MASK(EV_SW);
+<<<<<<< HEAD
 	input_set_capability(input, EV_SW, SW_FLIP);
+=======
+	input_set_capability(input, EV_SW, SW_LID);
+>>>>>>> ata-karner-lineage-21
 
 	input->open = hall_open;
 	input->close = hall_close;

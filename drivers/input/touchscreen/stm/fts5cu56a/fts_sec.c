@@ -886,6 +886,12 @@ static ssize_t get_lp_dump(struct device *dev, struct device_attribute *attr, ch
 				snprintf(ibuff, sizeof(ibuff), "%03d: %04x%04x%04x%04x%04x\n",
 						i + (info->sponge_dump_event * dump_area),
 						edata[0], edata[1], edata[2], edata[3], edata[4]);
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SEC_DEBUG_TSP_LOG
+				sec_tsp_sponge_log(ibuff);
+#endif
+>>>>>>> ata-karner-lineage-21
 			}
 		}
 
@@ -1456,22 +1462,38 @@ void fts_print_frame(struct fts_ts_info *info, short *min, short *max)
 	if (pStr == NULL)
 		return;
 
+<<<<<<< HEAD
 	snprintf(pTmp, 5, "    ");
 	strlcat(pStr, pTmp, BUFFER_MAX);
 
 	for (i = 0; i < info->SenseChannelLength; i++) {
 		snprintf(pTmp, 7, "Rx%02d  ", i);
+=======
+	snprintf(pTmp, 4, "    ");
+	strlcat(pStr, pTmp, BUFFER_MAX);
+
+	for (i = 0; i < info->SenseChannelLength; i++) {
+		snprintf(pTmp, 6, "Rx%02d  ", i);
+>>>>>>> ata-karner-lineage-21
 		strlcat(pStr, pTmp, BUFFER_MAX);
 	}
 
 	input_raw_info_d(true, &info->client->dev, "%s\n", pStr);
 
 	memset(pStr, 0x0, 6 * (info->SenseChannelLength + 1));
+<<<<<<< HEAD
 	snprintf(pTmp, 3, " +");
 	strlcat(pStr, pTmp, BUFFER_MAX);
 
 	for (i = 0; i < info->SenseChannelLength; i++) {
 		snprintf(pTmp, 7, "------");
+=======
+	snprintf(pTmp, 2, " +");
+	strlcat(pStr, pTmp, BUFFER_MAX);
+
+	for (i = 0; i < info->SenseChannelLength; i++) {
+		snprintf(pTmp, 6, "------");
+>>>>>>> ata-karner-lineage-21
 		strlcat(pStr, pTmp, BUFFER_MAX);
 	}
 
@@ -1479,11 +1501,19 @@ void fts_print_frame(struct fts_ts_info *info, short *min, short *max)
 
 	for (i = 0; i < info->ForceChannelLength; i++) {
 		memset(pStr, 0x0, 6 * (info->SenseChannelLength + 1));
+<<<<<<< HEAD
 		snprintf(pTmp, 8, "Tx%02d | ", i);
 		strlcat(pStr, pTmp, BUFFER_MAX);
 
 		for (j = 0; j < info->SenseChannelLength; j++) {
 			snprintf(pTmp, 7, "%5d ", info->pFrame[(i * info->SenseChannelLength) + j]);
+=======
+		snprintf(pTmp, 7, "Tx%02d | ", i);
+		strlcat(pStr, pTmp, BUFFER_MAX);
+
+		for (j = 0; j < info->SenseChannelLength; j++) {
+			snprintf(pTmp, 6, "%5d ", info->pFrame[(i * info->SenseChannelLength) + j]);
+>>>>>>> ata-karner-lineage-21
 			strlcat(pStr, pTmp, BUFFER_MAX);
 
 			if (info->pFrame[(i * info->SenseChannelLength) + j] < *min) {
@@ -7444,7 +7474,14 @@ static void ear_detect_enable(void *device_data)
 		snprintf(buff, sizeof(buff), "NG");
 		sec->cmd_state = SEC_CMD_STATUS_FAIL;
 	} else {
+<<<<<<< HEAD
 		info->ed_enable = sec->cmd_param[0];
+=======
+		if (info->fts_power_state == FTS_POWER_STATE_LOWPOWER)
+			info->ed_enable = sec->cmd_param[0];
+		else
+			info->ed_enable = sec->cmd_param[0] != 0 ? 3 : 0;
+>>>>>>> ata-karner-lineage-21
 		snprintf(buff, sizeof(buff), "OK");
 
 		data[0] = FTS_CMD_SET_EAR_DETECT;

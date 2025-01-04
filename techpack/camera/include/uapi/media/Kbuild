@@ -12,4 +12,7 @@ header-y += cam_req_mgr.h
 header-y += cam_sensor.h
 header-y += cam_sync.h
 header-y += cam_lrme.h
+<<<<<<< HEAD
 header-y += cam_sbi.h
+=======
+>>>>>>> ata-karner-lineage-21

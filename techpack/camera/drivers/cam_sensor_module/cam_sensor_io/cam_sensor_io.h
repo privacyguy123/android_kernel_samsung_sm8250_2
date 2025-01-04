@@ -1,6 +1,10 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
  * Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #ifndef _CAM_SENSOR_IO_H_
@@ -78,7 +82,12 @@ int32_t camera_io_release(struct camera_io_master *io_master_info);
  * This API abstracts write functionality based on master type
  */
 int32_t camera_io_dev_write(struct camera_io_master *io_master_info,
+<<<<<<< HEAD
 	struct cam_sensor_i2c_reg_setting *write_setting);
+=======
+	struct cam_sensor_i2c_reg_setting *write_setting,
+	bool force_low_priority);
+>>>>>>> ata-karner-lineage-21
 
 /**
  * @io_master_info: I2C/SPI master information
@@ -90,7 +99,12 @@ int32_t camera_io_dev_write(struct camera_io_master *io_master_info,
  */
 int32_t camera_io_dev_write_continuous(struct camera_io_master *io_master_info,
 	struct cam_sensor_i2c_reg_setting *write_setting,
+<<<<<<< HEAD
 	uint8_t cam_sensor_i2c_write_flag);
+=======
+	uint8_t cam_sensor_i2c_write_flag,
+	bool force_low_priority);
+>>>>>>> ata-karner-lineage-21
 
 int32_t camera_io_dev_erase(struct camera_io_master *io_master_info,
 	uint32_t addr, uint32_t size);

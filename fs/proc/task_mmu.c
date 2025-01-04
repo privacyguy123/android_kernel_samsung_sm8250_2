@@ -28,10 +28,13 @@
 #include <asm/tlbflush.h>
 #include "internal.h"
 
+<<<<<<< HEAD
 #ifdef CONFIG_KSU_SUSFS
 #include <linux/susfs.h>
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 #ifdef CONFIG_ZRAM_LRU_WRITEBACK
 #include <linux/delay.h>
 #include "../../drivers/block/zram/zram_drv.h"

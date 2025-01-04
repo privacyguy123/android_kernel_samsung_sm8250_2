@@ -909,6 +909,10 @@ struct fts_ts_info {
 	int fod_y;
 	int fod_vi_size;
 	u8 *fod_vi_data;
+<<<<<<< HEAD
+=======
+	int fod_pressed;
+>>>>>>> ata-karner-lineage-21
 
 #if defined(CONFIG_INPUT_SEC_SECURE_TOUCH)
 	atomic_t st_enabled;

@@ -376,6 +376,14 @@ static int fake_id(int app_id)
 	return ret_id;
 }
 
+<<<<<<< HEAD
+=======
+static ssize_t mode_max_show(struct device *dev,
+		struct device_attribute *attr, char *buf)
+{
+	return snprintf(buf, PAGE_SIZE, "%u\n", MAX_MODE);
+}
+>>>>>>> ata-karner-lineage-21
 
 static ssize_t scenario_store(struct device *dev,
 					  struct device_attribute *attr,
@@ -675,6 +683,7 @@ static ssize_t sensorRGB_store(struct device *dev,
 	sscanf(buf, "%d %d %d", &white_red, &white_green, &white_blue);
 
 	if (tune->ldu_mode_index == 0) {
+<<<<<<< HEAD
 		if ((tune->mdnie_accessibility == ACCESSIBILITY_OFF) && (tune->mdnie_mode == AUTO_MODE) &&
 			((tune->mdnie_app == BROWSER_APP) || (tune->mdnie_app == eBOOK_APP))) {
 
@@ -701,6 +710,30 @@ static ssize_t sensorRGB_store(struct device *dev,
 				mdnie_data->DSI_RGB_SENSOR_MDNIE_SCR[mdnie_data->address_scr_white[ADDRESS_SCR_WHITE_GREEN_OFFSET]] = white_green;
 				mdnie_data->DSI_RGB_SENSOR_MDNIE_SCR[mdnie_data->address_scr_white[ADDRESS_SCR_WHITE_BLUE_OFFSET]] = white_blue;
 			}
+=======
+		tune->scr_white_red = (char)white_red;
+		tune->scr_white_green = (char)white_green;
+		tune->scr_white_blue = (char)white_blue;
+
+		DPRINT("[mDNIe] %s: white_red = %d, white_green = %d, white_blue = %d, %d %d\n",
+			__func__,
+			white_red, white_green, white_blue,
+			mdnie_data->dsi_rgb_sensor_mdnie_1_size,
+			mdnie_data->dsi_rgb_sensor_mdnie_2_size);
+
+		tune_data_dsi = mdnie_data->DSI_RGB_SENSOR_MDNIE;
+
+		data_dsi = mdnie_data->mdnie_tune_value_dsi[tune->mdnie_app][tune->mdnie_mode][tune->outdoor];
+
+			if (data_dsi) {
+			memcpy(mdnie_data->DSI_RGB_SENSOR_MDNIE_1, data_dsi[mdnie_data->mdnie_step_index[MDNIE_STEP1]].msg.tx_buf, mdnie_data->dsi_rgb_sensor_mdnie_1_size);
+			memcpy(mdnie_data->DSI_RGB_SENSOR_MDNIE_2, data_dsi[mdnie_data->mdnie_step_index[MDNIE_STEP2]].msg.tx_buf, mdnie_data->dsi_rgb_sensor_mdnie_2_size);
+			memcpy(mdnie_data->DSI_RGB_SENSOR_MDNIE_3, data_dsi[mdnie_data->mdnie_step_index[MDNIE_STEP3]].msg.tx_buf, mdnie_data->dsi_rgb_sensor_mdnie_3_size);
+
+			mdnie_data->DSI_RGB_SENSOR_MDNIE_SCR[mdnie_data->address_scr_white[ADDRESS_SCR_WHITE_RED_OFFSET]] = white_red;
+			mdnie_data->DSI_RGB_SENSOR_MDNIE_SCR[mdnie_data->address_scr_white[ADDRESS_SCR_WHITE_GREEN_OFFSET]] = white_green;
+			mdnie_data->DSI_RGB_SENSOR_MDNIE_SCR[mdnie_data->address_scr_white[ADDRESS_SCR_WHITE_BLUE_OFFSET]] = white_blue;
+>>>>>>> ata-karner-lineage-21
 		}
 	}
 
@@ -1308,6 +1341,10 @@ static ssize_t hmt_color_temperature_store(struct device *dev,
 }
 
 static DEVICE_ATTR(mode, 0664, mode_show, mode_store);
+<<<<<<< HEAD
+=======
+static DEVICE_ATTR(mode_max, 0444, mode_max_show, NULL);
+>>>>>>> ata-karner-lineage-21
 static DEVICE_ATTR(scenario, 0664, scenario_show, scenario_store);
 static DEVICE_ATTR(outdoor, 0664, outdoor_show, outdoor_store);
 static DEVICE_ATTR(bypass, 0664, bypass_show, bypass_store);
@@ -1467,6 +1504,13 @@ void create_tcon_mdnie_node(struct samsung_display_driver_data *vdd)
 	if (device_create_file(tune_mdnie_dev, &dev_attr_mode) < 0)
 		DPRINT("Failed to create device file(%s)!\n", dev_attr_mode.attr.name);
 
+<<<<<<< HEAD
+=======
+	/* MODE MAX */
+	if (device_create_file(tune_mdnie_dev, &dev_attr_mode_max) < 0)
+		DPRINT("Failed to create device file(%s)!\n", dev_attr_mode_max.attr.name);
+
+>>>>>>> ata-karner-lineage-21
 	/* OUTDOOR */
 	if (device_create_file(tune_mdnie_dev, &dev_attr_outdoor) < 0)
 		DPRINT("Failed to create device file(%s)!\n", dev_attr_outdoor.attr.name);

@@ -499,6 +499,18 @@ void sde_connector_schedule_status_work(struct drm_connector *connector,
 	if (c_conn->ops.check_status &&
 		(info.capabilities & MSM_DISPLAY_ESD_ENABLED)) {
 		if (en) {
+<<<<<<< HEAD
+=======
+			u32 interval;
+
+			/*
+			 * If debugfs property is not set then take
+			 * default value
+			 */
+			interval = c_conn->esd_status_interval ?
+				c_conn->esd_status_interval :
+					STATUS_CHECK_INTERVAL_MS;
+>>>>>>> ata-karner-lineage-21
 #if !defined(CONFIG_DISPLAY_SAMSUNG)
 			/* Schedule ESD status check */
 			schedule_delayed_work(&c_conn->status_work,
@@ -831,12 +843,23 @@ int sde_connector_pre_kickoff(struct drm_connector *connector)
 		vdd = display->panel->panel_private;
 		finger_mask_state = sde_connector_get_property(c_conn->base.state,
 				CONNECTOR_PROP_FINGERPRINT_MASK);
+<<<<<<< HEAD
 		vdd->finger_mask_updated = false;
 		if (finger_mask_state != vdd->finger_mask) {
 			SDE_ERROR("[FINGER MASK]updated finger mask mode %d\n", finger_mask_state);
 			vdd->finger_mask_updated = true;
 			vdd->finger_mask = finger_mask_state;
 		}
+=======
+                if (finger_mask_state == 0 && vdd->finger_mask == 1) {
+                        finger_mask_state = vdd->finger_mask;
+                        SDE_ERROR("[FINGER_MASK]updated finger mask mode %d\n", vdd->finger_mask);
+                } else if (finger_mask_state == 1 && vdd->finger_mask == 0) {
+                        finger_mask_state = vdd->finger_mask;
+                        vdd->finger_mask_updated = false;
+                        SDE_ERROR("[FINGER_MASK]updated finger mask mode %d\n", vdd->finger_mask);
+                }
+>>>>>>> ata-karner-lineage-21
 	}
 #endif
 
@@ -2304,6 +2327,13 @@ static void sde_connector_check_status_work(struct work_struct *work)
 	if (rc > 0) {
 		SDE_DEBUG("esd check status success conn_id: %d enc_id: %d\n",
 				conn->base.base.id, conn->encoder->base.id);
+<<<<<<< HEAD
+=======
+
+		/* If debugfs property is not set then take default value */
+		interval = conn->esd_status_interval ?
+			conn->esd_status_interval : STATUS_CHECK_INTERVAL_MS;
+>>>>>>> ata-karner-lineage-21
 #if !defined(CONFIG_DISPLAY_SAMSUNG)
 		schedule_delayed_work(&conn->status_work,
 			msecs_to_jiffies(interval));

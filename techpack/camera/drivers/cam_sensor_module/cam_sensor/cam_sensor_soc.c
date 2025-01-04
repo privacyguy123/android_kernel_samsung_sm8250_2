@@ -12,6 +12,7 @@
 #include "cam_sensor_soc.h"
 #include "cam_soc_util.h"
 
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_SYSFS_V2)
 extern char rear_cam_info[150];
 extern char front_cam_info[150];
@@ -212,6 +213,8 @@ ERROR1:
 }
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 int32_t cam_sensor_get_sub_module_index(struct device_node *of_node,
 	struct cam_sensor_board_info *s_info)
 {
@@ -298,11 +301,18 @@ static int32_t cam_sensor_driver_get_dt_data(struct cam_sensor_ctrl_t *s_ctrl)
 {
 	int32_t rc = 0;
 	int i = 0;
+<<<<<<< HEAD
+=======
+	uint32_t concurrency_sensors = 0;
+>>>>>>> ata-karner-lineage-21
 	struct cam_sensor_board_info *sensordata = NULL;
 	struct device_node *of_node = s_ctrl->of_node;
 	struct device_node *of_parent = NULL;
 	struct cam_hw_soc_info *soc_info = &s_ctrl->soc_info;
+<<<<<<< HEAD
    	uint32_t temp = 0;
+=======
+>>>>>>> ata-karner-lineage-21
 
 	s_ctrl->sensordata = kzalloc(sizeof(*sensordata), GFP_KERNEL);
 	if (!s_ctrl->sensordata)
@@ -325,6 +335,7 @@ static int32_t cam_sensor_driver_get_dt_data(struct cam_sensor_ctrl_t *s_ctrl)
 
 	s_ctrl->id = soc_info->index;
 
+<<<<<<< HEAD
 	rc = of_property_read_u32(of_node, "slave-addr", &temp);
 	sensordata->slave_info.sensor_slave_addr = (uint16_t)temp;
 	if (rc < 0) {
@@ -332,6 +343,8 @@ static int32_t cam_sensor_driver_get_dt_data(struct cam_sensor_ctrl_t *s_ctrl)
 		rc = 0;
 	}
 
+=======
+>>>>>>> ata-karner-lineage-21
 	/* Validate cell_id */
 	if (s_ctrl->id >= MAX_CAMERAS) {
 		CAM_ERR(CAM_SENSOR, "Failed invalid cell_id %d", s_ctrl->id);
@@ -393,6 +406,22 @@ static int32_t cam_sensor_driver_get_dt_data(struct cam_sensor_ctrl_t *s_ctrl)
 			s_ctrl->cci_num = CCI_DEVICE_0;
 
 		CAM_DBG(CAM_SENSOR, "cci-index %d", s_ctrl->cci_num);
+<<<<<<< HEAD
+=======
+
+		rc = of_property_read_u32(of_node,
+			"concurrency-sensors-on-same-cci",
+			&concurrency_sensors);
+		CAM_DBG(CAM_SENSOR,
+			"sensor %d concurrency_sensors %d, rc %d",
+			soc_info->index, concurrency_sensors, rc);
+		if (rc < 0 || concurrency_sensors < 2) {
+			s_ctrl->force_low_priority_for_init_setting = false;
+			rc = 0;
+		} else
+			s_ctrl->force_low_priority_for_init_setting = true;
+
+>>>>>>> ata-karner-lineage-21
 	}
 
 	if (of_property_read_u32(of_node, "sensor-position-pitch",
@@ -411,6 +440,7 @@ static int32_t cam_sensor_driver_get_dt_data(struct cam_sensor_ctrl_t *s_ctrl)
 		sensordata->pos_yaw = 360;
 	}
 
+<<<<<<< HEAD
 #if defined(CONFIG_CAMERA_SYSFS_V2)
 	/* camera information */
 	if (s_ctrl->id == CAMERA_0)
@@ -452,6 +482,8 @@ static int32_t cam_sensor_driver_get_dt_data(struct cam_sensor_ctrl_t *s_ctrl)
 	}
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 	return rc;
 
 FREE_SENSOR_DATA:

@@ -251,6 +251,7 @@ source "drivers/muic/Kconfig"
 
 source "drivers/ccic/Kconfig"
 
+<<<<<<< HEAD
 source "drivers/redriver/Kconfig"
 
 source "drivers/vibrator/cs40l2x/Kconfig"
@@ -281,4 +282,13 @@ source "drivers/kunit/Kconfig"
 
 source "drivers/spu_verify/Kconfig"
 source "drivers/kernelsu/Kconfig"
+=======
+source "drivers/motor/Kconfig"
+
+source "drivers/fingerprint/Kconfig"
+
+source "drivers/security/samsung/tzic/Kconfig"
+
+source "drivers/spu_verify/Kconfig"
+>>>>>>> ata-karner-lineage-21
 endmenu

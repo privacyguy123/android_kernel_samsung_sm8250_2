@@ -123,6 +123,10 @@ struct dsi_backlight_config {
 	u32 bl_scale_sv;
 	bool bl_inverted_dbv;
 	u32 bl_dcs_subtype;
+<<<<<<< HEAD
+=======
+	u32 real_bl_level;
+>>>>>>> ata-karner-lineage-21
 
 	int en_gpio;
 	/* PWM params */
@@ -173,6 +177,12 @@ struct drm_panel_esd_config {
 	u8 *return_buf;
 	u8 *status_buf;
 	u32 groups;
+};
+
+#define BRIGHTNESS_ALPHA_PAIR_LEN 2
+struct brightness_alpha_pair {
+	u16 brightness;
+	u8 alpha;
 };
 
 struct dsi_panel {
@@ -364,4 +374,9 @@ int ss_dsi_panel_parse_cmd_sets(struct dsi_panel_cmd_set *cmd_sets,
 			struct dsi_panel *panel);
 #endif
 
+<<<<<<< HEAD
+=======
+u32 dsi_panel_get_fod_dim_alpha(struct dsi_panel *panel);
+
+>>>>>>> ata-karner-lineage-21
 #endif /* _DSI_PANEL_H_ */

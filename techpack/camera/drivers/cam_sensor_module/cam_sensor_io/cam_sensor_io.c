@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #include "cam_sensor_io.h"
@@ -116,7 +120,12 @@ int32_t camera_io_dev_read_seq(struct camera_io_master *io_master_info,
 }
 
 int32_t camera_io_dev_write(struct camera_io_master *io_master_info,
+<<<<<<< HEAD
 	struct cam_sensor_i2c_reg_setting *write_setting)
+=======
+	struct cam_sensor_i2c_reg_setting *write_setting,
+	bool force_low_priority)
+>>>>>>> ata-karner-lineage-21
 {
 	if (!write_setting || !io_master_info) {
 		CAM_ERR(CAM_SENSOR,
@@ -132,7 +141,11 @@ int32_t camera_io_dev_write(struct camera_io_master *io_master_info,
 
 	if (io_master_info->master_type == CCI_MASTER) {
 		return cam_cci_i2c_write_table(io_master_info,
+<<<<<<< HEAD
 			write_setting);
+=======
+			write_setting, force_low_priority);
+>>>>>>> ata-karner-lineage-21
 	} else if (io_master_info->master_type == I2C_MASTER) {
 		return cam_qup_i2c_write_table(io_master_info,
 			write_setting);
@@ -148,7 +161,12 @@ int32_t camera_io_dev_write(struct camera_io_master *io_master_info,
 
 int32_t camera_io_dev_write_continuous(struct camera_io_master *io_master_info,
 	struct cam_sensor_i2c_reg_setting *write_setting,
+<<<<<<< HEAD
 	uint8_t cam_sensor_i2c_write_flag)
+=======
+	uint8_t cam_sensor_i2c_write_flag,
+	bool force_low_priority)
+>>>>>>> ata-karner-lineage-21
 {
 	if (!write_setting || !io_master_info) {
 		CAM_ERR(CAM_SENSOR,
@@ -164,7 +182,12 @@ int32_t camera_io_dev_write_continuous(struct camera_io_master *io_master_info,
 
 	if (io_master_info->master_type == CCI_MASTER) {
 		return cam_cci_i2c_write_continuous_table(io_master_info,
+<<<<<<< HEAD
 			write_setting, cam_sensor_i2c_write_flag);
+=======
+			write_setting, cam_sensor_i2c_write_flag,
+			force_low_priority);
+>>>>>>> ata-karner-lineage-21
 	} else if (io_master_info->master_type == I2C_MASTER) {
 		return cam_qup_i2c_write_continuous_table(io_master_info,
 			write_setting, cam_sensor_i2c_write_flag);

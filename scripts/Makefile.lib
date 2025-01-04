@@ -320,6 +320,7 @@ cmd_cat = (cat $(filter-out FORCE,$^) > $@) || (rm -f $@; false)
 
 # Bzip2 and LZMA do not include size in file... so we have to fake that;
 # append the size as a 32-bit littleendian number as gzip does.
+<<<<<<< HEAD
 size_append = printf 0
 _size_append = printf $(shell						\
 dec_size=0;								\
@@ -335,6 +336,9 @@ printf "%08x\n" $$dec_size |						\
 		done;							\
 	}								\
 )
+=======
+size_append = true
+>>>>>>> ata-karner-lineage-21
 
 quiet_cmd_bzip2 = BZIP2   $@
 cmd_bzip2 = (cat $(filter-out FORCE,$^) | \

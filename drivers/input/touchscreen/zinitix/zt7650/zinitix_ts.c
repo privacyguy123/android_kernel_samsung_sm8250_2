@@ -802,6 +802,10 @@ struct zt_ts_info {
 	u8 fod_info_vi_trx[3];
 	u16 fod_info_vi_data_len;
 	u16 fod_rect[4];
+<<<<<<< HEAD
+=======
+	int fod_pressed;
+>>>>>>> ata-karner-lineage-21
 
 	u16 aod_rect[4];
 	u16 aod_active_area[3];
@@ -1424,10 +1428,20 @@ static void zt_set_lp_mode(struct zt_ts_info *info, int event, bool enable)
 
 	mutex_lock(&info->set_lpmode_lock);
 
+<<<<<<< HEAD
 	if (enable)
 		zinitix_bit_set(info->lpm_mode, event);
 	else
 		zinitix_bit_clr(info->lpm_mode, event);
+=======
+	if (enable) {
+		zinitix_bit_set(info->lpm_mode, event);
+		info->fod_pressed = 0;
+	}
+	else {
+		zinitix_bit_clr(info->lpm_mode, event);
+    }
+>>>>>>> ata-karner-lineage-21
 
 	ret = ts_write_to_sponge(info, ZT_SPONGE_LP_FEATURE, &info->lpm_mode, 1);
 	if (ret < 0)
@@ -1599,13 +1613,32 @@ static ssize_t secure_touch_show(struct device *dev,
 	return snprintf(buf, PAGE_SIZE, "%u", val);
 }
 
+<<<<<<< HEAD
 static DEVICE_ATTR(secure_touch_enable, (S_IRUGO | S_IWUSR | S_IWGRP),
 		secure_touch_enable_show, secure_touch_enable_store);
 static DEVICE_ATTR(secure_touch, S_IRUGO, secure_touch_show, NULL);
+=======
+static ssize_t zt_fod_pressed_show(struct device *dev,
+		struct device_attribute *attr, char *buf)
+{
+	struct zt_ts_info *info = dev_get_drvdata(dev);
+
+	return snprintf(buf, PAGE_SIZE, "%u\n", info->fod_pressed);
+}
+
+static DEVICE_ATTR(secure_touch_enable, (S_IRUGO | S_IWUSR | S_IWGRP),
+		secure_touch_enable_show, secure_touch_enable_store);
+static DEVICE_ATTR(secure_touch, S_IRUGO, secure_touch_show, NULL);
+static DEVICE_ATTR(fod_pressed, S_IRUGO, zt_fod_pressed_show, NULL);
+>>>>>>> ata-karner-lineage-21
 
 static struct attribute *secure_attr[] = {
 	&dev_attr_secure_touch_enable.attr,
 	&dev_attr_secure_touch.attr,
+<<<<<<< HEAD
+=======
+	&dev_attr_fod_pressed.attr,
+>>>>>>> ata-karner-lineage-21
 	NULL,
 };
 
@@ -1869,11 +1902,14 @@ static void zt_ts_fod_event_report(struct zt_ts_info *info, struct point_info to
 			| ((touch_info.byte04.value_u8bit & 0xF0) >> 4);
 		info->scrub_y = ((touch_info.byte03.value_u8bit << 4) & 0xFF0)
 			| ((touch_info.byte04.value_u8bit & 0x0F));
+<<<<<<< HEAD
 
 		input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 1);
 		input_sync(info->input_dev);
 		input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 0);
 		input_sync(info->input_dev);
+=======
+>>>>>>> ata-karner-lineage-21
 #ifdef CONFIG_SAMSUNG_PRODUCT_SHIP
 		input_info(true, &info->client->dev, "%s: FOD %s PRESS: %d\n", __func__,
 				touch_info.byte01.value_u8bit ? "NORMAL" : "LONG", info->scrub_id);
@@ -1882,6 +1918,11 @@ static void zt_ts_fod_event_report(struct zt_ts_info *info, struct point_info to
 				touch_info.byte01.value_u8bit ? "NORMAL" : "LONG",
 				info->scrub_id, info->scrub_x, info->scrub_y);
 #endif
+<<<<<<< HEAD
+=======
+        info->fod_pressed = true;
+		    sysfs_notify(&info->input_dev->dev.kobj, NULL, "fod_pressed");
+>>>>>>> ata-karner-lineage-21
 	} else if (touch_info.byte01.value_u8bit == 2) {
 		info->scrub_id = SPONGE_EVENT_TYPE_FOD_RELEASE;
 
@@ -1889,17 +1930,25 @@ static void zt_ts_fod_event_report(struct zt_ts_info *info, struct point_info to
 			| ((touch_info.byte04.value_u8bit & 0xF0) >> 4);
 		info->scrub_y = ((touch_info.byte03.value_u8bit << 4) & 0xFF0)
 			| ((touch_info.byte04.value_u8bit & 0x0F));
+<<<<<<< HEAD
 
 		input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 1);
 		input_sync(info->input_dev);
 		input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 0);
 		input_sync(info->input_dev);
+=======
+>>>>>>> ata-karner-lineage-21
 #ifdef CONFIG_SAMSUNG_PRODUCT_SHIP
 		input_info(true, &info->client->dev, "%s: FOD RELEASE: %d\n", __func__, info->scrub_id);
 #else
 		input_info(true, &info->client->dev, "%s: FOD RELEASE: %d, %d, %d\n",
 				__func__, info->scrub_id, info->scrub_x, info->scrub_y);
 #endif
+<<<<<<< HEAD
+=======
+        info->fod_pressed = false;
+			sysfs_notify(&info->input_dev->dev.kobj, NULL, "fod_pressed");
+>>>>>>> ata-karner-lineage-21
 	} else if (touch_info.byte01.value_u8bit == 3) {
 		info->scrub_id = SPONGE_EVENT_TYPE_FOD_OUT;
 
@@ -1907,11 +1956,14 @@ static void zt_ts_fod_event_report(struct zt_ts_info *info, struct point_info to
 			| ((touch_info.byte04.value_u8bit & 0xF0) >> 4);
 		info->scrub_y = ((touch_info.byte03.value_u8bit << 4) & 0xFF0)
 			| ((touch_info.byte04.value_u8bit & 0x0F));
+<<<<<<< HEAD
 
 		input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 1);
 		input_sync(info->input_dev);
 		input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 0);
 		input_sync(info->input_dev);
+=======
+>>>>>>> ata-karner-lineage-21
 #ifdef CONFIG_SAMSUNG_PRODUCT_SHIP
 		input_info(true, &info->client->dev, "%s: FOD OUT: %d\n", __func__, info->scrub_id);
 #else
@@ -3576,12 +3628,26 @@ static irqreturn_t zt_touch_work(int irq, void *data)
 			if (read_data(info->client, ZT_PROXIMITY_DETECT, (u8 *)&prox_data, 2) < 0)
 				input_err(true, &client->dev, "%s: fail to read proximity detect reg\n", __func__);
 
+<<<<<<< HEAD
 			info->hover_event = prox_data;
 
 			input_info(true, &client->dev, "PROXIMITY DETECT. LVL = %d \n", prox_data);
 			input_report_abs(info->input_dev_proximity, ABS_MT_CUSTOM, prox_data);
 			input_sync(info->input_dev_proximity);
 			break;
+=======
+            if (info->lpm_mode == 1 || !info->finger_cnt1) {
+			// Report actual range when the area around the sensor is touched,
+			// when panel is in LPM state or when the screen isn't touched
+			    prox_data = prox_data == 5 || !prox_data;
+			    info->hover_event = prox_data;
+
+			    input_info(true, &client->dev, "PROXIMITY DETECT. LVL = %d \n", prox_data);
+			    input_report_abs(info->input_dev_proximity, ABS_MT_CUSTOM, prox_data);
+			    input_sync(info->input_dev_proximity);
+			    break;
+			}
+>>>>>>> ata-karner-lineage-21
 		}
 	}
 
@@ -7828,8 +7894,16 @@ static void ear_detect_enable(void *device_data)
 		snprintf(buff, sizeof(buff), "%s", "NG");
 		sec->cmd_state = SEC_CMD_STATUS_FAIL;
 	} else {
+<<<<<<< HEAD
 		info->ed_enable = sec->cmd_param[0];
 
+=======
+		if (info->lpm_mode == 1)
+			info->ed_enable = sec->cmd_param[0];
+		else
+			info->ed_enable = sec->cmd_param[0] != 0 ? 3 : 0;
+		
+>>>>>>> ata-karner-lineage-21
 		if (info->ed_enable == 3) {
 			zt_set_optional_mode(info, DEF_OPTIONAL_MODE_EAR_DETECT, true);
 			zt_set_optional_mode(info, DEF_OPTIONAL_MODE_EAR_DETECT_MUTUAL, false);

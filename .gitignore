@@ -139,9 +139,16 @@ all.config
 # fetched Android config fragments
 kernel/configs/android-*.cfg
 
+<<<<<<< HEAD
 # build folder
 out/
  
 # AnyKernel folder
 AnyKernel3/Image
 AnyKernel3/Aeretrea-r8q.zip
+=======
+#
+#Ignoring Android.bp link file
+#
+Android.bp
+>>>>>>> ata-karner-lineage-21

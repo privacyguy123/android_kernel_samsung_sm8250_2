@@ -583,9 +583,12 @@ static void set_track(struct kmem_cache *s, void *object,
 			enum track_item alloc, unsigned long addr)
 {
 	struct track *p = get_track(s, object, alloc);
+<<<<<<< HEAD
 #ifdef CONFIG_KDP_CRED
 	check_cred_cache(s, );
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	if (addr) {
 #ifdef CONFIG_STACKTRACE
 		struct stack_trace trace;

@@ -392,7 +392,11 @@ READELF		= $(CLANG_DIR)llvm-readelf
 OBJSIZE		= $(CLANG_DIR)llvm-size
 STRIP		= $(CLANG_DIR)llvm-strip
 else
+<<<<<<< HEAD
 CC		= ccache $(CROSS_COMPILE)gcc
+=======
+CC		= $(CROSS_COMPILE)gcc
+>>>>>>> ata-karner-lineage-21
 LD		= $(CROSS_COMPILE)ld
 AR		= $(CROSS_COMPILE)ar
 NM		= $(CROSS_COMPILE)nm
@@ -818,11 +822,15 @@ KBUILD_CFLAGS	+= -enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-f
 endif
 endif
 
+<<<<<<< HEAD
 # Workaround for GCC versions < 5.0
 # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=61801
 ifdef CONFIG_CC_IS_GCC
 KBUILD_CFLAGS   += $(call cc-ifversion, -lt, 0500, $(call cc-option, -fno-var-tracking-assignments))
 endif
+=======
+KBUILD_CFLAGS   += $(call cc-option, -fno-var-tracking-assignments)
+>>>>>>> ata-karner-lineage-21
 
 ifdef CONFIG_DEBUG_INFO
 ifdef CONFIG_DEBUG_INFO_SPLIT

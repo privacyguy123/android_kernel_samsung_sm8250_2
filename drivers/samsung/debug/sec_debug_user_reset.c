@@ -34,6 +34,7 @@
 #include <linux/sec_param.h>
 #include <linux/sec_class.h>
 
+<<<<<<< HEAD
 #ifdef CONFIG_RKP_CFP_ROPP
 #include <linux/rkp_cfp.h>
 #endif
@@ -41,6 +42,8 @@
 #include <linux/cfp.h>
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 #include <linux/qseecom.h>
 #include "sec_debug_internal.h"
 
@@ -1490,9 +1493,18 @@ void sec_debug_backtrace(void)
 	static int once;
 	struct stackframe frame;
 	int skip_callstack = 0;
+<<<<<<< HEAD
 #if defined (CONFIG_CFP_ROPP) || defined(CONFIG_RKP_CFP_ROPP)
 	unsigned long where = 0x0;
 #endif
+=======
+
+/* ata-kaner: Disable ROPP
+#if defined (CONFIG_CFP_ROPP) || defined(CONFIG_RKP_CFP_ROPP)
+	unsigned long where = 0x0;
+#endif
+*/
+>>>>>>> ata-karner-lineage-21
 
 	if (!once++) {
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(5,4,0)
@@ -1512,6 +1524,7 @@ void sec_debug_backtrace(void)
 				break;
 
 			if (skip_callstack++ > 3) {
+<<<<<<< HEAD
 #if defined (CONFIG_CFP_ROPP) || defined(CONFIG_RKP_CFP_ROPP)
 				where = frame.pc;
 				if (where>>40 != 0xffffff)
@@ -1522,6 +1535,19 @@ void sec_debug_backtrace(void)
 #else
 				_sec_debug_store_backtrace(frame.pc);
 #endif
+=======
+// ata-kaner: Disable ROPP
+// #if defined (CONFIG_CFP_ROPP) || defined(CONFIG_RKP_CFP_ROPP)
+//				where = frame.pc;
+//				if (where>>40 != 0xffffff)
+//					where = ropp_enable_backtrace(where,
+//							current);
+//
+//				_sec_debug_store_backtrace(where);
+//#else
+				_sec_debug_store_backtrace(frame.pc);
+//#endif
+>>>>>>> ata-karner-lineage-21
 			}
 		}
 	}

@@ -10,7 +10,11 @@
 #include <net/inetpeer.h>
 #include <net/tcp.h>
 #ifdef CONFIG_MPTCP
+<<<<<<< HEAD
 	#include <net/mptcp.h>
+=======
+#include <net/mptcp.h>
+>>>>>>> ata-karner-lineage-21
 #endif
 
 void tcp_fastopen_init_key_once(struct net *net)

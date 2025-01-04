@@ -1,6 +1,14 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
+<<<<<<< HEAD
+<<<<<<<< HEAD:techpack/camera/drivers/cam_cpas/cpas_top/cam_cpastop_hw.h
  * Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+========
+ * Copyright (c) 2017-2021, The Linux Foundation. All rights reserved.
+>>>>>>>> ata-karner-lineage-21:techpack/camera-bengal/drivers/cam_cpas/cpas_top/cam_cpastop_hw.h
+=======
+ * Copyright (c) 2017-2020, The Linux Foundation. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #ifndef _CAM_CPASTOP_HW_H_
@@ -20,12 +28,24 @@
  * @CAM_CAMNOC_HW_IRQ_IFE_UBWC_STATS_ENCODE_ERROR: Triggered if any error
  *                                                 detected in the IFE UBWC-
  *                                                 Stats encoder instance
+<<<<<<< HEAD
+=======
+ * @CAM_CAMNOC_HW_IRQ_IFE01_UBWC_ENCODE_ERROR  : Triggered if any error
+ *                                               detected in the IFE1 UBWC
+ *                                               encoder instance
+>>>>>>> ata-karner-lineage-21
  * @CAM_CAMNOC_HW_IRQ_IFE02_UBWC_ENCODE_ERROR  : Triggered if any error
  *                                               detected in the IFE0 UBWC
  *                                               encoder instance
  * @CAM_CAMNOC_HW_IRQ_IFE13_UBWC_ENCODE_ERROR  : Triggered if any error
  *                                               detected in the IFE1 or IFE3
  *                                               UBWC encoder instance
+<<<<<<< HEAD
+=======
+ * @CAM_CAMNOC_HW_IRQ_IFE23_UBWC_ENCODE_ERROR  : Triggered if any error
+ *                                               detected in the IFE2 or IFE3
+ *                                               UBWC encoder instance
+>>>>>>> ata-karner-lineage-21
  * @CAM_CAMNOC_HW_IRQ_IPE1_BPS_UBWC_DECODE_ERROR: Triggered if any error
  *                                                detected in the IPE1/BPS read
  *                                                path decoder instance
@@ -54,10 +74,20 @@ enum cam_camnoc_hw_irq_type {
 		CAM_CAMNOC_IRQ_SLAVE_ERROR,
 	CAM_CAMNOC_HW_IRQ_IFE_UBWC_STATS_ENCODE_ERROR =
 		CAM_CAMNOC_IRQ_IFE_UBWC_STATS_ENCODE_ERROR,
+<<<<<<< HEAD
+=======
+	CAM_CAMNOC_HW_IRQ_IFE01_UBWC_ENCODE_ERROR =
+		CAM_CAMNOC_IRQ_IFE01_UBWC_ENCODE_ERROR,
+>>>>>>> ata-karner-lineage-21
 	CAM_CAMNOC_HW_IRQ_IFE02_UBWC_ENCODE_ERROR =
 		CAM_CAMNOC_IRQ_IFE02_UBWC_ENCODE_ERROR,
 	CAM_CAMNOC_HW_IRQ_IFE13_UBWC_ENCODE_ERROR =
 		CAM_CAMNOC_IRQ_IFE13_UBWC_ENCODE_ERROR,
+<<<<<<< HEAD
+=======
+	CAM_CAMNOC_HW_IRQ_IFE23_UBWC_ENCODE_ERROR =
+		CAM_CAMNOC_IRQ_IFE23_UBWC_ENCODE_ERROR,
+>>>>>>> ata-karner-lineage-21
 	CAM_CAMNOC_HW_IRQ_IFE0_UBWC_ENCODE_ERROR =
 		CAM_CAMNOC_IRQ_IFE0_UBWC_ENCODE_ERROR,
 	CAM_CAMNOC_HW_IRQ_IFE1_WRITE_UBWC_ENCODE_ERROR =
@@ -106,11 +136,25 @@ enum cam_camnoc_hw_irq_type {
  * @CAM_CAMNOC_JPEG: Indicates JPEG HW connection to camnoc
  * @CAM_CAMNOC_FD: Indicates FD HW connection to camnoc
  * @CAM_CAMNOC_ICP: Indicates ICP HW connection to camnoc
+<<<<<<< HEAD
+ * @CAM_CAMNOC_TFE: Indicates TFE HW connection to camnoc
+ * @CAM_CAMNOC_TFE_1 : Indicates TFE1 HW connection to camnoc
+ * @CAM_CAMNOC_TFE_2 : Indicates TFE2 HW connection to camnoc
+ * @CAM_CAMNOC_OPE: Indicates OPE HW connection to camnoc
  */
 enum cam_camnoc_port_type {
 	CAM_CAMNOC_CDM,
 	CAM_CAMNOC_IFE02,
 	CAM_CAMNOC_IFE13,
+=======
+ */
+enum cam_camnoc_port_type {
+	CAM_CAMNOC_CDM,
+	CAM_CAMNOC_IFE01,
+	CAM_CAMNOC_IFE02,
+	CAM_CAMNOC_IFE13,
+	CAM_CAMNOC_IFE23,
+>>>>>>> ata-karner-lineage-21
 	CAM_CAMNOC_IFE_LINEAR,
 	CAM_CAMNOC_IFE_UBWC_STATS,
 	CAM_CAMNOC_IFE_RDI_WR,
@@ -128,6 +172,13 @@ enum cam_camnoc_port_type {
 	CAM_CAMNOC_JPEG,
 	CAM_CAMNOC_FD,
 	CAM_CAMNOC_ICP,
+<<<<<<< HEAD
+	CAM_CAMNOC_TFE,
+	CAM_CAMNOC_TFE_1,
+	CAM_CAMNOC_TFE_2,
+	CAM_CAMNOC_OPE,
+=======
+>>>>>>> ata-karner-lineage-21
 };
 
 /**
@@ -245,6 +296,31 @@ struct cam_camnoc_err_logger_info {
 };
 
 /**
+<<<<<<< HEAD
+=======
+ * struct cam_camnoc_fifo_lvl_info : Struct for fifo fill level registers
+ * @IFE0_nRDI_maxwr_offset: Register offset for fill level for IFE0
+ * @IFE1_nRDI_maxwr_offset: Register offset for fill level for IFE1
+ * @IFE0123_RDI_maxwr_low_offset: Register offset for RDI
+ * @ife_linear: Register offset for ife linear
+ * @ife_rdi_wr: Register offset for rdi wr
+ * @ife_ubwc_stats: Register offset for ubwc stats
+ * @IFE02_MAXWR_LOW: Register offset for IFE02
+ * @IFE13_MAXWR_LOW: Register offset for IFE13
+ */
+struct cam_camnoc_fifo_lvl_info {
+	uint32_t IFE0_nRDI_maxwr_offset;
+	uint32_t IFE1_nRDI_maxwr_offset;
+	uint32_t IFE0123_RDI_maxwr_offset;
+	uint32_t ife_linear;
+	uint32_t ife_rdi_wr;
+	uint32_t ife_ubwc_stats;
+	uint32_t IFE02_MAXWR_LOW;
+	uint32_t IFE13_MAXWR_LOW;
+};
+
+/**
+>>>>>>> ata-karner-lineage-21
  * struct cam_camnoc_info : Overall CAMNOC settings info
  *
  * @specific: Pointer to CAMNOC SPECIFICTONTTPTR settings
@@ -254,6 +330,10 @@ struct cam_camnoc_err_logger_info {
  * @irq_err_size: Array size of IRQ Error settings
  * @err_logger: Pointer to CAMNOC IRQ Error logger read registers
  * @errata_wa_list: HW Errata workaround info
+<<<<<<< HEAD
+=======
+ * @fill_level_register: Fill level registers
+>>>>>>> ata-karner-lineage-21
  *
  */
 struct cam_camnoc_info {
@@ -264,6 +344,10 @@ struct cam_camnoc_info {
 	int irq_err_size;
 	struct cam_camnoc_err_logger_info *err_logger;
 	struct cam_cpas_hw_errata_wa_list *errata_wa_list;
+<<<<<<< HEAD
+=======
+	struct cam_camnoc_fifo_lvl_info *fill_lvl_register;
+>>>>>>> ata-karner-lineage-21
 };
 
 /**
@@ -272,6 +356,10 @@ struct cam_camnoc_info {
  * @hw: Pointer to HW info
  * @irq_status: IRQ status value
  * @irq_data: IRQ data
+<<<<<<< HEAD
+ * @workq_scheduled_ts: workqueue scheduled timestamp
+=======
+>>>>>>> ata-karner-lineage-21
  * @work: Work handle
  *
  */
@@ -279,6 +367,10 @@ struct cam_cpas_work_payload {
 	struct cam_hw_info *hw;
 	uint32_t irq_status;
 	uint32_t irq_data;
+<<<<<<< HEAD
+	ktime_t workq_scheduled_ts;
+=======
+>>>>>>> ata-karner-lineage-21
 	struct work_struct work;
 };
 

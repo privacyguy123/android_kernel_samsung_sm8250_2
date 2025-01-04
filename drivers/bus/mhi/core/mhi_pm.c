@@ -261,12 +261,18 @@ int mhi_ready_state_transition(struct mhi_controller *mhi_cntrl)
 #ifdef CONFIG_SEC_DEBUG_MDM_FILE_INFO
     snprintf(mdmerr_info, sizeof(mdmerr_info), 
 				"%x\n", mhi_cntrl->session_id);
+<<<<<<< HEAD
 #ifdef CONFIG_SEC_DEBUG_SUMMARY
+=======
+>>>>>>> ata-karner-lineage-21
     sec_set_mdm_summary_info(mdmerr_info);
 
 	MHI_ERR("MDM session ID : %s\n", mdmerr_info);
 #endif
+<<<<<<< HEAD
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 
 	MHI_CNTRL_LOG("Waiting to enter READY state\n");
 
@@ -1088,9 +1094,14 @@ void mhi_control_error(struct mhi_controller *mhi_cntrl)
 					"%x, Failure reason: %s\n", 
 					mhi_cntrl->session_id,
 					mhi_get_restart_reason(mhi_cntrl->name));
+<<<<<<< HEAD
 #ifdef CONFIG_SEC_DEBUG_SUMMARY
 		sec_set_mdm_summary_info(mdmerr_info);
 #endif
+=======
+		sec_set_mdm_summary_info(mdmerr_info);
+
+>>>>>>> ata-karner-lineage-21
 		MHI_ERR("MDM session ID : %s\n", mdmerr_info);
 	}
 #endif

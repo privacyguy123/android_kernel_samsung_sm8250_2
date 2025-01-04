@@ -916,6 +916,14 @@ static int ufs_qcom_full_reset(struct ufs_hba *hba)
 	host->hw_reset_outstanding_reqs = hba->outstanding_reqs;
 	memcpy(&host->hw_reset_ufs_stats, &hba->ufs_stats, sizeof(struct ufs_stats));
 
+	host->hw_reset_count++;
+	host->last_hw_reset = (unsigned long)ktime_to_us(ktime_get());
+	host->hw_reset_saved_err = hba->saved_err;
+	host->hw_reset_saved_uic_err = hba->saved_uic_err;
+	host->hw_reset_outstanding_tasks = hba->outstanding_tasks;
+	host->hw_reset_outstanding_reqs = hba->outstanding_reqs;
+	memcpy(&host->hw_reset_ufs_stats, &hba->ufs_stats, sizeof(struct ufs_stats));
+
 	if (!hba->core_reset) {
 		dev_err(hba->dev, "%s: failed, err = %d\n", __func__,
 				ret);
@@ -2395,6 +2403,14 @@ static struct ufs_hba_variant_ops ufs_hba_qcom_vops = {
 #ifdef CONFIG_DEBUG_FS
 	.add_debugfs		= ufs_qcom_dbg_add_debugfs,
 #endif
+<<<<<<< HEAD
+=======
+};
+
+static struct ufs_hba_pm_qos_variant_ops ufs_hba_pm_qos_variant_ops = {
+	.req_start	= ufs_qcom_pm_qos_req_start,
+	.req_end	= ufs_qcom_pm_qos_req_end,
+>>>>>>> ata-karner-lineage-21
 };
 
 static struct ufs_hba_variant ufs_hba_qcom_variant = {

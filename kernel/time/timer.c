@@ -1470,7 +1470,11 @@ static void call_timer_fn(struct timer_list *timer,
 	 */
 	lock_map_acquire(&lockdep_map);
 
+<<<<<<< HEAD
 	trace_timer_expire_entry(timer, baseclk);
+=======
+	trace_timer_expire_entry(timer);
+>>>>>>> ata-karner-lineage-21
 	sec_debug_msg_log("timer %pS entry", fn);
 	fn(timer);
 	sec_debug_msg_log("timer %pS exit", fn);

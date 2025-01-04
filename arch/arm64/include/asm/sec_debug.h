@@ -110,6 +110,16 @@ struct sec_debug_core_t {
 
 static inline void sec_debug_save_mmu_reg(struct sec_debug_mmu_reg_t *mmu_reg)
 {
+<<<<<<< HEAD
+=======
+	uint64_t pstate, which_el;
+
+	pstate = READ_SPECIAL_REG(CurrentEl);
+	which_el = pstate & PSR_MODE_MASK;
+
+	/* pr_emerg("%s: sec_debug EL mode=%d\n", __func__,which_el); */
+
+>>>>>>> ata-karner-lineage-21
 	mmu_reg->TTBR0_EL1 = READ_SPECIAL_REG(TTBR0_EL1);
 	mmu_reg->TTBR1_EL1 = READ_SPECIAL_REG(TTBR1_EL1);
 	mmu_reg->TCR_EL1 = READ_SPECIAL_REG(TCR_EL1);
@@ -119,7 +129,11 @@ static inline void sec_debug_save_mmu_reg(struct sec_debug_mmu_reg_t *mmu_reg)
 
 static inline void sec_debug_save_core_reg(struct sec_debug_core_t *core_reg)
 {
+<<<<<<< HEAD
 	uint64_t pstate, which_el;
+=======
+	uint64_t pstate,which_el;
+>>>>>>> ata-karner-lineage-21
 
 	pstate = READ_SPECIAL_REG(CurrentEl);
 	which_el = pstate & PSR_MODE_MASK;
@@ -137,6 +151,7 @@ static inline void sec_debug_save_core_reg(struct sec_debug_core_t *core_reg)
 		"stp x9, x10, [x0], #0x10\n\t"
 		"stp x11, x12, [x0], #0x10\n\t"
 		"stp x13, x14, [x0], #0x10\n\t"
+<<<<<<< HEAD
 #if (!defined CONFIG_CFP_ROPP) || (defined CONFIG_CFP_TEST)
 		"stp x15, x16, [x0], #0x10\n\t"
 		"stp x17, x18, [x0], #0x10\n\t"
@@ -144,6 +159,16 @@ static inline void sec_debug_save_core_reg(struct sec_debug_core_t *core_reg)
 		"stp x15, x15, [x0], #0x10\n\t"
 		"stp x18, x18, [x0], #0x10\n\t"
 #endif
+=======
+// ata-kaner: Disable ROPP. It's not necessary anymore.
+// #if (!defined CONFIG_CFP_ROPP) || (defined CONFIG_CFP_TEST)
+		"stp x15, x16, [x0], #0x10\n\t"
+		"stp x17, x18, [x0], #0x10\n\t"
+// #else
+// 		"stp x15, x15, [x0], #0x10\n\t"
+// 		"stp x18, x18, [x0], #0x10\n\t"
+// #endif
+>>>>>>> ata-karner-lineage-21
 		"stp x19, x20, [x0], #0x10\n\t"
 		"stp x21, x22, [x0], #0x10\n\t"
 		"stp x23, x24, [x0], #0x10\n\t"

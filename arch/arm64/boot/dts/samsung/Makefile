@@ -25,10 +25,27 @@ $(eval $(call sec_dtbo_build, \
 
 endif
 
+<<<<<<< HEAD
 
 dts-dirs += r8q
+=======
+dts-dirs += bloomxq
+dts-dirs += c1q
+dts-dirs += c2q
+dts-dirs += f2q
+dts-dirs += gts7l
+dts-dirs += gts7xl
+dts-dirs += r8q
+dts-dirs += x1q
+dts-dirs += y2q
+dts-dirs += z3q
+>>>>>>> ata-karner-lineage-21
 
 always          := $(dtb-y)
 subdir-y        := $(dts-dirs)
 
+<<<<<<< HEAD
 clean-files := *.dtb *.reverse.dts *.dtbo
+=======
+clean-files := *.dtb *.reverse.dts *.dtbo
+>>>>>>> ata-karner-lineage-21

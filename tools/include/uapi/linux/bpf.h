@@ -2740,9 +2740,12 @@ enum {
 	BPF_TCP_LISTEN,
 	BPF_TCP_CLOSING,	/* Now a valid state */
 	BPF_TCP_NEW_SYN_RECV,
+<<<<<<< HEAD
 #ifdef CONFIG_MPTCP
 	BPF_TCP_RST_WAIT,
 #endif
+=======
+>>>>>>> ata-karner-lineage-21
 	BPF_TCP_MAX_STATES	/* Leave at the end! */
 };
 

@@ -11,4 +11,8 @@ obj-$(CONFIG_SPECTRA_CAMERA) += cam_icp/
 obj-$(CONFIG_SPECTRA_CAMERA) += cam_jpeg/
 obj-$(CONFIG_SPECTRA_CAMERA) += cam_fd/
 obj-$(CONFIG_SPECTRA_CAMERA) += cam_lrme/
+<<<<<<< HEAD
 obj-$(CONFIG_SPECTRA_CAMERA) += cam_sbi/
+=======
+obj-$(CONFIG_SPECTRA_CAMERA) += cam_cust/
+>>>>>>> ata-karner-lineage-21

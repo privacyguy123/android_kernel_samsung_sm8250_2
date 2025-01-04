@@ -211,6 +211,7 @@ ifeq ($(CONFIG_BATTERY_SAMSUNG_V2), y)
 	obj-$(CONFIG_BATTERY_SAMSUNG)	+= battery_v2/
 endif
 
+<<<<<<< HEAD
 # COMBO REDRIVER
 obj-$(CONFIG_REDRIVER)	        += redriver/
 
@@ -229,18 +230,26 @@ endif
 ifeq ($(CONFIG_PERF_MGR), y)
 	obj-$(CONFIG_PERF_MGR)	+= perf_mgr/
 endif
+=======
+# Motor
+obj-y				+= motor/
+>>>>>>> ata-karner-lineage-21
 
 #TZIC
 obj-$(CONFIG_TZIC)  += security/samsung/tzic/
 
+<<<<<<< HEAD
 # KUnit
 obj-y				+= kunit/
 
+=======
+>>>>>>> ata-karner-lineage-21
 # GNSS
 obj-$(CONFIG_GPS_BCM4753)	+= gps/
 
 # SPU signature verify
 obj-$(CONFIG_SPU_VERIFY) += spu_verify/
+<<<<<<< HEAD
 
 # CS40L2X Vibrator
 obj-$(CONFIG_MOTOR_DRV_CS40L2X)			+= vibrator/cs40l2x/
@@ -262,3 +271,5 @@ obj-$(CONFIG_ANDROID_TIMED_OUTPUT)		+= vibrator/timed_output/
 
 
 obj-$(CONFIG_KSU_SUSFS) += kernelsu-next/
+=======
+>>>>>>> ata-karner-lineage-21

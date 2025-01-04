@@ -70,9 +70,15 @@ struct ss_tlog {
 };
 
 /* PANEL DEBUG FUNCTION */
+<<<<<<< HEAD
 static inline void ss_xlog(const char *name, int flag, ...) {}
 static inline void ss_xlog_vsync(const char *name, int flag, ...) {}
 static inline void ss_dump_xlog(void) {}
+=======
+void ss_xlog(const char *name, int flag, ...);
+void ss_xlog_vsync(const char *name, int flag, ...);
+void ss_dump_xlog(void);
+>>>>>>> ata-karner-lineage-21
 void ss_store_xlog_panic_dbg(void);
 int ss_panel_debug_init(struct samsung_display_driver_data *vdd);
 
@@ -114,6 +120,7 @@ struct ss_image_logging {
 	int src_format;
 };
 
+<<<<<<< HEAD
 static inline int ss_read_rddpm(struct samsung_display_driver_data *vdd) { return 0; }
 static inline int ss_read_rddsm(struct samsung_display_driver_data *vdd) { return 0; }
 static inline int ss_read_errfg(struct samsung_display_driver_data *vdd) { return 0; }
@@ -121,6 +128,15 @@ static inline int ss_read_dsierr(struct samsung_display_driver_data *vdd) { retu
 static inline int ss_read_mipi_protocol_err(struct samsung_display_driver_data *vdd) { return 0; }
 int ss_read_self_diag(struct samsung_display_driver_data *vdd);
 static inline int ss_read_ddi_cmd_log(struct samsung_display_driver_data *vdd, char *read_buf) { return 0; }
+=======
+int ss_read_rddpm(struct samsung_display_driver_data *vdd);
+int ss_read_rddsm(struct samsung_display_driver_data *vdd);
+int ss_read_errfg(struct samsung_display_driver_data *vdd);
+int ss_read_dsierr(struct samsung_display_driver_data *vdd);
+int ss_read_mipi_protocol_err(struct samsung_display_driver_data *vdd);
+int ss_read_self_diag(struct samsung_display_driver_data *vdd);
+int ss_read_ddi_cmd_log(struct samsung_display_driver_data *vdd, char *read_buf);
+>>>>>>> ata-karner-lineage-21
 int ss_read_pps_data(struct samsung_display_driver_data *vdd);
 
 int ss_smmu_debug_init(struct samsung_display_driver_data *vdd);

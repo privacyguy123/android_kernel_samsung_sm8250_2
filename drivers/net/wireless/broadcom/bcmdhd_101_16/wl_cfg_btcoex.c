@@ -432,7 +432,11 @@ void* wl_cfg80211_btcoex_init(struct net_device *ndev)
 	return btco_inf;
 }
 
+<<<<<<< HEAD
 void wl_cfg80211_btcoex_kill_handler()
+=======
+void wl_cfg80211_btcoex_kill_handler(void)
+>>>>>>> ata-karner-lineage-21
 {
 	if (!btcoex_info_loc)
 		return;
@@ -445,7 +449,11 @@ void wl_cfg80211_btcoex_kill_handler()
 	wl_cfg80211_btcoex_init_handler_status();
 }
 
+<<<<<<< HEAD
 void wl_cfg80211_btcoex_deinit()
+=======
+void wl_cfg80211_btcoex_deinit(void)
+>>>>>>> ata-karner-lineage-21
 {
 	if (!btcoex_info_loc)
 		return;

@@ -247,7 +247,7 @@ struct usb_ep_ops {
 
 	int (*fifo_status) (struct usb_ep *ep);
 	void (*fifo_flush) (struct usb_ep *ep);
-	int (*gsi_ep_op)(struct usb_ep *ep, void *op_data,
+	int (*gsi_ep_op) (struct usb_ep *ep, void *op_data,
 		enum gsi_ep_op op);
 
 };

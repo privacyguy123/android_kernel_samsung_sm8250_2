@@ -22,12 +22,15 @@
  */
 #include "sched.h"
 
+<<<<<<< HEAD
 #ifdef CONFIG_PERF_MGR
 #include <linux/cpufreq.h>
 #include <linux/percpu.h>
 #include <trace/events/power.h>
 #endif
 
+=======
+>>>>>>> ata-karner-lineage-21
 #include <trace/events/sched.h>
 #include "walt.h"
 
@@ -5537,6 +5540,7 @@ enqueue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 {
 	struct cfs_rq *cfs_rq;
 	struct sched_entity *se = &p->se;
+<<<<<<< HEAD
 #ifdef CONFIG_PERF_MGR
 	unsigned long next_fps_boosted_util;
 	int boosted_cnt;
@@ -5544,6 +5548,9 @@ enqueue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 	int alloc_cpu = -1;
 #endif
 
+=======
+	
+>>>>>>> ata-karner-lineage-21
 	/*
 	 * The code below (indirectly) updates schedutil which looks at
 	 * the cfs_rq utilization to select a frequency.
@@ -6331,6 +6338,7 @@ stune_util(int cpu, unsigned long other_util,
 				   cpu_util_freq(cpu, walt_load) + other_util);
 	long margin = schedtune_cpu_margin_with(util, cpu, NULL);
 	unsigned long boosted_util;
+<<<<<<< HEAD
 #ifdef CONFIG_PERF_MGR
 	unsigned long fps_util = per_cpu(fps_boosted_util, cpu);
 #endif
@@ -6340,6 +6348,10 @@ stune_util(int cpu, unsigned long other_util,
 #ifdef CONFIG_PERF_MGR
 	boosted_util = max(fps_util, boosted_util);
 #endif
+=======
+	trace_sched_boost_cpu(cpu, util, margin);
+	boosted_util = util + margin;
+>>>>>>> ata-karner-lineage-21
 
 	return boosted_util;
 }

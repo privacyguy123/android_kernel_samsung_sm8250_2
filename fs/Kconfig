@@ -136,9 +136,13 @@ endmenu
 endif # BLOCK
 
 if BLOCK
-menu "DOS/FAT/NT Filesystems"
+menu "DOS/FAT/EXFAT/SDFAT/NT Filesystems"
 
 source "fs/fat/Kconfig"
+<<<<<<< HEAD
+=======
+source "fs/exfat/Kconfig"
+>>>>>>> ata-karner-lineage-21
 source "fs/sdfat/Kconfig"
 source "fs/ntfs/Kconfig"
 

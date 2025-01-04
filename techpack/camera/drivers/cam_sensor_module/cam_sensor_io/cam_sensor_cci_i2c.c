@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
+<<<<<<< HEAD
+=======
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+>>>>>>> ata-karner-lineage-21
  */
 
 #include "cam_sensor_cmn_header.h"
@@ -96,7 +100,12 @@ int32_t cam_camera_cci_i2c_read_seq(struct cam_sensor_cci_client *cci_client,
 static int32_t cam_cci_i2c_write_table_cmd(
 	struct camera_io_master *client,
 	struct cam_sensor_i2c_reg_setting *write_setting,
+<<<<<<< HEAD
 	enum cam_cci_cmd_type cmd)
+=======
+	enum cam_cci_cmd_type cmd,
+	bool force_low_priority)
+>>>>>>> ata-karner-lineage-21
 {
 	int32_t rc = -EINVAL;
 	struct cam_cci_ctrl cci_ctrl;
@@ -117,6 +126,10 @@ static int32_t cam_cci_i2c_write_table_cmd(
 	cci_ctrl.cfg.cci_i2c_write_cfg.data_type = write_setting->data_type;
 	cci_ctrl.cfg.cci_i2c_write_cfg.addr_type = write_setting->addr_type;
 	cci_ctrl.cfg.cci_i2c_write_cfg.size = write_setting->size;
+<<<<<<< HEAD
+=======
+	cci_ctrl.force_low_priority = force_low_priority;
+>>>>>>> ata-karner-lineage-21
 	rc = v4l2_subdev_call(client->cci_client->cci_subdev,
 		core, ioctl, VIDIOC_MSM_CCI_CFG, &cci_ctrl);
 	if (rc < 0) {
@@ -136,25 +149,45 @@ static int32_t cam_cci_i2c_write_table_cmd(
 
 int32_t cam_cci_i2c_write_table(
 	struct camera_io_master *client,
+<<<<<<< HEAD
 	struct cam_sensor_i2c_reg_setting *write_setting)
 {
 	return cam_cci_i2c_write_table_cmd(client, write_setting,
 		MSM_CCI_I2C_WRITE);
+=======
+	struct cam_sensor_i2c_reg_setting *write_setting,
+	bool force_low_priority)
+{
+	return cam_cci_i2c_write_table_cmd(client, write_setting,
+		MSM_CCI_I2C_WRITE, force_low_priority);
+>>>>>>> ata-karner-lineage-21
 }
 
 int32_t cam_cci_i2c_write_continuous_table(
 	struct camera_io_master *client,
 	struct cam_sensor_i2c_reg_setting *write_setting,
+<<<<<<< HEAD
 	uint8_t cam_sensor_i2c_write_flag)
+=======
+	uint8_t cam_sensor_i2c_write_flag,
+	bool force_low_priority)
+>>>>>>> ata-karner-lineage-21
 {
 	int32_t rc = 0;
 
 	if (cam_sensor_i2c_write_flag == 1)
 		rc = cam_cci_i2c_write_table_cmd(client, write_setting,
+<<<<<<< HEAD
 			MSM_CCI_I2C_WRITE_BURST);
 	else if (cam_sensor_i2c_write_flag == 0)
 		rc = cam_cci_i2c_write_table_cmd(client, write_setting,
 			MSM_CCI_I2C_WRITE_SEQ);
+=======
+			MSM_CCI_I2C_WRITE_BURST, force_low_priority);
+	else if (cam_sensor_i2c_write_flag == 0)
+		rc = cam_cci_i2c_write_table_cmd(client, write_setting,
+			MSM_CCI_I2C_WRITE_SEQ, force_low_priority);
+>>>>>>> ata-karner-lineage-21
 
 	return rc;
 }

@@ -32,7 +32,11 @@
 #include <linux/sti/abc_common.h>
 #endif
 
+<<<<<<< HEAD
 static void adreno_pwr_on_work(struct work_struct *work);
+=======
+static void adreno_input_work(struct work_struct *work);
+>>>>>>> ata-karner-lineage-21
 static unsigned int counter_delta(struct kgsl_device *device,
 	unsigned int reg, unsigned int *counter);
 

@@ -106,6 +106,12 @@ static ssize_t fts_secure_touch_enable_store(struct device *dev,
 static ssize_t fts_secure_touch_show(struct device *dev,
 		struct device_attribute *attr, char *buf);
 
+<<<<<<< HEAD
+=======
+static ssize_t fts_fod_pressed_show(struct device *dev,
+		struct device_attribute *attr, char *buf);
+
+>>>>>>> ata-karner-lineage-21
 static struct device_attribute attrs[] = {
 	__ATTR(secure_touch_enable, (0664),
 			fts_secure_touch_enable_show,
@@ -113,6 +119,12 @@ static struct device_attribute attrs[] = {
 	__ATTR(secure_touch, (0444),
 			fts_secure_touch_show,
 			NULL),
+<<<<<<< HEAD
+=======
+	__ATTR(fod_pressed, (0444),
+			fts_fod_pressed_show,
+			NULL),
+>>>>>>> ata-karner-lineage-21
 };
 
 static ssize_t fts_secure_touch_enable_show(struct device *dev,
@@ -287,6 +299,17 @@ static void fts_secure_touch_stop(struct fts_ts_info *info, int blocking)
 	mutex_unlock(&info->st_lock);
 }
 
+<<<<<<< HEAD
+=======
+static ssize_t fts_fod_pressed_show(struct device *dev,
+		struct device_attribute *attr, char *buf)
+{
+	struct fts_ts_info *info = dev_get_drvdata(dev);
+
+	return snprintf(buf, PAGE_SIZE, "%u\n", info->fod_pressed);
+}
+
+>>>>>>> ata-karner-lineage-21
 static irqreturn_t fts_filter_interrupt(struct fts_ts_info *info)
 {
 	if (atomic_read(&info->st_enabled)) {
@@ -1807,10 +1830,22 @@ static u8 fts_event_handler_type_b(struct fts_ts_info *info)
 			if (p_event_status->stype == FTS_EVENT_STATUSTYPE_VENDORINFO) {
 				if (info->board->support_ear_detect) {
 					if (p_event_status->status_id == 0x6A) {
+<<<<<<< HEAD
 						info->hover_event = p_event_status->status_data_1;
 						input_report_abs(info->input_dev_proximity, ABS_MT_CUSTOM, p_event_status->status_data_1);
 						input_sync(info->input_dev_proximity);
 						input_info(true, &info->client->dev, "%s: proximity: %d\n", __func__, p_event_status->status_data_1);
+=======
+						if (info->fts_power_state == FTS_POWER_STATE_LOWPOWER || !info->touch_count) {
+							// Report actual range when the area around the sensor is touched,
+							// when panel is in LPM state or when the screen isn't touched
+							p_event_status->status_data_1 = p_event_status->status_data_1 == 5 || !p_event_status->status_data_1;
+							info->hover_event = p_event_status->status_data_1;
+							input_report_abs(info->input_dev_proximity, ABS_MT_CUSTOM, p_event_status->status_data_1);
+							input_sync(info->input_dev_proximity);
+							input_info(true, &info->client->dev, "%s: proximity: %d\n", __func__, p_event_status->status_data_1);
+						}
+>>>>>>> ata-karner-lineage-21
 					}
 				}
 			}
@@ -2110,9 +2145,19 @@ static u8 fts_event_handler_type_b(struct fts_ts_info *info)
 						info->scrub_id = SPONGE_EVENT_TYPE_FOD;
 						input_info(true, &info->client->dev, "%s: FOD %sPRESS\n",
 								__func__, p_gesture_status->gesture_id ? "" : "LONG");
+<<<<<<< HEAD
 					} else if (p_gesture_status->gesture_id == FTS_SPONGE_EVENT_GESTURE_ID_FOD_RELEASE) {
 						info->scrub_id = SPONGE_EVENT_TYPE_FOD_RELEASE;
 						input_info(true, &info->client->dev, "%s: FOD RELEASE\n", __func__);
+=======
+						info->fod_pressed = true;
+						sysfs_notify(&info->input_dev->dev.kobj, NULL, "fod_pressed");
+					} else if (p_gesture_status->gesture_id == FTS_SPONGE_EVENT_GESTURE_ID_FOD_RELEASE) {
+						info->scrub_id = SPONGE_EVENT_TYPE_FOD_RELEASE;
+						input_info(true, &info->client->dev, "%s: FOD RELEASE\n", __func__);
+						info->fod_pressed = false;
+						sysfs_notify(&info->input_dev->dev.kobj, NULL, "fod_pressed");
+>>>>>>> ata-karner-lineage-21
 					} else if (p_gesture_status->gesture_id == FTS_SPONGE_EVENT_GESTURE_ID_FOD_OUT) {
 						info->scrub_id = SPONGE_EVENT_TYPE_FOD_OUT;
 						input_info(true, &info->client->dev, "%s: FOD OUT\n", __func__);
@@ -2135,9 +2180,12 @@ static u8 fts_event_handler_type_b(struct fts_ts_info *info)
 								__func__, p_gesture_status->gesture_id);
 						break;
 					}
+<<<<<<< HEAD
 					input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 1);
 					input_sync(info->input_dev);
 					input_report_key(info->input_dev, KEY_BLACK_UI_GESTURE, 0);
+=======
+>>>>>>> ata-karner-lineage-21
 					break;
 				}
 			}
@@ -3821,6 +3869,12 @@ static void fts_sponge_dump_flush(struct fts_ts_info *info, int dump_area)
 			snprintf(buff, sizeof(buff), "%03d: %04x%04x%04x%04x%04x\n",
 					i + (info->sponge_dump_event * dump_area),
 					edata[0], edata[1], edata[2], edata[3], edata[4]);
+<<<<<<< HEAD
+=======
+#ifdef CONFIG_SEC_DEBUG_TSP_LOG
+			sec_tsp_sponge_log(buff);
+#endif
+>>>>>>> ata-karner-lineage-21
 		}
 	}
 
@@ -4123,6 +4177,11 @@ int fts_set_lowpowermode(struct fts_ts_info *info, u8 mode)
 	}
 
 	if (mode == TO_LOWPOWER_MODE) {
+<<<<<<< HEAD
+=======
+		info->fod_pressed = 0;
+
+>>>>>>> ata-karner-lineage-21
 		if (device_may_wakeup(&info->client->dev))
 			enable_irq_wake(info->irq);
 

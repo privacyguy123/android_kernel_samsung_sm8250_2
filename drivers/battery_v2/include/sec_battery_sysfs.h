@@ -75,6 +75,10 @@ enum {
 	BLKT_TEMP_ADC,
 	BATT_VF_ADC,
 	BATT_SLATE_MODE,
+<<<<<<< HEAD
+=======
+	CHARGING_ENABLED,
+>>>>>>> ata-karner-lineage-21
 	BATT_LP_CHARGING,
 	SIOP_ACTIVATED,
 	SIOP_LEVEL,

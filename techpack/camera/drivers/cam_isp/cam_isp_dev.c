@@ -50,10 +50,20 @@ static const struct of_device_id cam_isp_dt_match[] = {
 static int cam_isp_subdev_open(struct v4l2_subdev *sd,
 	struct v4l2_subdev_fh *fh)
 {
+<<<<<<< HEAD
+=======
+	cam_req_mgr_rwsem_read_op(CAM_SUBDEV_LOCK);
+
+>>>>>>> ata-karner-lineage-21
 	mutex_lock(&g_isp_dev.isp_mutex);
 	g_isp_dev.open_cnt++;
 	mutex_unlock(&g_isp_dev.isp_mutex);
 
+<<<<<<< HEAD
+=======
+	cam_req_mgr_rwsem_read_op(CAM_SUBDEV_UNLOCK);
+
+>>>>>>> ata-karner-lineage-21
 	return 0;
 }
 
