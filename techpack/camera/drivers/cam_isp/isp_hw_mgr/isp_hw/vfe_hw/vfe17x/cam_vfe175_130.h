@@ -33,7 +33,9 @@ static struct cam_irq_register_set vfe175_130_top_irq_reg_set[2] = {
 };
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static struct cam_vfe_rdi_overflow_status vfe175_130_rdi_irq_status = {
 	.rdi0_overflow_mask = 0x8,
 	.rdi1_overflow_mask = 0x10,
@@ -193,7 +195,9 @@ struct cam_vfe_top_ver2_reg_offset_module_ctrl zoom_175_130_reg = {
 };
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static struct cam_vfe_bus_ver2_stats_cfg_info stats_175_130_info  = {
 	.dmi_offset_info = {
 		.auto_increment = 0x00000100,
@@ -388,7 +392,9 @@ static struct cam_vfe_top_ver2_reg_offset_common vfe175_130_top_common_reg = {
 	.violation_status         = 0x0000007C,
 	.reg_update_cmd           = 0x000004AC,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.irq_mask_0               = 0x0000005C,
 	.irq_mask_1               = 0x00000060,
 	.irq_status_0             = 0x0000006C,
@@ -426,7 +432,9 @@ static struct cam_vfe_rdi_reg_data  vfe_175_130_rdi_2_data = {
 };
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 struct cam_vfe_top_dump_data vfe175_130_dump_data = {
 	.num_reg_dump_entries  =  2,
 	.num_lut_dump_entries  =  1,
@@ -471,7 +479,9 @@ static struct cam_vfe_top_ver2_hw_info vfe175_130_top_hw_info = {
 		.rdi_reg         = &vfe175_130_rdi_reg,
 		.common_reg_data = &vfe175_130_rdi_reg_data,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		.rdi_irq_status  = &vfe175_130_rdi_irq_status,
 >>>>>>> ata-karner-lineage-21
 		.reg_data = {
@@ -496,7 +506,9 @@ static struct cam_vfe_top_ver2_hw_info vfe175_130_top_hw_info = {
 		CAM_VFE_IN_RD_VER_1_0,
 	},
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.dump_data = &vfe175_130_dump_data,
 >>>>>>> ata-karner-lineage-21
 };
@@ -539,7 +551,9 @@ static struct cam_vfe_bus_ver2_reg_offset_ubwc_3_client
 	.mode_cfg_1       = 0x000025A4,
 	.bw_limit         = 0x000025A0,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.ubwc_comp_en_bit = BIT(1),
 >>>>>>> ata-karner-lineage-21
 };
@@ -556,7 +570,9 @@ static struct cam_vfe_bus_ver2_reg_offset_ubwc_3_client
 	.mode_cfg_1       = 0x000026A4,
 	.bw_limit         = 0x000026A0,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.ubwc_comp_en_bit = BIT(1),
 >>>>>>> ata-karner-lineage-21
 };
@@ -573,7 +589,9 @@ static struct cam_vfe_bus_ver2_reg_offset_ubwc_3_client
 	.mode_cfg_1       = 0x000036A4,
 	.bw_limit         = 0x000036A0,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.ubwc_comp_en_bit = BIT(1),
 >>>>>>> ata-karner-lineage-21
 };
@@ -590,7 +608,9 @@ static struct cam_vfe_bus_ver2_reg_offset_ubwc_3_client
 	.mode_cfg_1       = 0x000037A4,
 	.bw_limit         = 0x000037A0,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.ubwc_comp_en_bit = BIT(1),
 >>>>>>> ata-karner-lineage-21
 };
@@ -633,7 +653,9 @@ static struct cam_vfe_bus_rd_ver1_hw_info vfe175_130_bus_rd_hw_info = {
 		},
 	},
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.top_irq_shift = 23,
 >>>>>>> ata-karner-lineage-21
 };
@@ -1354,7 +1376,9 @@ static struct cam_vfe_bus_ver2_hw_info vfe175_130_bus_hw_info = {
 		},
 	},
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.stats_data = &stats_175_130_info,
 	.support_consumed_addr = false,
 >>>>>>> ata-karner-lineage-21

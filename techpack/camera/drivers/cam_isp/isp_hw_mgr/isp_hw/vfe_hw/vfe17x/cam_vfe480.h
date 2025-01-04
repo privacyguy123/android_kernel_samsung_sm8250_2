@@ -105,7 +105,9 @@ static struct cam_vfe_top_ver3_reg_offset_common vfe480_top_common_reg = {
 	.core_cfg_0               = 0x0000002C,
 	.core_cfg_1               = 0x00000030,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.irq_mask_0               = 0x0000003C,
 	.irq_mask_1               = 0x00000040,
 	.irq_mask_2               = 0x00000044,
@@ -363,7 +365,9 @@ static struct cam_vfe_bus_ver3_reg_offset_ubwc_client
 	.off_lossy_var    = 0x0000AC5C,
 	.bw_limit         = 0x0000AC1C,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.ubwc_comp_en_bit = BIT(1),
 >>>>>>> ata-karner-lineage-21
 };
@@ -380,7 +384,9 @@ static struct cam_vfe_bus_ver3_reg_offset_ubwc_client
 	.off_lossy_var    = 0x0000AD5C,
 	.bw_limit         = 0x0000AD1C,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.ubwc_comp_en_bit = BIT(1),
 >>>>>>> ata-karner-lineage-21
 };
@@ -397,7 +403,9 @@ static struct cam_vfe_bus_ver3_reg_offset_ubwc_client
 	.off_lossy_var    = 0x0000B05C,
 	.bw_limit         = 0x0000B01C,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.ubwc_comp_en_bit = BIT(1),
 >>>>>>> ata-karner-lineage-21
 };
@@ -414,7 +422,9 @@ static struct cam_vfe_bus_ver3_reg_offset_ubwc_client
 	.off_lossy_var    = 0x0000B15C,
 	.bw_limit         = 0x0000B11C,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.ubwc_comp_en_bit = BIT(1),
 >>>>>>> ata-karner-lineage-21
 };
@@ -1352,7 +1362,9 @@ static struct cam_vfe_bus_ver3_hw_info vfe480_bus_hw_info = {
 	.comp_done_shift = 6,
 	.top_irq_shift   = 7,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.support_consumed_addr = true,
 >>>>>>> ata-karner-lineage-21
 };
@@ -1403,7 +1415,9 @@ static struct cam_vfe_bus_rd_ver1_hw_info vfe480_bus_rd_hw_info = {
 		},
 	},
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.top_irq_shift = 8,
 >>>>>>> ata-karner-lineage-21
 };

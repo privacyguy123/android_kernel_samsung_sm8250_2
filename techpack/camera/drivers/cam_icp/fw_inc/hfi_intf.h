@@ -37,7 +37,9 @@ struct hfi_mem {
  * @qdss: qdss mapped memory for fw
  * @io_mem: io memory info
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @io_mem2: 2nd io memory info
 >>>>>>> ata-karner-lineage-21
  * @icp_base: icp base address
@@ -53,7 +55,9 @@ struct hfi_mem_info {
 	struct hfi_mem qdss;
 	struct hfi_mem io_mem;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	struct hfi_mem io_mem2;
 >>>>>>> ata-karner-lineage-21
 	void __iomem *icp_base;

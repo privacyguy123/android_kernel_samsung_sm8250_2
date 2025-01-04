@@ -52,7 +52,9 @@ static struct device_attribute sec_battery_attrs[] = {
 	SEC_BATTERY_ATTR(batt_vf_adc),
 	SEC_BATTERY_ATTR(batt_slate_mode),
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	SEC_BATTERY_ATTR(charging_enabled),
 >>>>>>> ata-karner-lineage-21
 
@@ -554,7 +556,9 @@ ssize_t sec_bat_show_attrs(struct device *dev,
 			is_slate_mode(battery));
 		break;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	case CHARGING_ENABLED:
 		i += scnprintf(buf + i, PAGE_SIZE - i, "%d\n",
 			battery->charging_enabled);
@@ -2052,7 +2056,9 @@ ssize_t sec_bat_store_attrs(
 		}
 		break;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	case CHARGING_ENABLED:
 		if (sscanf(buf, "%10d\n", &x) == 1) {
 			if (x) {

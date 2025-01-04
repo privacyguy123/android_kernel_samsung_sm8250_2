@@ -399,7 +399,9 @@ static void cam_sensor_release_stream_rsc(
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static void cam_sensor_free_power_reg_rsc(
 	struct cam_sensor_ctrl_t *s_ctrl)
 {
@@ -456,7 +458,9 @@ static int32_t cam_sensor_i2c_pkt_parse(struct cam_sensor_ctrl_t *s_ctrl,
 	struct cam_packet *csl_packet = NULL;
 	struct cam_cmd_buf_desc *cmd_desc = NULL;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	struct cam_buf_io_cfg *io_cfg = NULL;
 >>>>>>> ata-karner-lineage-21
 	struct i2c_settings_array *i2c_reg_settings = NULL;
@@ -1205,7 +1209,9 @@ static int32_t cam_sensor_i2c_modes_util(
 			}
 		}
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	} else if (i2c_list->op_code == CAM_SENSOR_I2C_SET_I2C_INFO) {
 		rc = cam_sensor_update_i2c_info(&i2c_list->slave_info,
 			s_ctrl,
@@ -1349,7 +1355,9 @@ int32_t cam_handle_cmd_buffers_for_probe(void *cmd_buf,
 	}
 		break;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	case 2: {
 		struct i2c_settings_array *i2c_reg_settings = NULL;
 		struct i2c_data_settings *i2c_data = NULL;
@@ -1459,7 +1467,9 @@ int32_t cam_handle_mem_ptr(uint64_t handle, struct cam_sensor_ctrl_t *s_ctrl)
 			CAM_ERR(CAM_SENSOR,
 				"offset past length of buffer");
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 			cam_mem_put_cpu_buf(cmd_desc[i].mem_handle);
 >>>>>>> ata-karner-lineage-21
 			rc = -EINVAL;
@@ -1470,7 +1480,9 @@ int32_t cam_handle_mem_ptr(uint64_t handle, struct cam_sensor_ctrl_t *s_ctrl)
 			CAM_ERR(CAM_SENSOR,
 				"Not enough buffer provided for cmd");
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 			cam_mem_put_cpu_buf(cmd_desc[i].mem_handle);
 >>>>>>> ata-karner-lineage-21
 			rc = -EINVAL;
@@ -2023,7 +2035,9 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 		sensor_acq_dev.device_handle =
 			cam_create_device_hdl(&bridge_params);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		if (sensor_acq_dev.device_handle <= 0) {
 			rc = -EFAULT;
 			CAM_ERR(CAM_SENSOR, "Can not create device handle");
@@ -2370,7 +2384,9 @@ int32_t cam_sensor_driver_cmd(struct cam_sensor_ctrl_t *s_ctrl,
 			s_ctrl->sensor_state = CAM_SENSOR_CONFIG;
 		}
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 		if (s_ctrl->i2c_data.read_settings.is_settings_valid) {
 			rc = cam_sensor_apply_settings(s_ctrl, 0,
@@ -2423,7 +2439,9 @@ free_power_settings:
 	power_info->power_down_setting_size = 0;
 	power_info->power_setting_size = 0;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	cam_sensor_free_power_reg_rsc(s_ctrl);
 >>>>>>> ata-karner-lineage-21
 	mutex_unlock(&(s_ctrl->cam_sensor_mutex));
@@ -2621,7 +2639,9 @@ int cam_sensor_power_up(struct cam_sensor_ctrl_t *s_ctrl)
 	}
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	soc_info = &s_ctrl->soc_info;
 
 >>>>>>> ata-karner-lineage-21
@@ -2835,7 +2855,9 @@ int cam_sensor_apply_settings(struct cam_sensor_ctrl_t *s_ctrl,
 	struct i2c_settings_array *i2c_set = NULL;
 	struct i2c_settings_list *i2c_list;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	bool force_low_priority = false;
 >>>>>>> ata-karner-lineage-21
 
@@ -2854,7 +2876,9 @@ int cam_sensor_apply_settings(struct cam_sensor_ctrl_t *s_ctrl,
 		case CAM_SENSOR_PACKET_OPCODE_SENSOR_INITIAL_CONFIG: {
 			i2c_set = &s_ctrl->i2c_data.init_settings;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 			force_low_priority =
 				s_ctrl->force_low_priority_for_init_setting;
 >>>>>>> ata-karner-lineage-21
@@ -3051,7 +3075,9 @@ int cam_sensor_apply_settings(struct cam_sensor_ctrl_t *s_ctrl,
 	}
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 EXIT_RESTORE:
 	(void)cam_sensor_restore_slave_info(s_ctrl);
 

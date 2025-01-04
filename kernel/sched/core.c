@@ -30,7 +30,9 @@
 
 #include <linux/sec_debug.h>
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
 >>>>>>> ata-karner-lineage-21

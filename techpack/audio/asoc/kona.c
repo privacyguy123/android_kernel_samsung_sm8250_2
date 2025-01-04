@@ -97,7 +97,9 @@
 #define SWR_MAX_SLAVE_DEVICES 6
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #define VDD_APCx_PC_DISABLE    800 // Little 909us, Big 1461us
 #define VDD_APCx_PC_ENABLE     PM_QOS_DEFAULT_VALUE
 static struct pm_qos_request noise_wa_req;
@@ -223,7 +225,9 @@ struct msm_asoc_mach_data {
 	u32 wsa_max_devs;
 	u32 tdm_max_slots; /* Max TDM slots used */
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	bool pm_qos_noise_wa;
 >>>>>>> ata-karner-lineage-21
 	int (*get_wsa_dev_num)(struct snd_soc_component*);
@@ -1058,7 +1062,9 @@ static void param_set_mask(struct snd_pcm_hw_params *p, int n,
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int vdd_apcx_control_get(struct snd_kcontrol *kcontrol,
 	struct snd_ctl_elem_value *ucontrol)
 {
@@ -4038,7 +4044,9 @@ static int msm_bt_sample_rate_tx_put(struct snd_kcontrol *kcontrol,
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static const struct snd_kcontrol_new pm_qos_noise_wa_controls[] = {
 	SOC_SINGLE_EXT("Vdd Apcx Control", SND_SOC_NOPM, 0, 1, 0,
 			vdd_apcx_control_get, vdd_apcx_control_put),

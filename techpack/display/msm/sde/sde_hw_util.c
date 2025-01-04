@@ -73,7 +73,9 @@ void sde_reg_write(struct sde_hw_blk_reg_map *c,
 		const char *name)
 {
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	/* don't need to mutex protect this */
 	if (c->log_mask & sde_hw_util_log_mask)
 		SDE_DEBUG_DRIVER("[%s:0x%X] <= 0x%X\n",

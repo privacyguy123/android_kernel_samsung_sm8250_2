@@ -124,7 +124,9 @@ struct dsi_backlight_config {
 	bool bl_inverted_dbv;
 	u32 bl_dcs_subtype;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	u32 real_bl_level;
 >>>>>>> ata-karner-lineage-21
 
@@ -375,7 +377,9 @@ int ss_dsi_panel_parse_cmd_sets(struct dsi_panel_cmd_set *cmd_sets,
 #endif
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 u32 dsi_panel_get_fod_dim_alpha(struct dsi_panel *panel);
 
 >>>>>>> ata-karner-lineage-21

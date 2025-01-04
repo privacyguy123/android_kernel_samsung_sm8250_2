@@ -2349,7 +2349,9 @@ static long fuse_dev_ioctl(struct file *file, unsigned int cmd,
 		}
 		break;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	case FUSE_DEV_IOC_PASSTHROUGH_OPEN:
 		res = -EFAULT;
 		if (!get_user(oldfd, (__u32 __user *)arg)) {

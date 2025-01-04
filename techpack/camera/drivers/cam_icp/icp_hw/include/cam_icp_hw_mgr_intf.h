@@ -25,7 +25,9 @@
 #define CPAS_IPE1_BIT            0x2000
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #define CAM_ICP_UBWC_COMP_EN     BIT(1)
 
 >>>>>>> ata-karner-lineage-21
@@ -37,7 +39,9 @@
 #define CAM_ICP_DEFAULT_AXI_TRANSAC CAM_AXI_TRANSACTION_READ
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #define CAM_ICP_DUMP_TAG_MAX_LEN 32
 #define CAM_ICP_DUMP_NUM_WORDS   5
 
@@ -60,7 +64,9 @@ struct cam_icp_cpas_vote {
 };
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 /**
  * struct cam_icp_hw_dump_args
  * @cpu_addr: kernel vaddr

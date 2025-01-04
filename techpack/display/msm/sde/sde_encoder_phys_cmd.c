@@ -185,7 +185,9 @@ static void sde_encoder_phys_cmd_pp_tx_done_irq(void *arg, int irq_idx)
 	struct sde_encoder_phys *phys_enc = arg;
 	u32 scheduler_status = INVALID_CTL_STATUS;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	struct sde_encoder_phys_cmd *cmd_enc;
 >>>>>>> ata-karner-lineage-21
 	struct sde_hw_pp_vsync_info info[MAX_CHANNELS_PER_ENC] = {{0}};
@@ -197,7 +199,9 @@ static void sde_encoder_phys_cmd_pp_tx_done_irq(void *arg, int irq_idx)
 
 	SDE_ATRACE_BEGIN("pp_done_irq");
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	cmd_enc = to_sde_encoder_phys_cmd(phys_enc);
 >>>>>>> ata-karner-lineage-21
 	ctl = phys_enc->hw_ctl;

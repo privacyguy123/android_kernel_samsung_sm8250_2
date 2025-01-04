@@ -47,7 +47,9 @@
 #include "ss_dsi_panel_debug.h"
 #endif
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #include "dsi_display.h"
 >>>>>>> ata-karner-lineage-21
 

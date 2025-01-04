@@ -20,7 +20,9 @@
  * @cam_eventq: event queue
  * @cam_eventq_lock: lock for event queue
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @shutdown_state: shutdown state
 >>>>>>> ata-karner-lineage-21
  */
@@ -36,7 +38,9 @@ struct cam_req_mgr_device {
 	struct v4l2_fh  *cam_eventq;
 	spinlock_t cam_eventq_lock;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	bool shutdown_state;
 >>>>>>> ata-karner-lineage-21
 };

@@ -673,7 +673,9 @@ void update_cpu_features(int cpu,
 	taint |= check_update_ftr_reg(SYS_ID_AA64ISAR2_EL1, cpu,
 				      info->reg_id_aa64isar2, boot->reg_id_aa64isar2);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 >>>>>>> ata-karner-lineage-21
 	/*

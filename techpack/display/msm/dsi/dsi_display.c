@@ -39,7 +39,9 @@
 #define MAX_TE_SOURCE_ID  2
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 struct dsi_display *primary_display;
 
 >>>>>>> ata-karner-lineage-21

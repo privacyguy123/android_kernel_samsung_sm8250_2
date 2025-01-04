@@ -280,7 +280,9 @@ struct fuse_file_lock {
 #define FUSE_ABORT_ERROR	(1 << 21)
 #define FUSE_MAX_PAGES		(1 << 22)
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #define FUSE_PASSTHROUGH	(1 << 31)
 >>>>>>> ata-karner-lineage-21
 
@@ -796,7 +798,9 @@ struct fuse_notify_retrieve_in {
 #define FUSE_DEV_IOC_MAGIC		229
 #define FUSE_DEV_IOC_CLONE		_IOR(FUSE_DEV_IOC_MAGIC, 0, uint32_t)
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 /* 127 is reserved for the V1 interface implementation in Android (deprecated) */
 /* 126 is reserved for the V2 interface implementation in Android */
 #define FUSE_DEV_IOC_PASSTHROUGH_OPEN	_IOW(FUSE_DEV_IOC_MAGIC, 126, __u32)

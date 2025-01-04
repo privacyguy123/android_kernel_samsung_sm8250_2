@@ -1696,7 +1696,9 @@ error:
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #include <linux/cpufreq.h>
 #define CPUFREQ_MAX	100
 #define CPUFREQ_ALT_HIGH	70
@@ -2890,7 +2892,9 @@ int ss_panel_off_post(struct samsung_display_driver_data *vdd)
 	LCD_INFO("[DISPLAY_%d] +\n", vdd->ndx);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
     if (vdd->finger_mask)
 		vdd->finger_mask = 0;
 

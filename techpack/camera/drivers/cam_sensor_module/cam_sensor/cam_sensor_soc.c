@@ -302,7 +302,9 @@ static int32_t cam_sensor_driver_get_dt_data(struct cam_sensor_ctrl_t *s_ctrl)
 	int32_t rc = 0;
 	int i = 0;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	uint32_t concurrency_sensors = 0;
 >>>>>>> ata-karner-lineage-21
 	struct cam_sensor_board_info *sensordata = NULL;
@@ -407,7 +409,9 @@ static int32_t cam_sensor_driver_get_dt_data(struct cam_sensor_ctrl_t *s_ctrl)
 
 		CAM_DBG(CAM_SENSOR, "cci-index %d", s_ctrl->cci_num);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 		rc = of_property_read_u32(of_node,
 			"concurrency-sensors-on-same-cci",

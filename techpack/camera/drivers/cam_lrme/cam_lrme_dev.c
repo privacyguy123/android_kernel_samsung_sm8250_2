@@ -78,7 +78,9 @@ static int cam_lrme_dev_open(struct v4l2_subdev *sd,
 	mutex_unlock(&lrme_dev->lock);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	cam_req_mgr_rwsem_read_op(CAM_SUBDEV_UNLOCK);
 
 >>>>>>> ata-karner-lineage-21

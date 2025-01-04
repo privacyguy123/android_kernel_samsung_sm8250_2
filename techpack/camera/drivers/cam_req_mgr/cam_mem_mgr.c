@@ -446,7 +446,9 @@ static int cam_mem_util_get_dma_buf_fd(size_t len,
 		goto get_fd_fail;
 	}
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 	if (tbl.alloc_profile_enable) {
 		CAM_GET_TIMESTAMP(ts2);

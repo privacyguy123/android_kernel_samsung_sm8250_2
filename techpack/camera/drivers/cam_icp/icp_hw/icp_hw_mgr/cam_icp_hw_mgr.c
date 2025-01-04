@@ -1901,7 +1901,9 @@ static int cam_icp_hw_mgr_create_debugfs_entry(void)
 	}
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	if (!debugfs_create_bool("disable_ubwc_comp",
 		0644,
 		icp_hw_mgr.dentry,
@@ -4982,7 +4984,9 @@ static int cam_icp_mgr_enqueue_abort(
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int cam_icp_mgr_hw_dump(void *hw_priv, void *hw_dump_args)
 {
 	int                              rc;

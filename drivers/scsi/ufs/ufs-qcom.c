@@ -2404,7 +2404,9 @@ static struct ufs_hba_variant_ops ufs_hba_qcom_vops = {
 	.add_debugfs		= ufs_qcom_dbg_add_debugfs,
 #endif
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 };
 
 static struct ufs_hba_pm_qos_variant_ops ufs_hba_pm_qos_variant_ops = {

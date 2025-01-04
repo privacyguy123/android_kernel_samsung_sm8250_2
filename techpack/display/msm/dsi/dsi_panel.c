@@ -4283,7 +4283,9 @@ end:
 	mafpc_utils->node = panel->mafpc_of_node;
 #endif
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 }
 
 static struct attribute *panel_attrs[] = {

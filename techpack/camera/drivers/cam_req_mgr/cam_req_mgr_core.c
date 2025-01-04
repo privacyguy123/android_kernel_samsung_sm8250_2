@@ -48,7 +48,9 @@ void cam_req_mgr_core_link_reset(struct cam_req_mgr_core_link *link)
 	link->sof_timestamp = 0;
 	link->prev_sof_timestamp = 0;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	link->skip_wd_validation = false;
 	link->last_applied_jiffies = 0;
 >>>>>>> ata-karner-lineage-21
@@ -2495,7 +2497,9 @@ static int cam_req_mgr_process_trigger(void *priv, void *data)
 
 	mutex_lock(&link->req.lock);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 	if (trigger_data->trigger == CAM_TRIGGER_POINT_SOF) {
 		idx = __cam_req_mgr_find_slot_for_req(in_q,
@@ -2771,7 +2775,9 @@ end:
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 /*
  * cam_req_mgr_cb_notify_stop()
  *
@@ -3914,7 +3920,9 @@ end:
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 int cam_req_mgr_dump_request(struct cam_dump_req_cmd *dump_req)
 {
 	int                                  rc = 0;

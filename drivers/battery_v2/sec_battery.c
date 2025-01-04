@@ -64,7 +64,9 @@ static enum power_supply_property sec_battery_props[] = {
 static enum power_supply_property sec_power_props[] = {
 	POWER_SUPPLY_PROP_ONLINE,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	POWER_SUPPLY_PROP_VOLTAGE_MAX,
 	POWER_SUPPLY_PROP_CURRENT_MAX,
 >>>>>>> ata-karner-lineage-21
@@ -74,7 +76,9 @@ static enum power_supply_property sec_wireless_props[] = {
 	POWER_SUPPLY_PROP_ONLINE,
 	POWER_SUPPLY_PROP_PRESENT,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	POWER_SUPPLY_PROP_VOLTAGE_MAX,
 	POWER_SUPPLY_PROP_CURRENT_MAX,
 >>>>>>> ata-karner-lineage-21
@@ -84,7 +88,9 @@ static enum power_supply_property sec_ac_props[] = {
 	POWER_SUPPLY_PROP_ONLINE,
 	POWER_SUPPLY_PROP_TEMP,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	POWER_SUPPLY_PROP_VOLTAGE_MAX,
 	POWER_SUPPLY_PROP_CURRENT_MAX,
 >>>>>>> ata-karner-lineage-21
@@ -5954,7 +5960,9 @@ skip_current_monitor:
 			__func__, battery->stability_test, battery->eng_not_full_status);
 #endif
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 	if (!is_nocharge_type(battery->cable_type) && !battery->charging_enabled) {
 		int chg_mode;
@@ -6008,7 +6016,9 @@ skip_current_monitor:
 		}
 	}
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 	if (!is_nocharge_type(battery->cable_type) && battery->charging_suspended && battery->charging_enabled && !battery->store_mode) {
 		pr_info("%s: @battery->capacity = (%d), battery->status= (%d), battery->charging_enabled=(%d)\n",
@@ -7799,7 +7809,9 @@ static int sec_ac_get_property(struct power_supply *psy,
 		val->intval = battery->chg_temp;
 		break;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	case POWER_SUPPLY_PROP_VOLTAGE_MAX:
 		/* Whatever -> uV */
 		val->intval = battery->input_voltage / (SEC_INPUT_VOLTAGE_5V / 5) * 1000000;
@@ -7837,7 +7849,9 @@ static int sec_wireless_get_property(struct power_supply *psy,
 			val->intval = 0;
 		break;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	case POWER_SUPPLY_PROP_VOLTAGE_MAX:
 		/* Whatever -> uV */
 		val->intval = battery->input_voltage / (SEC_INPUT_VOLTAGE_5V / 5) * 1000000;
@@ -9980,7 +9994,9 @@ static int sec_battery_probe(struct platform_device *pdev)
 	battery->factory_mode = false;
 	battery->store_mode = false;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	battery->charging_enabled = true;
 >>>>>>> ata-karner-lineage-21
 	battery->prev_usb_conf = USB_CURRENT_NONE;

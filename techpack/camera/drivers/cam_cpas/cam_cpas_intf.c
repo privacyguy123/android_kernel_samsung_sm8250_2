@@ -18,7 +18,9 @@
 #include "cam_cpas_hw_intf.h"
 #include "cam_cpas_soc.h"
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #include "cam_cpas_api.h"
 >>>>>>> ata-karner-lineage-21
 
@@ -162,7 +164,9 @@ int cam_cpas_get_cpas_hw_version(uint32_t *hw_version)
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 int cam_cpas_get_camnoc_fifo_fill_level_info(
 	uint32_t cpas_version,
 	uint32_t client_handle)

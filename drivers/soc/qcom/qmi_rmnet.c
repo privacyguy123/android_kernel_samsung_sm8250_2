@@ -1207,7 +1207,9 @@ static void qmi_rmnet_check_stats(struct work_struct *work)
 		    !rmnet_all_flows_enabled(real_work->port))
 			goto end;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 >>>>>>> ata-karner-lineage-21
 		/* Deregister to suppress QMI DFC and DL marker */

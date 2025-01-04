@@ -2,7 +2,9 @@
 /*
  * Copyright (c) 2017-2020, The Linux Foundation. All rights reserved.
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
 >>>>>>> ata-karner-lineage-21
  */
@@ -662,7 +664,9 @@ int32_t cam_cmd_buf_parser(struct csiphy_device *csiphy_dev,
 			 sizeof(struct cam_packet), len);
 		rc = -EINVAL;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		cam_mem_put_cpu_buf(cfg_dev->packet_handle);
 >>>>>>> ata-karner-lineage-21
 		return rc;
@@ -714,7 +718,9 @@ int32_t cam_cmd_buf_parser(struct csiphy_device *csiphy_dev,
 		CAM_ERR(CAM_CSIPHY,
 			"Failed to get cmd buf Mem address : %d", rc);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		cam_mem_put_cpu_buf(cfg_dev->packet_handle);
 >>>>>>> ata-karner-lineage-21
 		return rc;
@@ -726,7 +732,9 @@ int32_t cam_cmd_buf_parser(struct csiphy_device *csiphy_dev,
 			"Not enough buffer provided for cam_cisphy_info");
 		rc = -EINVAL;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		cam_mem_put_cpu_buf(cmd_desc->mem_handle);
 		cam_mem_put_cpu_buf(cfg_dev->packet_handle);
 >>>>>>> ata-karner-lineage-21
@@ -1317,7 +1325,9 @@ int32_t cam_csiphy_config_dev(struct csiphy_device *csiphy_dev,
 					reg_array[lane_pos][i].reg_addr);
 			break;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 			case CSIPHY_SKEW_CAL:
 			if (skew_cal_enable)
 				cam_io_w_mb(reg_array[lane_pos][i].reg_data,
@@ -1362,7 +1372,9 @@ void cam_csiphy_shutdown(struct csiphy_device *csiphy_dev)
 		return;
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	if (!csiphy_dev->acquire_count)
 		return;
 
@@ -1452,7 +1464,9 @@ static int32_t cam_csiphy_external_cmd(struct csiphy_device *csiphy_dev,
 	struct cam_csiphy_info cam_cmd_csiphy_info;
 	int32_t rc = 0;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	int32_t  index = -1;
 >>>>>>> ata-karner-lineage-21
 
@@ -1516,7 +1530,9 @@ static int32_t cam_csiphy_external_cmd(struct csiphy_device *csiphy_dev,
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int cam_csiphy_update_lane(
 	struct csiphy_device *csiphy, int index, bool enable)
 {
@@ -1888,7 +1904,9 @@ int32_t cam_csiphy_core_cfg(void *phy_dev,
 			CAM_ERR(CAM_CSIPHY, "de-voting CPAS: %d", rc);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		CAM_DBG(CAM_CSIPHY, "All PHY devices stopped");
 >>>>>>> ata-karner-lineage-21
 		csiphy_dev->csiphy_state = CAM_CSIPHY_ACQUIRE;
@@ -2217,7 +2235,9 @@ int32_t cam_csiphy_core_cfg(void *phy_dev,
 		}
 		csiphy_dev->start_dev_count++;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		CAM_DBG(CAM_CSIPHY, "START DEV CNT: %d",
 			csiphy_dev->start_dev_count);
 >>>>>>> ata-karner-lineage-21

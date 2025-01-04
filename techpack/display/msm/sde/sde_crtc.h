@@ -446,7 +446,9 @@ struct sde_crtc_state {
 	struct sde_core_perf_params new_perf;
 	int secure_session;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	bool color_invert_on;
 >>>>>>> ata-karner-lineage-21
 };

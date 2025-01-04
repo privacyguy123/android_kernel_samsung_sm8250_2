@@ -1561,7 +1561,9 @@ static int cam_fd_mgr_hw_flush(void *hw_mgr_priv,
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int cam_fd_mgr_hw_dump(
 	void *hw_mgr_priv,
 	void *hw_dump_args)

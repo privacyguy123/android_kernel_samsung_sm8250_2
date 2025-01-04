@@ -4119,7 +4119,9 @@ void sde_cp_crtc_disable(struct drm_crtc *drm_crtc)
 	vfree(info);
 }
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 const struct drm_msm_pcc *sde_cp_crtc_get_pcc_cfg(struct drm_crtc *drm_crtc)
 {

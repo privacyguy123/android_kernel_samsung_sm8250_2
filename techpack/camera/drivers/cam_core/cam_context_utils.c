@@ -302,7 +302,9 @@ int32_t cam_context_config_dev_to_hw(
 	}
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	if ((len < sizeof(struct cam_packet)) ||
 		(cmd->offset >= (len - sizeof(struct cam_packet)))) {
 		CAM_ERR(CAM_CTXT, "Not enough buf, len : %zu offset = %llu",
@@ -1066,7 +1068,9 @@ end:
 	return rc;
 }
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 static int cam_context_dump_context(struct cam_context *ctx,
 	struct cam_hw_dump_args *dump_args)

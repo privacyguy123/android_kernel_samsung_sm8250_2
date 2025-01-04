@@ -910,7 +910,9 @@ struct fts_ts_info {
 	int fod_vi_size;
 	u8 *fod_vi_data;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	int fod_pressed;
 >>>>>>> ata-karner-lineage-21
 

@@ -1478,7 +1478,9 @@ EXPORT_SYMBOL(qpnp_get_s2_reset_onoff);
 
 #if defined(CONFIG_SEC_PM)
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #ifdef CONFIG_SEC_PM_DEBUG
 >>>>>>> ata-karner-lineage-21
 static int
@@ -1502,7 +1504,9 @@ qpnp_control_s2_reset(struct qpnp_pon *pon, struct qpnp_pon_config *cfg, int on)
 	return 0;
 }
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #endif
 >>>>>>> ata-karner-lineage-21
 

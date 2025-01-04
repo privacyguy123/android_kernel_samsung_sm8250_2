@@ -12,7 +12,9 @@
 #include <linux/sched.h>
 #include <linux/input.h>
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #include <linux/of.h>
 >>>>>>> ata-karner-lineage-21
 //#if defined(CONFIG_SEC_SYSFS)

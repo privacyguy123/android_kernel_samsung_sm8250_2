@@ -2,7 +2,9 @@
 /*
  * Copyright (c) 2016-2019, The Linux Foundation. All rights reserved.
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
 >>>>>>> ata-karner-lineage-21
  */
@@ -14,7 +16,9 @@
 #include "cam_req_mgr_util_priv.h"
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 /* Interval for cam_info_rate_limit_custom() */
 #define CAM_RATE_LIMIT_INTERVAL_5SEC 5
 
@@ -147,7 +151,9 @@ void *cam_get_device_priv(int32_t dev_hdl);
 
 /**
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * cam_get_session_priv() - get private data of a session handle
  * @dev_hdl: handle for a session
  *
@@ -191,7 +197,9 @@ int32_t cam_destroy_device_hdl(int32_t dev_hdl);
 
 /**
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * cam_destroy_link_hdl() - destroy link handle
  * @dev_hdl: handle for a link.
  *

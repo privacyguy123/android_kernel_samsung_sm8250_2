@@ -2,7 +2,9 @@
 /*
  * Copyright (c) 2016-2019, The Linux Foundation. All rights reserved.
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * Copyright (c) 2023, Qualcomm Innovation Center, Inc. All rights reserved.
 >>>>>>> ata-karner-lineage-21
  */
@@ -95,7 +97,9 @@ int cam_mem_get_cpu_buf(int32_t buf_handle, uintptr_t *vaddr_ptr,
 	size_t *len);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 /**
  * @brief: This indicates end of CPU access
  *

@@ -4549,7 +4549,9 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
 		goto send_orig_cmd;
 	}
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 	add_lrbp = &hba->lrb[add_tag];
 
@@ -4660,7 +4662,9 @@ out:
 		clear_bit_unlock(add_tag, &hba->lrb_in_use);
                 ufshcd_release_all(hba);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		ufshcd_vops_pm_qos_req_end(hba, pre_cmd->request, true);
 >>>>>>> ata-karner-lineage-21
 		ufsf_hpb_end_pre_req(&hba->ufsf, pre_cmd->request);
@@ -13223,7 +13227,9 @@ out_error:
 EXPORT_SYMBOL(ufshcd_alloc_host);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #if 0
 >>>>>>> ata-karner-lineage-21
 #if defined(SEC_UFS_ERROR_COUNT)
@@ -13294,7 +13300,9 @@ static void ufs_sec_send_errinfo(void *data)
 }
 #endif
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #endif
 >>>>>>> ata-karner-lineage-21
 

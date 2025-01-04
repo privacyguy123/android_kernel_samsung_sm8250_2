@@ -3374,7 +3374,9 @@ static void _sde_plane_check_lut_dirty(struct sde_plane *psde,
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static inline void _sde_plane_set_csc_pcc(struct sde_plane *psde,
 					  struct sde_plane_state *pstate,
 					  struct drm_crtc *crtc)

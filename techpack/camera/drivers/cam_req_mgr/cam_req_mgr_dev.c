@@ -12,7 +12,9 @@
 #include <linux/slab.h>
 #include <linux/platform_device.h>
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #include <linux/highmem.h>
 #include <linux/types.h>
 #include <linux/rwsem.h>
@@ -655,7 +657,9 @@ void cam_register_subdev_fops(struct v4l2_file_operations *fops)
 EXPORT_SYMBOL(cam_register_subdev_fops);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 void cam_subdev_notify_message(u32 subdev_type,
 	enum cam_subdev_message_type_t message_type,
 	uint32_t data)

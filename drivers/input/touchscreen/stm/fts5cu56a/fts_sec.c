@@ -887,7 +887,9 @@ static ssize_t get_lp_dump(struct device *dev, struct device_attribute *attr, ch
 						i + (info->sponge_dump_event * dump_area),
 						edata[0], edata[1], edata[2], edata[3], edata[4]);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #ifdef CONFIG_SEC_DEBUG_TSP_LOG
 				sec_tsp_sponge_log(ibuff);
 #endif

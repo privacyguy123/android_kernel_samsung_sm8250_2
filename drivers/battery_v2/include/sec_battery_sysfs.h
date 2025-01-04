@@ -76,7 +76,9 @@ enum {
 	BATT_VF_ADC,
 	BATT_SLATE_MODE,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	CHARGING_ENABLED,
 >>>>>>> ata-karner-lineage-21
 	BATT_LP_CHARGING,

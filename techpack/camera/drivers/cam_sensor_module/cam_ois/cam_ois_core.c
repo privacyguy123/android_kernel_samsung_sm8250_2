@@ -968,7 +968,9 @@ static int cam_ois_pkt_parse(struct cam_ois_ctrl_t *o_ctrl, void *arg)
 #endif
 		break;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	case CAM_OIS_PACKET_OPCODE_READ: {
 		struct cam_buf_io_cfg *io_cfg;
 		struct i2c_settings_array i2c_read_settings;

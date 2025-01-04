@@ -108,7 +108,9 @@ struct cam_mem_buf_queue {
  * @bits: max bits of the utility
  * @bufq: array of buffers
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @dentry: Debugfs entry
  * @alloc_profile_enable: Whether to enable alloc profiling
 >>>>>>> ata-karner-lineage-21
@@ -119,7 +121,9 @@ struct cam_mem_table {
 	size_t bits;
 	struct cam_mem_buf_queue bufq[CAM_MEM_BUFQ_MAX];
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	struct dentry *dentry;
 	bool alloc_profile_enable;
 >>>>>>> ata-karner-lineage-21

@@ -111,7 +111,9 @@ struct sec_debug_core_t {
 static inline void sec_debug_save_mmu_reg(struct sec_debug_mmu_reg_t *mmu_reg)
 {
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	uint64_t pstate, which_el;
 
 	pstate = READ_SPECIAL_REG(CurrentEl);

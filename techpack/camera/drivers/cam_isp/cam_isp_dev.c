@@ -51,7 +51,9 @@ static int cam_isp_subdev_open(struct v4l2_subdev *sd,
 	struct v4l2_subdev_fh *fh)
 {
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	cam_req_mgr_rwsem_read_op(CAM_SUBDEV_LOCK);
 
 >>>>>>> ata-karner-lineage-21
@@ -60,7 +62,9 @@ static int cam_isp_subdev_open(struct v4l2_subdev *sd,
 	mutex_unlock(&g_isp_dev.isp_mutex);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	cam_req_mgr_rwsem_read_op(CAM_SUBDEV_UNLOCK);
 
 >>>>>>> ata-karner-lineage-21

@@ -752,7 +752,9 @@ static struct cam_cpas_hw_errata_wa_list cam175_cpas120_errata_wa_list = {
 };
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static struct cam_camnoc_fifo_lvl_info cam175_cpas120_camnoc_fifo_info = {
 	.IFE0_nRDI_maxwr_offset = 0x3A20,
 	.IFE1_nRDI_maxwr_offset = 0x5420,
@@ -769,7 +771,9 @@ static struct cam_camnoc_info cam175_cpas120_camnoc_info = {
 	.err_logger = &cam175_cpas120_err_logger_offsets,
 	.errata_wa_list = &cam175_cpas120_errata_wa_list,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.fill_lvl_register = &cam175_cpas120_camnoc_fifo_info,
 >>>>>>> ata-karner-lineage-21
 };

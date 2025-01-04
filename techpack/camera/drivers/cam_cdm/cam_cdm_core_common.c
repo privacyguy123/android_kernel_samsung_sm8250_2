@@ -206,7 +206,9 @@ void cam_cdm_notify_clients(struct cam_hw_info *cdm_hw,
 	for (i = 0; i < CAM_PER_CDM_MAX_REGISTERED_CLIENTS; i++) {
 		if (core->clients[i] != NULL) {
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 			mutex_lock(&cdm_hw->hw_mutex);
 >>>>>>> ata-karner-lineage-21
 			client = core->clients[i];
@@ -230,7 +232,9 @@ void cam_cdm_notify_clients(struct cam_hw_info *cdm_hw,
 			}
 			mutex_unlock(&client->lock);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 			mutex_unlock(&cdm_hw->hw_mutex);
 >>>>>>> ata-karner-lineage-21
 		}
@@ -252,7 +256,9 @@ int cam_cdm_stream_ops_internal(void *hw_priv,
 
 	core = (struct cam_cdm *)cdm_hw->core_info;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	mutex_lock(&cdm_hw->hw_mutex);
 >>>>>>> ata-karner-lineage-21
 	client_idx = CAM_CDM_GET_CLIENT_IDX(*handle);
@@ -260,7 +266,9 @@ int cam_cdm_stream_ops_internal(void *hw_priv,
 	if (!client) {
 		CAM_ERR(CAM_CDM, "Invalid client %pK hdl=%x", client, *handle);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		mutex_unlock(&cdm_hw->hw_mutex);
 >>>>>>> ata-karner-lineage-21
 		return -EINVAL;

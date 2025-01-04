@@ -488,7 +488,9 @@ int cam_vfe_top_write(void *device_priv,
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 int cam_vfe_top_query(struct cam_vfe_top_ver2_priv *top_priv,
 		void *cmd_args, uint32_t arg_size)
 {
@@ -617,7 +619,9 @@ int cam_vfe_top_process_cmd(void *device_priv, uint32_t cmd_type,
 			cmd_args, arg_size);
 		break;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	case CAM_ISP_HW_CMD_DUMP_HW:
 		rc = cam_vfe_hw_dump(top_priv,
 			cmd_args, arg_size);

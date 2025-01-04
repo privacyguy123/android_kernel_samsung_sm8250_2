@@ -531,7 +531,9 @@ static int qseecom_debug_show(struct seq_file *s, void *data)
 
 	struct qseecom_registered_app_list *ptr_app;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	u64 cur_time = sched_clock();
 >>>>>>> ata-karner-lineage-21
 

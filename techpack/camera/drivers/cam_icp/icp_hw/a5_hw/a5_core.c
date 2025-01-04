@@ -240,7 +240,9 @@ fw_download_failed:
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int cam_a5_fw_dump(
 	struct cam_icp_hw_dump_args    *dump_args,
 	struct cam_a5_device_core_info *core_info)
@@ -543,7 +545,9 @@ int cam_a5_process_cmd(void *device_priv, uint32_t cmd_type,
 	case CAM_ICP_A5_CMD_UBWC_CFG: {
 		struct a5_ubwc_cfg_ext *ubwc_cfg_ext = NULL;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		uint32_t *disable_ubwc_comp;
 >>>>>>> ata-karner-lineage-21
 
@@ -554,7 +558,9 @@ int cam_a5_process_cmd(void *device_priv, uint32_t cmd_type,
 		}
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		if (!cmd_args) {
 			CAM_ERR(CAM_ICP, "Invalid args");
 			return -EINVAL;
@@ -633,7 +639,9 @@ int cam_a5_process_cmd(void *device_priv, uint32_t cmd_type,
 		break;
 	}
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	case CAM_ICP_A5_CMD_HW_DUMP: {
 		struct cam_icp_hw_dump_args *dump_args = cmd_args;
 

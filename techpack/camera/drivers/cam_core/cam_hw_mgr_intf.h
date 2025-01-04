@@ -110,7 +110,9 @@ struct cam_hw_done_event_data {
  * @ctxt_to_hw_map:        HW context (returned)
  * @custom_enabled:        ctx has custom enabled
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @use_frame_header_ts:   Use frame header for qtimer ts
  * @support_consumed_addr: The platform has last consumed addr register
 >>>>>>> ata-karner-lineage-21
@@ -130,7 +132,9 @@ struct cam_hw_acquire_args {
 	void                        *ctxt_to_hw_map;
 	bool                         custom_enabled;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	bool                         use_frame_header_ts;
 	bool                         support_consumed_addr;
 >>>>>>> ata-karner-lineage-21

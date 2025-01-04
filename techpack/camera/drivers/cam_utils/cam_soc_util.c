@@ -2011,7 +2011,9 @@ end:
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int cam_soc_util_dump_dmi_reg_range_user_buf(
 	struct cam_hw_soc_info *soc_info,
 	struct cam_dmi_read_desc *dmi_read, uint32_t base_idx,

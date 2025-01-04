@@ -2190,7 +2190,9 @@ static void sde_kms_destroy(struct msm_kms *kms)
 static int sde_kms_set_crtc_for_conn(struct drm_device *dev,
 		struct drm_encoder *enc, struct drm_atomic_state *state)
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 {
 	struct drm_connector *conn = NULL;
 	struct drm_connector *tmp_conn = NULL;
@@ -2281,7 +2283,9 @@ static int _sde_kms_remove_fbs(struct sde_kms *sde_kms, struct drm_file *file,
 	struct drm_framebuffer *fb, *tfb;
 	struct list_head fbs;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	struct drm_plane *plane;
 >>>>>>> ata-karner-lineage-21
 	struct drm_crtc *crtc = NULL;
@@ -4038,7 +4042,9 @@ static int sde_kms_hw_init(struct msm_kms *kms)
 	}
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	sde_kms->affinity_notify.notify = sde_kms_irq_affinity_notify;
 	sde_kms->affinity_notify.release = sde_kms_irq_affinity_release;
 

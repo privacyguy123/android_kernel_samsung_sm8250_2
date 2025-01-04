@@ -3903,7 +3903,9 @@ static int _sde_perf_parse_dt_cfg(struct device_node *np,
 	}
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	cfg->perf.cpu_mask =
 			prop_exists[PERF_CPU_MASK] ?
 			PROP_VALUE_ACCESS(prop_value, PERF_CPU_MASK, 0) :

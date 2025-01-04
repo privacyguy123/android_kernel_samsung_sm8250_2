@@ -399,7 +399,9 @@ static struct cam_vfe_bus_ver3_hw_info vfe48x_bus_hw_info = {
 	.comp_done_shift = 4,
 	.top_irq_shift   = 4,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.support_consumed_addr = true,
 >>>>>>> ata-karner-lineage-21
 };

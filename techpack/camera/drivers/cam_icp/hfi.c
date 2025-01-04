@@ -301,7 +301,9 @@ int hfi_cmd_ubwc_config(uint32_t *ubwc_cfg, bool disable_ubwc_comp)
 	dbg_prop->prop_data[0] = HFI_PROP_SYS_UBWC_CFG;
 	dbg_prop->prop_data[1] = ubwc_cfg[0];
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	if (disable_ubwc_comp) {
 		ubwc_cfg[1] &= ~CAM_ICP_UBWC_COMP_EN;
 		CAM_DBG(CAM_ICP, "UBWC comp force disable, val= 0x%x",
@@ -697,7 +699,9 @@ int cam_hfi_resume(struct hfi_mem_info *hfi_mem,
 		icp_base + HFI_REG_IO_REGION_SIZE);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	cam_io_w_mb((uint32_t)hfi_mem->io_mem2.iova,
 		icp_base + HFI_REG_IO2_REGION_IOVA);
 	cam_io_w_mb((uint32_t)hfi_mem->io_mem2.len,
@@ -899,7 +903,9 @@ int cam_hfi_init(uint8_t event_driven_mode, struct hfi_mem_info *hfi_mem,
 	cam_io_w_mb((uint32_t)hfi_mem->io_mem.len,
 		icp_base + HFI_REG_IO_REGION_SIZE);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	cam_io_w_mb((uint32_t)hfi_mem->io_mem2.iova,
 		icp_base + HFI_REG_IO2_REGION_IOVA);
 	cam_io_w_mb((uint32_t)hfi_mem->io_mem2.len,

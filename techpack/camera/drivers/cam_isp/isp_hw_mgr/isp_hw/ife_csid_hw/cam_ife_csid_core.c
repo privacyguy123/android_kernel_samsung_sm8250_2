@@ -2328,7 +2328,9 @@ static int cam_ife_csid_enable_pxl_path(
 	bool                                      is_ipp;
 	uint32_t                                  val = 0;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	struct cam_isp_sensor_dimension          *path_config;
 	bool                                      path_active = false;
 >>>>>>> ata-karner-lineage-21
@@ -2364,7 +2366,9 @@ static int cam_ife_csid_enable_pxl_path(
 	CAM_DBG(CAM_ISP, "Enable %s path", (is_ipp) ? "IPP" : "PPP");
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	if ((!is_ipp) && (path_data->usage_type == CAM_ISP_RES_USAGE_DUAL))
 		path_data->init_frame_drop = 1;
 
@@ -3694,7 +3698,9 @@ STATIC int cam_ife_csid_release(void *hw_priv,
 	case CAM_ISP_RESOURCE_PIX_PATH:
 		res->res_state = CAM_ISP_RESOURCE_STATE_AVAILABLE;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		cam_ife_csid_reset_path_data(csid_hw, res);
 
 >>>>>>> ata-karner-lineage-21
@@ -4367,7 +4373,9 @@ static int cam_ife_csid_set_csid_clock(
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int cam_ife_csid_dump_csid_clock(
 	struct cam_ife_csid_hw *csid_hw, void *cmd_args)
 {

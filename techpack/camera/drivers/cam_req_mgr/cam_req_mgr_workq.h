@@ -109,7 +109,9 @@ struct cam_req_mgr_core_workq {
  * @flags    : Bitwise OR of Flags for workq behavior.
  *             e.g. CAM_REQ_MGR_WORKQ_HIGH_PRIORITY | CAM_REQ_MGR_WORKQ_SERIAL
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @is_static_payload : set to true if payload is statically allocated.
  * @func     : function pointer for cam_req_mgr_process_workq wrapper function
 >>>>>>> ata-karner-lineage-21

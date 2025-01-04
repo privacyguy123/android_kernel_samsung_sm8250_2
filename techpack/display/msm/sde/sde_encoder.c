@@ -251,7 +251,9 @@ const char *sde_enc_rc_states_str[SDE_ENC_RC_STATE_MAX] = {
  * @elevated_ahb_vote:		increase AHB bus speed for the first frame
  *				after power collapse
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @pm_qos_cpu_req:		qos request for all cpu core frequency
  * @valid_cpu_mask:		actual voted cpu core mask
 >>>>>>> ata-karner-lineage-21
@@ -324,7 +326,9 @@ struct sde_encoder_virt {
 	bool recovery_events_enabled;
 	bool elevated_ahb_vote;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	struct dev_pm_qos_request pm_qos_cpu_req[NR_CPUS];
 	struct cpumask valid_cpu_mask;
 >>>>>>> ata-karner-lineage-21
@@ -350,7 +354,9 @@ void sde_encoder_uidle_enable(struct drm_encoder *drm_enc, bool enable)
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static void _sde_encoder_pm_qos_add_request(struct drm_encoder *drm_enc)
 {
 	struct sde_encoder_virt *sde_enc = to_sde_encoder_virt(drm_enc);
@@ -2326,7 +2332,9 @@ static int _sde_encoder_resource_control_helper(struct drm_encoder *drm_enc,
 
 	sde_enc = to_sde_encoder_virt(drm_enc);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	priv = drm_enc->dev->dev_private;
 	sde_kms = to_sde_kms(priv->kms);
 >>>>>>> ata-karner-lineage-21
@@ -3375,7 +3383,9 @@ static void _sde_encoder_input_handler_register(
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #if !defined(CONFIG_DISPLAY_SAMSUNG) /* CL 16617782 : Excessive delay in setPowerMode because of pending display off */
 static void _sde_encoder_input_handler_unregister(
 		struct drm_encoder *drm_enc)
@@ -4648,7 +4658,9 @@ void sde_encoder_trigger_kickoff_pending(struct drm_encoder *drm_enc)
 	struct sde_rect prev_roi;
 	struct drm_display_mode *adj_mode;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	struct drm_connector *drm_conn;
 >>>>>>> ata-karner-lineage-21
 	u32 scheduler_status = INVALID_CTL_STATUS;
@@ -4660,7 +4672,9 @@ void sde_encoder_trigger_kickoff_pending(struct drm_encoder *drm_enc)
 	sde_enc = to_sde_encoder_virt(drm_enc);
 	adj_mode = &sde_enc->crtc->state->adjusted_mode;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	drm_conn = sde_enc->cur_master->connector;
 >>>>>>> ata-karner-lineage-21
 

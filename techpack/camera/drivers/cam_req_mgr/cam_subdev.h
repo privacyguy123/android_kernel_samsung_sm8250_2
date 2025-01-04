@@ -17,7 +17,9 @@
 #define CAM_SUBDEVICE_EVENT_MAX 30
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 enum cam_subdev_message_type_t {
 	CAM_SUBDEV_MESSAGE_IRQ_ERR = 0x1
 };

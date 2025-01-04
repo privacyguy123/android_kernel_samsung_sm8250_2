@@ -352,7 +352,9 @@ struct cam_req_mgr_connected_device {
  * @sof_timestamp_value  : SOF timestamp value
  * @prev_sof_timestamp   : Previous SOF timestamp value
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @dual_trigger         : Links needs to wait for two triggers prior to
  *                         applying the settings
  * @trigger_cnt          : trigger count value per device initiating the trigger
@@ -391,7 +393,9 @@ struct cam_req_mgr_core_link {
 	uint64_t                             sof_timestamp;
 	uint64_t                             prev_sof_timestamp;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	bool                                 dual_trigger;
 	uint32_t    trigger_cnt[CAM_REQ_MGR_MAX_TRIGGERS];
 	bool                                 skip_wd_validation;

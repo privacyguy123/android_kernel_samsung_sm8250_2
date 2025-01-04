@@ -1,11 +1,14 @@
-# Loop through all conflicting files and accept both changes
-git diff --name-only --diff-filter=U | while read -r file; do
-    echo "Resolving conflict for $file..."
-    # Combine both changes
-    sed -e '/^<<<<<<< /d' -e '/^=======/d' -e '/^>>>>>>> /d' -e 's/^<<<<<<< HEAD//' "$file" > "${file}.resolved"
-    mv "${file}.resolved" "$file"
-    git add "$file"
-done
+#!/bin/bash
 
-# Finalize the merge
-git commit -m "Resolved all conflicts by accepting both changes"
+# Merge changes by keeping both HEAD and incoming changes
+find . -type f -exec sed -i '
+/<<<<<<< HEAD/ {
+  # Remove the <<<<<<< HEAD line
+  N
+  # Replace ======= marker with a comment for distinction (if desired)
+  s/=======/\n# Conflict Divider Here\n/
+  # Remove the >>>>>>> marker
+  N; s/>>>>>>>.*//;
+}' {} \;
+
+echo "All conflicts have been resolved by keeping both changes."

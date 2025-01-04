@@ -231,7 +231,9 @@ struct cam_ife_hw_mgr {
 	struct cam_req_mgr_core_workq *workq;
 	struct cam_ife_hw_mgr_debug    debug_cfg;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	spinlock_t                     ctx_lock;
 	bool                           support_consumed_addr;
 >>>>>>> ata-karner-lineage-21

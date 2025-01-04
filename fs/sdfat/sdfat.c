@@ -4767,7 +4767,9 @@ enum {
 	Opt_fs,
 	Opt_adj_req,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #ifdef CONFIG_SDFAT_USE_FOR_VFAT
 	Opt_shortname_lower,
 	Opt_shortname_win95,
@@ -4804,7 +4806,9 @@ static const match_table_t sdfat_tokens = {
 	{Opt_fs, "fs=%s"},
 	{Opt_adj_req, "adj_req"},
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #ifdef CONFIG_SDFAT_USE_FOR_VFAT
 	{Opt_shortname_lower, "shortname=lower"},
 	{Opt_shortname_win95, "shortname=win95"},
@@ -4979,7 +4983,9 @@ static int parse_options(struct super_block *sb, char *options, int silent,
 #endif
 			break;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #ifdef CONFIG_SDFAT_USE_FOR_VFAT
 		case Opt_shortname_lower:
 		case Opt_shortname_win95:
@@ -5329,7 +5335,9 @@ static struct file_system_type sdfat_fs_type = {
 	.fs_flags    = FS_REQUIRES_DEV,
 };
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 MODULE_ALIAS_FS("sdfat");
 
 #ifdef CONFIG_SDFAT_USE_FOR_EXFAT
@@ -5405,7 +5413,9 @@ static int __init init_sdfat_fs(void)
 	}
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #ifdef CONFIG_SDFAT_USE_FOR_EXFAT
 	err = register_filesystem(&exfat_fs_type);
 	if (err) {

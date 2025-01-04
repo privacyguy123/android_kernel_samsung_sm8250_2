@@ -727,7 +727,9 @@ static struct cam_cpas_hw_errata_wa_list cam480_cpas100_errata_wa_list = {
 };
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 struct cam_camnoc_fifo_lvl_info cam480_cpas100_camnoc_fifo_info = {
 	.ife_linear = 0xA20,
 	.ife_rdi_wr = 0x1420,
@@ -744,7 +746,9 @@ static struct cam_camnoc_info cam480_cpas100_camnoc_info = {
 	.err_logger = &cam480_cpas100_err_logger_offsets,
 	.errata_wa_list = &cam480_cpas100_errata_wa_list,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.fill_lvl_register = &cam480_cpas100_camnoc_fifo_info,
 >>>>>>> ata-karner-lineage-21
 };

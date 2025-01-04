@@ -825,7 +825,9 @@ int qrtr_endpoint_post(struct qrtr_endpoint *ep, const void *data, size_t len)
 		}
 	}
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 >>>>>>> ata-karner-lineage-21
 	skb_reserve(skb, sizeof(*v1));

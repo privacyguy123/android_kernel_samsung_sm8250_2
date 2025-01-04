@@ -736,7 +736,9 @@ int dsi_display_get_panel_vfp(void *display,
 	int h_active, int v_active);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 struct dsi_display *get_main_display(void);
 
 >>>>>>> ata-karner-lineage-21

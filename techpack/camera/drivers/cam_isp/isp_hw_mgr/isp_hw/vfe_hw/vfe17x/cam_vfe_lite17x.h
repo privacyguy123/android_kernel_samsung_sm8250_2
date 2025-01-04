@@ -93,7 +93,9 @@ static struct cam_vfe_rdi_reg_data  vfe17x_rdi_3_data = {
 };
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static struct cam_vfe_rdi_overflow_status vfe17x_rdi_irq_status = {
 	.rdi0_overflow_mask = 0x8,
 	.rdi1_overflow_mask = 0x10,
@@ -121,7 +123,9 @@ static struct cam_vfe_top_ver2_hw_info vfe17x_top_hw_info = {
 			&vfe17x_rdi_3_data,
 			},
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		.rdi_irq_status  = &vfe17x_rdi_irq_status,
 >>>>>>> ata-karner-lineage-21
 		},
@@ -343,7 +347,9 @@ static struct cam_vfe_bus_ver2_hw_info vfe17x_bus_hw_info = {
 		},
 	},
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.support_consumed_addr = false,
 >>>>>>> ata-karner-lineage-21
 };

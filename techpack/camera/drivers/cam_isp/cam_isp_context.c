@@ -1207,7 +1207,9 @@ static int __cam_isp_ctx_handle_buf_done(
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static void __cam_isp_ctx_buf_done_match_req(
 	struct cam_ctx_request *req,
 	struct cam_isp_hw_done_event_data *done,
@@ -2874,7 +2876,9 @@ static int __cam_isp_ctx_apply_req_in_activated_state(
 			CAM_ISP_STATE_CHANGE_TRIGGER_APPLIED,
 			req->request_id);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		__cam_isp_ctx_update_event_record(ctx_isp,
 			CAM_ISP_CTX_EVENT_APPLY, req);
 	} else if (rc == -EALREADY) {
@@ -2973,7 +2977,9 @@ static int __cam_isp_ctx_apply_req_in_bubble(
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int __cam_isp_ctx_dump_req_info(
 	struct cam_context     *ctx,
 	struct cam_ctx_request *req,
@@ -4384,7 +4390,9 @@ static int __cam_isp_ctx_config_dev_in_top_state(
 		req->request_id, ctx->ctx_id);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	if (ctx_isp->offline_context && atomic_read(&ctx_isp->rxd_epoch)) {
 		__cam_isp_ctx_schedule_apply_req_offline(ctx_isp);
 	}
@@ -4766,7 +4774,9 @@ static int __cam_isp_ctx_acquire_hw_v2(struct cam_context *ctx,
 	/* Set custom flag if applicable */
 	ctx_isp->custom_enabled = param.custom_enabled;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	ctx_isp->use_frame_header_ts = param.use_frame_header_ts;
 	ctx_isp->support_consumed_addr =
 		param.support_consumed_addr;
@@ -4818,7 +4828,9 @@ static int __cam_isp_ctx_acquire_hw_v2(struct cam_context *ctx,
 		ctx_isp->substate_machine =
 			cam_isp_ctx_fs2_state_machine;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	} else if (isp_hw_cmd_args.u.ctx_type == CAM_ISP_CTX_OFFLINE) {
 		CAM_DBG(CAM_ISP, "Offline Session has PIX and RD resources");
 		ctx_isp->substate_machine_irq =

@@ -2,7 +2,9 @@
 /*
  * Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
 >>>>>>> ata-karner-lineage-21
  */
@@ -19,7 +21,9 @@
 #include "cam_req_mgr_util.h"
 #include "cam_debug_util.h"
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #include "cam_subdev.h"
 >>>>>>> ata-karner-lineage-21
 
@@ -61,7 +65,9 @@ int cam_req_mgr_util_init(void)
 		goto hdl_tbl_alloc_failed;
 	}
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	bitmap_size = BITS_TO_LONGS(CAM_REQ_MGR_MAX_HANDLES_V2) * sizeof(long);
 	hdl_tbl_local->bitmap = kzalloc(bitmap_size, GFP_KERNEL);
 	if (!hdl_tbl_local->bitmap) {
@@ -76,7 +82,9 @@ int cam_req_mgr_util_init(void)
 		spin_unlock_bh(&hdl_tbl_lock);
 		rc = -EEXIST;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		kfree(hdl_tbl_local->bitmap);
 >>>>>>> ata-karner-lineage-21
 		kfree(hdl_tbl_local);
@@ -169,7 +177,9 @@ static int32_t cam_get_free_handle_index(void)
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static void cam_dump_tbl_info(void)
 {
 	int i;
@@ -229,7 +239,9 @@ int32_t cam_create_device_hdl(struct cam_create_dev_hdl *hdl_data)
 	int rand = 0;
 	int32_t handle;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	bool crm_active;
 
 	crm_active = cam_req_mgr_is_open();
@@ -372,7 +384,9 @@ device_priv_fail:
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 void *cam_get_device_priv(int32_t dev_hdl)
 {
 	void *priv;
@@ -503,7 +517,9 @@ int cam_destroy_device_hdl(int32_t dev_hdl)
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 int cam_destroy_link_hdl(int32_t dev_hdl)
 {
 	CAM_DBG(CAM_CRM, "handle = %x", dev_hdl);

@@ -1948,7 +1948,9 @@ static int max77705_fg_get_property(struct power_supply *psy,
 	static struct timespec old_ts = {0, };
 	u8 data[2] = { 0, 0 };
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	union power_supply_propval value;
 >>>>>>> ata-karner-lineage-21
 

@@ -106,7 +106,9 @@ struct cam_vfe_bus_ver2_common_data {
 	cam_hw_mgr_event_cb_func                    event_cb;
 	bool                                        hw_init;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	struct cam_vfe_bus_ver2_stats_cfg_info     *stats_data;
 	bool                                        disable_ubwc_comp;
 	bool                                        support_consumed_addr;
@@ -3796,7 +3798,9 @@ int cam_vfe_bus_ver2_init(
 		CAM_VFE_BUS_ADDR_NO_SYNC_DEFAULT_VAL;
 	bus_priv->common_data.hw_init            = false;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	bus_priv->common_data.stats_data         = ver2_hw_info->stats_data;
 	bus_priv->common_data.support_consumed_addr =
 		ver2_hw_info->support_consumed_addr;

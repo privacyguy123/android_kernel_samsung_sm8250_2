@@ -4341,7 +4341,9 @@ static int cam_ife_mgr_release_hw(void *hw_mgr_priv,
 	ctx->cdm_ops = NULL;
 	ctx->custom_enabled = false;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	ctx->use_frame_header_ts = false;
 	ctx->num_reg_dump_buf = 0;
 	ctx->is_dual = false;
@@ -6033,7 +6035,9 @@ static int cam_ife_mgr_cmd(void *hw_mgr_priv, void *cmd_args)
 				isp_hw_cmd_args->u.ctx_type = CAM_ISP_CTX_PIX;
 			break;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		case CAM_ISP_HW_MGR_GET_PACKET_OPCODE:
 			packet = (struct cam_packet *)
 				isp_hw_cmd_args->cmd_data;
@@ -6125,7 +6129,9 @@ static int cam_ife_mgr_cmd(void *hw_mgr_priv, void *cmd_args)
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int cam_ife_mgr_user_dump_hw(
 		struct cam_ife_hw_mgr_ctx *ife_ctx,
 		struct cam_hw_dump_args *dump_args)
@@ -6556,7 +6562,9 @@ static int  cam_ife_hw_mgr_find_affected_ctx(
 			continue;
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		if (error_event_data->error_type ==
 			CAM_ISP_HW_ERROR_CSID_FATAL) {
 			CAM_DBG(CAM_ISP, "CSID recovery");
@@ -6600,7 +6608,9 @@ skip_overflow:
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int cam_ife_hw_mgr_handle_csid_event(
 	struct cam_isp_hw_event_info *event_info)
 {

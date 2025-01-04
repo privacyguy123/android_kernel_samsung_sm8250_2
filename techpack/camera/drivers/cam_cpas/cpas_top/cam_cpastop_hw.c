@@ -21,7 +21,9 @@
 #include "cpastop100.h"
 #include "cpastop_v150_100.h"
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #include "cpastop_v170_200.h"
 >>>>>>> ata-karner-lineage-21
 #include "cpastop_v170_110.h"
@@ -53,7 +55,9 @@ static const char * const camnoc_salve_err_code[] = {
 };
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static const uint32_t cam_cpas_hw_version_map
 	[CAM_CPAS_CAMERA_VERSION_ID_MAX][CAM_CPAS_VERSION_ID_MAX] = {
 	/* for camera_150 */
@@ -167,7 +171,9 @@ static int cam_cpastop_get_hw_info(struct cam_hw_info *cpas_hw,
 	int32_t reg_indx = cpas_core->regbase_index[CAM_CPAS_REG_CPASTOP];
 	uint32_t reg_value;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	uint32_t cam_version, cpas_version;
 	uint32_t cam_version_id, cpas_version_id;
 	int rc;
@@ -270,7 +276,9 @@ static int cam_cpastop_get_hw_info(struct cam_hw_info *cpas_hw,
 		(hw_caps->camera_version.incr == 0)) {
 		soc_info->hw_version = CAM_CPAS_TITAN_480_V100;
 <<<<<<<< HEAD:techpack/camera/drivers/cam_cpas/cpas_top/cam_cpastop_hw.c
-========
+
+# Conflict Divider Here
+=
 	} else if ((hw_caps->camera_version.major == 5) &&
 		(hw_caps->camera_version.minor == 4) &&
 		(hw_caps->camera_version.incr == 0)) {
@@ -857,7 +865,9 @@ static int cam_cpastop_init_hw_version(struct cam_hw_info *cpas_hw,
 		camnoc_info = &cam170_cpas110_camnoc_info;
 		break;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	case CAM_CPAS_TITAN_170_V200:
 		camnoc_info = &cam170_cpas200_camnoc_info;
 		break;
@@ -908,7 +918,9 @@ static int cam_cpastop_init_hw_version(struct cam_hw_info *cpas_hw,
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 int cam_cpas_hw_get_camnoc_fill_level_info(
 	uint32_t cpas_version,
 	uint32_t client_handle)

@@ -40,7 +40,9 @@
 #include <linux/workqueue.h>
 #include <linux/power_supply.h>
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #include <linux/proc_fs.h>
 >>>>>>> ata-karner-lineage-21
 

@@ -376,7 +376,9 @@ struct i2c_data_settings {
 	struct i2c_settings_array streamon_settings;
 	struct i2c_settings_array streamoff_settings;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	struct i2c_settings_array read_settings;
 	struct i2c_settings_array poweron_reg_settings;
 	struct i2c_settings_array poweroff_reg_settings;

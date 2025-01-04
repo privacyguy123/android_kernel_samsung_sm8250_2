@@ -237,7 +237,9 @@ enum cam_isp_hw_mgr_command {
 	CAM_ISP_HW_MGR_CMD_SOF_DEBUG,
 	CAM_ISP_HW_MGR_CMD_CTX_TYPE,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	CAM_ISP_HW_MGR_GET_PACKET_OPCODE,
 	CAM_ISP_HW_MGR_GET_LAST_CDM_DONE,
 >>>>>>> ata-karner-lineage-21
@@ -272,7 +274,9 @@ struct cam_isp_hw_cmd_args {
 		uint32_t                      sof_irq_enable;
 		uint32_t                      ctx_type;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		uint32_t                      packet_op_code;
 		uint64_t                      last_cdm_done;
 >>>>>>> ata-karner-lineage-21

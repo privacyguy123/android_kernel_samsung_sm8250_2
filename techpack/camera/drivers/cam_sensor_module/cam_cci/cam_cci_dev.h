@@ -2,7 +2,9 @@
 /*
  * Copyright (c) 2017-2020, The Linux Foundation. All rights reserved.
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * Copyright (c) 2022-2023, Qualcomm Innovation Center, Inc. All rights reserved.
 >>>>>>> ata-karner-lineage-21
  */
@@ -77,7 +79,9 @@
 #define SYNC_QUEUE (QUEUE_1)
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #define REPORT_IDSIZE 16
 
 >>>>>>> ata-karner-lineage-21
@@ -198,7 +202,9 @@ enum cam_cci_state_t {
  * @cam_cci_i2c_queue_info:     CCI queue information
  * @i2c_freq_mode:              I2C frequency of operations
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @master_active_slave:        Number of active/connected slaves for master
 >>>>>>> ata-karner-lineage-21
  * @cci_clk_params:             CCI hw clk params
@@ -320,7 +326,9 @@ struct cam_cci_ctrl {
 		struct cam_cci_gpio_cfg gpio_cfg;
 	} cfg;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	bool force_low_priority;
 >>>>>>> ata-karner-lineage-21
 };

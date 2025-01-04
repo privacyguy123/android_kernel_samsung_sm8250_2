@@ -220,7 +220,9 @@ void sde_cp_crtc_enable(struct drm_crtc *crtc);
  */
 void sde_cp_crtc_disable(struct drm_crtc *crtc);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 const struct drm_msm_pcc *sde_cp_crtc_get_pcc_cfg(struct drm_crtc *crtc);
 >>>>>>> ata-karner-lineage-21
 #endif /*_SDE_COLOR_PROCESSING_H */

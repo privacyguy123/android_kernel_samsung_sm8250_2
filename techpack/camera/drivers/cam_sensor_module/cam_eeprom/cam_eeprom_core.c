@@ -2508,7 +2508,9 @@ static int32_t cam_eeprom_get_dev_handle(struct cam_eeprom_ctrl_t *e_ctrl,
 	eeprom_acq_dev.device_handle =
 		cam_create_device_hdl(&bridge_params);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	if (eeprom_acq_dev.device_handle <= 0) {
 		CAM_ERR(CAM_EEPROM, "Can not create device handle");
 		return -EFAULT;
@@ -3320,7 +3322,9 @@ static int32_t cam_eeprom_get_cal_data(struct cam_eeprom_ctrl_t *e_ctrl,
 			if (buf_size <= io_cfg->offsets[0]) {
 				CAM_ERR(CAM_EEPROM, "Not enough buffer");
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 				cam_mem_put_cpu_buf(io_cfg->mem_handle[0]);
 >>>>>>> ata-karner-lineage-21
 				rc = -EINVAL;
@@ -3336,7 +3340,9 @@ static int32_t cam_eeprom_get_cal_data(struct cam_eeprom_ctrl_t *e_ctrl,
 				CAM_ERR(CAM_EEPROM,
 					"invalid buffer to copy data");
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 				cam_mem_put_cpu_buf(io_cfg->mem_handle[0]);
 >>>>>>> ata-karner-lineage-21
 				rc = -EINVAL;
@@ -3348,7 +3354,9 @@ static int32_t cam_eeprom_get_cal_data(struct cam_eeprom_ctrl_t *e_ctrl,
 				CAM_ERR(CAM_EEPROM,
 					"failed to copy, Invalid size");
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 				cam_mem_put_cpu_buf(io_cfg->mem_handle[0]);
 >>>>>>> ata-karner-lineage-21
 				rc = -EINVAL;
@@ -3360,7 +3368,9 @@ static int32_t cam_eeprom_get_cal_data(struct cam_eeprom_ctrl_t *e_ctrl,
 			memcpy(read_buffer, e_ctrl->cal_data.mapdata,
 					e_ctrl->cal_data.num_data);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 			cam_mem_put_cpu_buf(io_cfg->mem_handle[0]);
 >>>>>>> ata-karner-lineage-21
 		} else {
@@ -3855,7 +3865,9 @@ static int32_t cam_eeprom_pkt_parse(struct cam_eeprom_ctrl_t *e_ctrl, void *arg)
 	uintptr_t                        generic_pkt_addr;
 	size_t                          pkt_len;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	size_t                          remain_len = 0;
 >>>>>>> ata-karner-lineage-21
 	struct cam_packet              *csl_packet = NULL;
@@ -3935,7 +3947,9 @@ static int32_t cam_eeprom_pkt_parse(struct cam_eeprom_ctrl_t *e_ctrl, void *arg)
 			if (rc < 0) {
 				CAM_ERR(CAM_EEPROM, "Failed: rc : %d", rc);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 				cam_mem_put_cpu_buf(dev_config.packet_handle);
 >>>>>>> ata-karner-lineage-21
 				return rc;
@@ -4122,7 +4136,9 @@ eeropm_crc_check :
 		if (rc < 0) {
 			CAM_ERR(CAM_EEPROM, "Failed: rc : %d", rc);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 			cam_mem_put_cpu_buf(dev_config.packet_handle);
 >>>>>>> ata-karner-lineage-21
 			return rc;
@@ -4147,7 +4163,9 @@ eeropm_crc_check :
 		if (rc < 0) {
 			CAM_ERR(CAM_EEPROM, "Failed in erase : %d", rc);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 			cam_mem_put_cpu_buf(dev_config.packet_handle);
 >>>>>>> ata-karner-lineage-21
 			return rc;
@@ -4160,7 +4178,9 @@ eeropm_crc_check :
 		if (rc < 0) {
 			CAM_ERR(CAM_EEPROM, "Failed: rc : %d", rc);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 			cam_mem_put_cpu_buf(dev_config.packet_handle);
 >>>>>>> ata-karner-lineage-21
 			return rc;
@@ -4186,7 +4206,9 @@ eeropm_crc_check :
 	}
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	cam_mem_put_cpu_buf(dev_config.packet_handle);
 >>>>>>> ata-karner-lineage-21
 	return rc;
@@ -4196,7 +4218,9 @@ memdata_free:
 	vfree(e_ctrl->cal_data.mapdata);
 error:
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	cam_mem_put_cpu_buf(dev_config.packet_handle);
 >>>>>>> ata-karner-lineage-21
 	kfree(power_info->power_setting);

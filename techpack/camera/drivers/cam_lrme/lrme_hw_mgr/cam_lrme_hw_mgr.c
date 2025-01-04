@@ -660,7 +660,9 @@ static int cam_lrme_mgr_hw_release(void *hw_mgr_priv, void *hw_release_args)
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int cam_lrme_mgr_hw_dump(void *hw_mgr_priv, void *hw_dump_args)
 {
 	struct cam_hw_dump_args *dump_args = hw_dump_args;

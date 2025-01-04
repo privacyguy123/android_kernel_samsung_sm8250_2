@@ -221,7 +221,9 @@ struct cam_isp_context_state_monitor {
  * @split_acquire:             Indicate whether a separate acquire is expected
  * @custom_enabled:            Custom HW enabled for this ctx
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @use_frame_header_ts:       Use frame header for qtimer ts
  * @support_consumed_addr:     Indicate whether HW has last consumed addr reg
  * @apply_in_progress          Whether request apply is in progress
@@ -272,7 +274,9 @@ struct cam_isp_context {
 	bool                                  split_acquire;
 	bool                                  custom_enabled;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	bool                                  use_frame_header_ts;
 	bool                                  support_consumed_addr;
 	atomic_t                              apply_in_progress;

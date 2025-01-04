@@ -48,7 +48,9 @@ static struct ss_dbg_xlog_vsync {
  **************************************************************/
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 void ss_xlog_vsync(const char *name, int flag, ...)
 {
 	unsigned long flags;
@@ -170,7 +172,9 @@ static struct ss_dbg_xlog {
  **************************************************************/
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 void ss_xlog(const char *name, int flag, ...)
 {
 	unsigned long flags;
@@ -272,7 +276,9 @@ static ssize_t ss_xlog_dump_entry(char *xlog_buf, ssize_t xlog_buf_size)
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 void ss_dump_xlog(void)
 {
 	char xlog_buf[SS_XLOG_BUF_MAX] = {0,};
@@ -535,7 +541,9 @@ int ss_disp_dbg_info_misc_register(void)
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 int ss_read_rddpm(struct samsung_display_driver_data *vdd)
 {
 	char rddpm = 0;
@@ -665,7 +673,9 @@ int ss_read_self_diag(struct samsung_display_driver_data *vdd)
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 int ss_read_mipi_protocol_err(struct samsung_display_driver_data *vdd)
 {
 	u16 err_status = 0;

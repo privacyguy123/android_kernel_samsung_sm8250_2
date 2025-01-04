@@ -2,7 +2,9 @@
 /*
  * Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
 >>>>>>> ata-karner-lineage-21
  */
@@ -127,7 +129,9 @@ static int32_t cam_cci_i2c_write_table_cmd(
 	cci_ctrl.cfg.cci_i2c_write_cfg.addr_type = write_setting->addr_type;
 	cci_ctrl.cfg.cci_i2c_write_cfg.size = write_setting->size;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	cci_ctrl.force_low_priority = force_low_priority;
 >>>>>>> ata-karner-lineage-21
 	rc = v4l2_subdev_call(client->cci_client->cci_subdev,

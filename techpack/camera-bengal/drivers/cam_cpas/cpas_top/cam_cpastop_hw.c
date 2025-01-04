@@ -127,7 +127,9 @@ static int cam_cpastop_get_hw_info(struct cam_hw_info *cpas_hw,
 		(hw_caps->camera_version.incr == 0)) {
 		soc_info->hw_version = CAM_CPAS_TITAN_480_V100;
 <<<<<<<< HEAD:techpack/camera/drivers/cam_cpas/cpas_top/cam_cpastop_hw.c
-========
+
+# Conflict Divider Here
+=
 	} else if ((hw_caps->camera_version.major == 5) &&
 		(hw_caps->camera_version.minor == 4) &&
 		(hw_caps->camera_version.incr == 0)) {

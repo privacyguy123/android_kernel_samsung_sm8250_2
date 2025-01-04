@@ -600,7 +600,9 @@ static int enter_state(suspend_state_t state)
 		s2idle_begin();
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #ifndef CONFIG_SUSPEND_SKIP_SYNC
 	trace_suspend_resume(TPS("sync_filesystems"), 0, true);
 	pr_info("Syncing filesystems ... ");

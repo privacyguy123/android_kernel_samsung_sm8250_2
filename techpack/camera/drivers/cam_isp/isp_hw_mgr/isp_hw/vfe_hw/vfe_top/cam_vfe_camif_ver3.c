@@ -1379,7 +1379,9 @@ static int cam_vfe_camif_ver3_handle_irq_bottom_half(void *handler_priv,
 		CAM_ERR(CAM_ISP, "VFE:%d Overflow", evt_info.hw_idx);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		CAM_INFO(CAM_ISP,
 			"SOF %lld:%lld EPOCH %lld:%lld EOF %lld:%lld",
 			camif_priv->sof_ts.tv_sec,
@@ -1421,7 +1423,9 @@ static int cam_vfe_camif_ver3_handle_irq_bottom_half(void *handler_priv,
 		CAM_ERR(CAM_ISP, "VFE:%d Violation", evt_info.hw_idx);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		CAM_INFO(CAM_ISP,
 			"SOF %lld:%lld EPOCH %lld:%lld EOF %lld:%lld",
 			camif_priv->sof_ts.tv_sec,

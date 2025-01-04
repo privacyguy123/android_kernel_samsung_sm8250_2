@@ -239,7 +239,9 @@ static int32_t cam_sensor_handle_continuous_write(
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int32_t cam_sensor_get_io_buffer(
 	struct cam_buf_io_cfg *io_cfg,
 	struct cam_sensor_i2c_reg_setting *i2c_settings)

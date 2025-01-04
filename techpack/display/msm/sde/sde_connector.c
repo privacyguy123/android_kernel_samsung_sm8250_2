@@ -500,7 +500,9 @@ void sde_connector_schedule_status_work(struct drm_connector *connector,
 		(info.capabilities & MSM_DISPLAY_ESD_ENABLED)) {
 		if (en) {
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 			u32 interval;
 
 			/*
@@ -2328,7 +2330,9 @@ static void sde_connector_check_status_work(struct work_struct *work)
 		SDE_DEBUG("esd check status success conn_id: %d enc_id: %d\n",
 				conn->base.base.id, conn->encoder->base.id);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 		/* If debugfs property is not set then take default value */
 		interval = conn->esd_status_interval ?

@@ -107,7 +107,9 @@ static ssize_t fts_secure_touch_show(struct device *dev,
 		struct device_attribute *attr, char *buf);
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static ssize_t fts_fod_pressed_show(struct device *dev,
 		struct device_attribute *attr, char *buf);
 
@@ -120,7 +122,9 @@ static struct device_attribute attrs[] = {
 			fts_secure_touch_show,
 			NULL),
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	__ATTR(fod_pressed, (0444),
 			fts_fod_pressed_show,
 			NULL),
@@ -300,7 +304,9 @@ static void fts_secure_touch_stop(struct fts_ts_info *info, int blocking)
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static ssize_t fts_fod_pressed_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
@@ -3870,7 +3876,9 @@ static void fts_sponge_dump_flush(struct fts_ts_info *info, int dump_area)
 					i + (info->sponge_dump_event * dump_area),
 					edata[0], edata[1], edata[2], edata[3], edata[4]);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 #ifdef CONFIG_SEC_DEBUG_TSP_LOG
 			sec_tsp_sponge_log(buff);
 #endif
@@ -4178,7 +4186,9 @@ int fts_set_lowpowermode(struct fts_ts_info *info, u8 mode)
 
 	if (mode == TO_LOWPOWER_MODE) {
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		info->fod_pressed = 0;
 
 >>>>>>> ata-karner-lineage-21

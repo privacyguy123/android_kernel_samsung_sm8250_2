@@ -185,7 +185,9 @@ static int cam_jpeg_mgr_process_irq(void *priv, void *data)
 
 	list_add_tail(&p_cfg_req->list, &hw_mgr->free_req_list);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	mutex_unlock(&g_jpeg_hw_mgr.hw_mgr_mutex);
 	cam_mem_put_cpu_buf(mem_hdl);
 >>>>>>> ata-karner-lineage-21
@@ -1521,7 +1523,9 @@ num_dev_failed:
 }
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 static int cam_jpeg_mgr_hw_dump(void *hw_mgr_priv, void *dump_hw_args)
 {
 	int                             rc;

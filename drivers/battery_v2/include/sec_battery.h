@@ -619,7 +619,9 @@ struct sec_battery_info {
 	bool store_mode;
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	/* charging disabler */
 	bool charging_enabled;
 	bool charging_suspended;

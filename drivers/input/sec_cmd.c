@@ -336,7 +336,9 @@ static void sec_cmd_store_function(struct sec_cmd_data *data)
 				(unsigned long)t,
 				nanosec_rem / 1000);
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 >>>>>>> ata-karner-lineage-21
 #ifdef CONFIG_SEC_DEBUG_TSP_LOG
@@ -394,7 +396,9 @@ static ssize_t sec_cmd_store(struct device *dev, struct device_attribute *devatt
 				sec_debug_tsp_command_history(tbuf);
 #endif
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 
 >>>>>>> ata-karner-lineage-21
 			}

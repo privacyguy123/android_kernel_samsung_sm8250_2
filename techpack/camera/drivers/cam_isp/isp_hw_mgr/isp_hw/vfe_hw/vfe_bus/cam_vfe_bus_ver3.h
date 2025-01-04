@@ -119,7 +119,9 @@ struct cam_vfe_bus_ver3_reg_offset_ubwc_client {
 	uint32_t off_lossy_var;
 	uint32_t bw_limit;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	uint32_t ubwc_comp_en_bit;
 >>>>>>> ata-karner-lineage-21
 };
@@ -203,7 +205,9 @@ struct cam_vfe_bus_ver3_hw_info {
 	uint32_t comp_done_shift;
 	uint32_t top_irq_shift;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	bool support_consumed_addr;
 >>>>>>> ata-karner-lineage-21
 };

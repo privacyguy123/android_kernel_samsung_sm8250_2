@@ -185,8 +185,7 @@ struct cam_vfe_top_dump_data vfe170_dump_data = {
 		},
 	},
 <<<<<<< HEAD
->>>>>>>> ata-karner-lineage-21:techpack/camera-bengal/drivers/cam_isp/isp_hw_mgr/isp_hw/vfe_hw/vfe17x/cam_vfe170.h
-=======
+
 };
 
 static struct cam_vfe_rdi_overflow_status vfe170_rdi_irq_status = {
@@ -234,7 +233,9 @@ static struct cam_vfe_top_ver2_hw_info vfe170_top_hw_info = {
 		CAM_VFE_RDI_VER_1_0,
 	},
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.dump_data = &vfe170_dump_data,
 >>>>>>> ata-karner-lineage-21
 };
@@ -267,7 +268,9 @@ static struct cam_vfe_bus_ver2_reg_offset_ubwc_client ubwc_regs_client_3 = {
 	.mode_cfg_0       = 0x00002544,
 	.bw_limit         = 0x000025A0,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.ubwc_comp_en_bit = BIT(1),
 >>>>>>> ata-karner-lineage-21
 };
@@ -282,7 +285,9 @@ static struct cam_vfe_bus_ver2_reg_offset_ubwc_client ubwc_regs_client_4 = {
 	.mode_cfg_0       = 0x00002644,
 	.bw_limit         = 0x000026A0,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.ubwc_comp_en_bit = BIT(1),
 >>>>>>> ata-karner-lineage-21
 };
@@ -895,7 +900,9 @@ static struct cam_vfe_bus_ver2_hw_info vfe170_bus_hw_info = {
 		},
 	},
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	.support_consumed_addr = false,
 >>>>>>> ata-karner-lineage-21
 };

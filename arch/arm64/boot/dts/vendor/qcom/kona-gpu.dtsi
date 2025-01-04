@@ -76,7 +76,9 @@
 		qcom,tzone-name = "gpuss-max-step";
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		qcom,pm-qos-active-latency = <44>;
 
 >>>>>>> ata-karner-lineage-21

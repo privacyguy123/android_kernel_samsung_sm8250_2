@@ -499,7 +499,9 @@ int cam_isp_add_io_buffers(
 	uint32_t                            res_id_out, res_id_in, plane_id;
 	uint32_t                            io_cfg_used_bytes, num_ent;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	uint32_t                           *image_buf_addr;
 	uint32_t                           *image_buf_offset;
 	uint64_t                            iova_addr;

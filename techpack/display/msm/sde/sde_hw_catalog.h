@@ -1164,7 +1164,9 @@ struct sde_sc_cfg {
  * @qos_refresh_rate: different refresh rates for luts
  * @cdp_cfg            cdp use case configurations
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @cpu_mask:          pm_qos cpu mask value
  * @cpu_mask_perf:     pm_qos cpu silver core mask value
  * @cpu_dma_latency:   pm_qos cpu dma latency value
@@ -1199,7 +1201,9 @@ struct sde_perf_cfg {
 	u32 *qos_refresh_rate;
 	struct sde_perf_cdp_cfg cdp_cfg[SDE_PERF_CDP_USAGE_MAX];
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	unsigned long cpu_mask;
 	unsigned long cpu_mask_perf;
 	u32 cpu_dma_latency;

@@ -825,7 +825,9 @@ static int cam_vfe_camif_handle_irq_bottom_half(void *handler_priv,
 		CAM_DBG(CAM_ISP, "Received ERROR");
 
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 		CAM_INFO(CAM_ISP,
 			"SOF %lld:%lld EPOCH %lld:%lld EOF %lld:%lld",
 			camif_priv->sof_ts.tv_sec,

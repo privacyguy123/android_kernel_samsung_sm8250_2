@@ -29,7 +29,9 @@
  *                                                 detected in the IFE UBWC-
  *                                                 Stats encoder instance
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @CAM_CAMNOC_HW_IRQ_IFE01_UBWC_ENCODE_ERROR  : Triggered if any error
  *                                               detected in the IFE1 UBWC
  *                                               encoder instance
@@ -41,7 +43,9 @@
  *                                               detected in the IFE1 or IFE3
  *                                               UBWC encoder instance
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @CAM_CAMNOC_HW_IRQ_IFE23_UBWC_ENCODE_ERROR  : Triggered if any error
  *                                               detected in the IFE2 or IFE3
  *                                               UBWC encoder instance
@@ -75,7 +79,9 @@ enum cam_camnoc_hw_irq_type {
 	CAM_CAMNOC_HW_IRQ_IFE_UBWC_STATS_ENCODE_ERROR =
 		CAM_CAMNOC_IRQ_IFE_UBWC_STATS_ENCODE_ERROR,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	CAM_CAMNOC_HW_IRQ_IFE01_UBWC_ENCODE_ERROR =
 		CAM_CAMNOC_IRQ_IFE01_UBWC_ENCODE_ERROR,
 >>>>>>> ata-karner-lineage-21
@@ -84,7 +90,9 @@ enum cam_camnoc_hw_irq_type {
 	CAM_CAMNOC_HW_IRQ_IFE13_UBWC_ENCODE_ERROR =
 		CAM_CAMNOC_IRQ_IFE13_UBWC_ENCODE_ERROR,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	CAM_CAMNOC_HW_IRQ_IFE23_UBWC_ENCODE_ERROR =
 		CAM_CAMNOC_IRQ_IFE23_UBWC_ENCODE_ERROR,
 >>>>>>> ata-karner-lineage-21
@@ -297,7 +305,9 @@ struct cam_camnoc_err_logger_info {
 
 /**
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * struct cam_camnoc_fifo_lvl_info : Struct for fifo fill level registers
  * @IFE0_nRDI_maxwr_offset: Register offset for fill level for IFE0
  * @IFE1_nRDI_maxwr_offset: Register offset for fill level for IFE1
@@ -331,7 +341,9 @@ struct cam_camnoc_fifo_lvl_info {
  * @err_logger: Pointer to CAMNOC IRQ Error logger read registers
  * @errata_wa_list: HW Errata workaround info
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
  * @fill_level_register: Fill level registers
 >>>>>>> ata-karner-lineage-21
  *
@@ -345,7 +357,9 @@ struct cam_camnoc_info {
 	struct cam_camnoc_err_logger_info *err_logger;
 	struct cam_cpas_hw_errata_wa_list *errata_wa_list;
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	struct cam_camnoc_fifo_lvl_info *fill_lvl_register;
 >>>>>>> ata-karner-lineage-21
 };

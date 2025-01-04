@@ -803,7 +803,9 @@ struct zt_ts_info {
 	u16 fod_info_vi_data_len;
 	u16 fod_rect[4];
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	int fod_pressed;
 >>>>>>> ata-karner-lineage-21
 
@@ -1636,7 +1638,9 @@ static struct attribute *secure_attr[] = {
 	&dev_attr_secure_touch_enable.attr,
 	&dev_attr_secure_touch.attr,
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
 	&dev_attr_fod_pressed.attr,
 >>>>>>> ata-karner-lineage-21
 	NULL,
@@ -1919,7 +1923,9 @@ static void zt_ts_fod_event_report(struct zt_ts_info *info, struct point_info to
 				info->scrub_id, info->scrub_x, info->scrub_y);
 #endif
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
         info->fod_pressed = true;
 		    sysfs_notify(&info->input_dev->dev.kobj, NULL, "fod_pressed");
 >>>>>>> ata-karner-lineage-21
@@ -1945,7 +1951,9 @@ static void zt_ts_fod_event_report(struct zt_ts_info *info, struct point_info to
 				__func__, info->scrub_id, info->scrub_x, info->scrub_y);
 #endif
 <<<<<<< HEAD
-=======
+
+# Conflict Divider Here
+
         info->fod_pressed = false;
 			sysfs_notify(&info->input_dev->dev.kobj, NULL, "fod_pressed");
 >>>>>>> ata-karner-lineage-21
