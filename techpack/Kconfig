@@ -2,8 +2,6 @@ menu "Tech packages"
 
 source "techpack/data/Kconfig"
 
-<<<<<<< HEAD
-=======
 menu "Samsung techpack packages"
 
 config TECHPACK_CAMERA_SAMSUNG
@@ -13,5 +11,4 @@ config TECHPACK_CAMERA_SAMSUNG
 
 endmenu
 
->>>>>>> ata-karner-lineage-21
 endmenu
