@@ -30,8 +30,5 @@ source "crypto/Kconfig"
 source "lib/Kconfig"
 
 source "lib/Kconfig.debug"
-<<<<<<< HEAD
-=======
 
 source "techpack/Kconfig"
->>>>>>> ata-karner-lineage-21

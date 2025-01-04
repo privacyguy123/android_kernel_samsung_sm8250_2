@@ -15,8 +15,6 @@ config SDFAT_FS
 	  To compile this as a module, choose M here: the module will be called
 	  sdfat_core and sdfat_fs.
 
-<<<<<<< HEAD
-=======
 config SDFAT_USE_FOR_EXFAT
 	bool "Register sdFAT as exFAT"
 	default y
@@ -31,7 +29,6 @@ config SDFAT_USE_FOR_VFAT
 	help
 	  If you want to register sdFAT as available for VFAT, say Y.
 
->>>>>>> ata-karner-lineage-21
 config SDFAT_DELAYED_META_DIRTY
 	bool "Enable delayed metadata dirty"
 	default y
