@@ -347,11 +347,7 @@
 	};
 
 	chosen {
-<<<<<<< HEAD
-		bootargs = "noirqdebug rcu_nocbs=0-7 cgroup.memory=nokmem";
-=======
 		bootargs = "rcupdate.rcu_expedited=1 rcu_nocbs=0-7 cgroup.memory=nokmem";
->>>>>>> ata-karner-lineage-21
 	};
 
 	firmware: firmware {
@@ -368,12 +364,8 @@
 					compatible = "android,vendor";
 					dev = "/dev/block/platform/soc/1d84000.ufshc/by-name/vendor";
 					type = "ext4";
-					mnt_flags = "ro,barrier=1,discard";
-<<<<<<< HEAD
-					fsmgr_flags = "wait,slotselect";
-=======
+					mnt_flags = "ro,barrier=1,discard"
 					fsmgr_flags = "wait,slotselect,avb";
->>>>>>> ata-karner-lineage-21
 					status = "ok";
 				};
 			};
