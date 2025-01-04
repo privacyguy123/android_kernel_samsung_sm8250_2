@@ -238,7 +238,6 @@ config TOUCHSCREEN_DUMP_MODE
 	  
 	  If unsure, say N.
 
-<<<<<<< HEAD
 config SEC_INPUT_BOOSTER
 	bool "SEC INPUT BOOSTER"
 	depends on INPUT_EVDEV
@@ -248,8 +247,6 @@ config SEC_INPUT_BOOSTER
 
 	  It's triggered in evdev module.
 
-=======
->>>>>>> ata-karner-lineage-21
 comment "Input Device Drivers"
 
 source "drivers/input/keyboard/Kconfig"
