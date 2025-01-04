@@ -1836,7 +1836,6 @@ retry:
 				continue;
 
 			util = cpu_util(cpu);
-<<<<<<< HEAD
 #ifdef CONFIG_PERF_MGR
 			if (task->drawing_mig_boost){
 				if (capacity_orig_of(cpu) < util + tutil){
@@ -1850,10 +1849,8 @@ retry:
 			if (__cpu_overutilized(cpu, tutil))
 				continue;
 #endif
-=======
 			if (__cpu_overutilized(cpu, tutil))
 				continue;
->>>>>>> ata-karner-lineage-21
 
 			/* Find the least loaded CPU */
 			if (util > best_cpu_util)
@@ -1942,11 +1939,8 @@ static int find_lowest_rq(struct task_struct *task)
 #else
 	if (cpumask_test_cpu(cpu, lowest_mask))
 		return cpu;
-<<<<<<< HEAD
 #endif
 
-=======
->>>>>>> ata-karner-lineage-21
 	/*
 	 * Otherwise, we consult the sched_domains span maps to figure
 	 * out which CPU is logically closest to our hot cache data.
@@ -2028,13 +2022,10 @@ static struct rq *find_lock_lowest_rq(struct task_struct *task, struct rq *rq)
 			 * Also make sure that it wasn't scheduled on its rq.
 			 */
 			cpu_allow_check = cpumask_test_cpu(lowest_rq->cpu, &task->cpus_allowed);
-<<<<<<< HEAD
 #ifdef CONFIG_PERF_MGR
 			if(task->drawing_mig_boost)
 				cpu_allow_check = cpu_active(cpu);
 #endif
-=======
->>>>>>> ata-karner-lineage-21
 			if (unlikely(task_rq(task) != rq ||
 				     !cpu_allow_check ||
 				     task_running(rq, task) ||
