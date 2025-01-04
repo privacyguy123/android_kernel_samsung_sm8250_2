@@ -92,13 +92,10 @@ source "net/netlabel/Kconfig"
 #ifdef CONFIG_MPTCP
 	source "net/mptcp/Kconfig"
 #endif
-<<<<<<< HEAD
 
 config NET_ANALYTICS
 	bool
 	default y
-=======
->>>>>>> ata-karner-lineage-21
 
 endif # if INET
 
